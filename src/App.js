@@ -1,11 +1,12 @@
 import React from "react";
 import Layout from "./Layout/Layout";
-import Homepage from "./Pages/Homepage/Homepage";
+import { Outlet } from "react-router-dom";
+
 
 const App=()=>{
 return (
 <Layout>
-<Homepage />
+    <Outlet/>
 </Layout>
 )
 }
