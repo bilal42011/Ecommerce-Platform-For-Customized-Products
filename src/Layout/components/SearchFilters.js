@@ -9,10 +9,10 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 
 export default function SearchFilters() {
-  const [budget, setBudget] = useState(null);
-  const [deliveryTime, setDeliveryTime] = useState(null);
+  const [budget, setBudget] = useState("");
+  const [deliveryTime, setDeliveryTime] = useState("");
   return (
-    <Box display="flex" alignItems={"center"}>
+    <Box display="flex" alignItems={"center"} flexWrap="wrap">
       <Box minWidth={120}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Budget</InputLabel>
@@ -21,7 +21,7 @@ export default function SearchFilters() {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={budget}
-            label="Age"
+            label="Budget"
             onChange={(e) => setBudget(e.target.value)}
           >
             <MenuItem>Budget</MenuItem>
@@ -38,7 +38,7 @@ export default function SearchFilters() {
             labelId="demo-simple-select-label-1"
             id="demo-simple-select-1"
             value={deliveryTime}
-            label="Age"
+            label="Delivery Time"
             onChange={(e) => setDeliveryTime(e.target.value)}
           >
             <MenuItem>Delivery Time</MenuItem>
