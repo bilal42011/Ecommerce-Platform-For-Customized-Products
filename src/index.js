@@ -4,6 +4,7 @@ import "./styles/index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./Pages/Homepage/Homepage";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
+import ProductPage from "./Pages/ProductPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,6 +22,7 @@ root.render(
         <Route path="login" element={<div>Welcome to login</div>} />
         <Route path="signup" element={<div>Welcome to Sign Up</div>} />
         <Route path="search" element={<SearchResultsPage />} />
+        <Route path="products/*" element={<ProductPage />} />
       </Route>
     </Routes>
   </Router>

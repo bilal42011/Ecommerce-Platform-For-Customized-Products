@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import { Box } from "@mui/system";
-import SearchFilters from "../../Layout/components/SearchFilters";
-import SearchResults from "../../Layout/components/SearchResults";
+import SearchFilters from "../../components/SearchFilters";
+import SearchResults from "../../components/SearchResults";
 import "./SearchResultsPage.module.css";
 
 export default function SearchResultsPage() {
