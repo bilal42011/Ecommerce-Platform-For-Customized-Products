@@ -1,5 +1,5 @@
 import React, { useState } from "react"; 
-import {Grid,Typography,OutlinedInput,Button} from "@mui/material";
+import {Grid,Typography,OutlinedInput,Button,Container} from "@mui/material";
 import ArtImage from "../../../assets/ArtImage.png";
 import styled from "@mui/material/styles/styled";
 import {useTheme} from "@mui/material/styles";
@@ -44,7 +44,9 @@ const onSearchHandler=()=>{
 console.log("Form Submitted");
 }
 
-return <Grid container sx={{background:`url(${ArtImage})`,height:"580px"}} justifyContent="center" alignContent="center">
+return <Container maxWidth="xl" disableGutters> 
+
+<Grid container sx={{background:`url(${ArtImage})`,height:"580px"}} justifyContent="center" alignContent="center">
 <Grid container item alignContent="center" justifyContent="center" 
 xs={11} sm={11} md={10} lg={10} xl={10} sx={{height:"500px",backgroundColor:"rgb(0,0,0,0.5)"}} rowSpacing={isSmallScreen? 3: 0}>
 <Grid item xs={10}>
@@ -65,6 +67,7 @@ value={searchvalue} required/>
 </Grid>
 </Grid>
 </Grid>
+</Container>
 }
 
 export default SearchProductsSection;

@@ -1,30 +1,60 @@
 import React from "react";
-import { Swiper, SwiperSlide} from "swiper/react";
-import {Navigation, EffectCards, Pagination} from "swiper";
+import { Swiper,SwiperSlide} from "swiper/react";
+import {Container} from "@mui/material";
+import {Navigation,  Pagination,} from "swiper";
+import SellerProfile from "../SellersProfiles/SellerProfile/SellerProfile";
+import {topSellers} from "../SellersProfiles/SellersProfiles";
+
 
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import "swiper/css/effect-cards";
+
 
 const SellersSlider = () => {
   return (
+<Container disableGutters sx={{paddingTop:"2rem"}}>    
 <Swiper
-modules={[Navigation, EffectCards,Pagination]}
-effect="Cards"
+modules={[Navigation,Pagination,]}
 slidesPerView={3}
+spaceBetween={50}
+breakpoints={{
+1020:{
+  slidesPerView:3,
+  spaceBetween:50,
+},
+855:{
+slidesPerView:2,
+spaceBetween:50
+},
+650:{
+  slidesPerView:2,
+  spaceBetween:50,
+},
+0:{
+  slidesPerView:1,
+  spaceBetween:50,
+},
+  }}
 navigation
+speed={400}
 pagination={{clickable:true}}
 onSwiper={()=>console.log("swiper")}
 onSlideChange={()=>{console.log("Slide Changed")}}
 >
-    <SwiperSlide>Slide 1</SwiperSlide>
-    <SwiperSlide>Slide 2</SwiperSlide>
-    <SwiperSlide>Slide 3</SwiperSlide>
-    <SwiperSlide>Slide 4</SwiperSlide>
-    <SwiperSlide>Slide 5</SwiperSlide>
-    <SwiperSlide>Slide 6</SwiperSlide>
+{
+topSellers.map((seller)=>{
+
+    return <SwiperSlide key={seller.id}>
+    <SellerProfile avatarSrc={seller.avatarSrc} name={seller.name} 
+    ratings={seller.ratings} description={seller.description} />
+    </SwiperSlide>
+    
+            })
+
+}
 </Swiper>
+</Container>
   )
 }
 
