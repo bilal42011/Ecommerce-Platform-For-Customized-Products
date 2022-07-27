@@ -6,7 +6,7 @@ import SellersSlider from './SellersSlider/SellersSlider';
 
 const TopRatedSellers = () => {
   return (
-    <Container maxWidth="xl" sx={{paddingTop:"3rem",backgroundColor:"#0d084d",marginTop:"6rem"}}>
+    <Container maxWidth="xl" sx={{paddingTop:"3rem",backgroundColor:"#0d084d",marginTop:{xs:"3rem",sm:"4rem",md:"6rem"}}}>
       <Typography variant="h3" fontFamily='Roboto sans-serif' textAlign="center" color="white" fontWeight="bold">
 <span style={{paddingBottom:"8px",borderBottom:"2px solid white"}}>Top Rated Sellers</span>
       </Typography>

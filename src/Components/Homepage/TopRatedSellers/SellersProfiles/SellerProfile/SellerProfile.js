@@ -9,17 +9,17 @@ const SellerProfile = ({avatarSrc,name,ratings,description}) => {
 ,paddingBottom:"-20px",backgroundColor:"white"}} 
 rowSpacing={2} alignItems="center" direction="column"  justifyContent="center">
     
-    <Grid item xs={8}>
+    <Grid item >
     <Avatar sx={{width:120, height:120}} src={avatarSrc}/>
     </Grid>
     
-    <Grid item xs={8}>
+    <Grid item >
     <Typography fontFamily="Roboto Condensed, sans-serif" variant="p" fontWeight="bold" fontSize="24px">
         {name}
     </Typography>
     </Grid>
     
-    <Grid container item  xs={8} alignItems="center" justifyContent="center" columnSpacing={0.5} >
+    <Grid container item alignItems="center" justifyContent="center" columnSpacing={0.5} >
 <Grid item>
 <Rating name="half-rating-read"
  readOnly value={ratings}
@@ -35,7 +35,7 @@ fontWeight="bolder" fontSize="17px">
 </Grid>
     </Grid>
 
-<Grid item xs={8}>
+<Grid item>
 <Typography variant="body1" fontFamily="Roboto , sans-serif" textAlign="center" fontSize="21px" color="#666666">
 {description}
 </Typography>
