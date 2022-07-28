@@ -6,7 +6,7 @@ import Homepage from "./Pages/Homepage/Homepage";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
 import ProductPage from "./Pages/ProductPage";
 import LogIn from "./Pages/LogIn";
-import SignUp from "./Pages/Signup";
+import SignUp from "./Pages/Signup/Signup";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
