@@ -22,7 +22,7 @@ export default function AvatarChooser({ value, onChange }) {
         OP
       </Avatar>
       <input
-        id="avatarChooser"
+        className="avatarChooser"
         type="file"
         name="avatar"
         accept="image/png, image/jpeg"
