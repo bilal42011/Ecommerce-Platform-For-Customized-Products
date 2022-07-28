@@ -46,7 +46,7 @@ onSlideChange={()=>{console.log("Slide Changed")}}
 topSellers.map((seller)=>{
 
     return <SwiperSlide key={seller.id}>
-    <SellerProfile avatarSrc={seller.avatarSrc} name={seller.name} 
+    <SellerProfile id={seller.id} avatarSrc={seller.avatarSrc} name={seller.name} 
     ratings={seller.ratings} description={seller.description} />
     </SwiperSlide>
     

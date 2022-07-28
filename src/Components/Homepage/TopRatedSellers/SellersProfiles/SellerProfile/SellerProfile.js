@@ -1,8 +1,10 @@
 import React from 'react'
 import {Grid,Avatar,Typography,Rating} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import {Link} from "react-router-dom";
 
-const SellerProfile = ({avatarSrc,name,ratings,description}) => {
+
+const SellerProfile = ({id,avatarSrc,name,ratings,description}) => {
 
   return (
 <Grid container sx={{p:3.5,border:"1px solid #808080",borderRadius:"8px"
@@ -36,9 +38,16 @@ fontWeight="bolder" fontSize="17px">
     </Grid>
 
 <Grid item>
-<Typography variant="body1" fontFamily="Roboto , sans-serif" textAlign="center" fontSize="21px" color="#666666">
+<Link to={`sellerprofile/${id}`} style={{textDecoration:"none"}}>
+<Typography variant="body1" fontFamily="Roboto , sans-serif" textAlign="center"
+ fontSize="21px" sx={{
+  "&:hover":{
+color:"rgb(29, 191, 115)"
+ }
+ }}>
 {description}
 </Typography>
+</Link>
 </Grid>
 
     </Grid>    

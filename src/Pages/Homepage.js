@@ -3,7 +3,7 @@ import {Container} from "@mui/material";
 import SearchProductsSection from "../Components/Homepage/SearchProductsSection/SearchProductsSection";
 import TopRatedSellers from "../Components/Homepage/TopRatedSellers/TopRatedSellers";
 import AboutSite from "../Components/Homepage/AboutSIte/AboutSite";
-
+import Categories from "../Components/Homepage/Categories/Categories";
 
 const Homepage=()=>{
 
@@ -11,7 +11,8 @@ const Homepage=()=>{
 <SearchProductsSection />
 <TopRatedSellers />
 <AboutSite/>
-    </Container>
+<Categories/>
+</Container>
 }
 
 export default Homepage;
