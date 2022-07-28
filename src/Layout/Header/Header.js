@@ -15,8 +15,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 
 const pages = [
-  { name: "Browse", url: "browse" },
-  { name: "Become a Seller", url: "/becomeseller" },
+  { name: "Browse", url: "/search" },
+  { name: "Become a Seller", url: "/signup" },
   { name: "Request a Custom Product", url: "/requestcustomproduct" },
 ];
 console.log(styles);
