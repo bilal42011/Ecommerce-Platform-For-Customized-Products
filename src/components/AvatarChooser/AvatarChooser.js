@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import "./AvatarChooser.css";
 
 export default function AvatarChooser({ value, onChange }) {
   const [image, setImage] = useState("");
