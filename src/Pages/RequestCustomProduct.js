@@ -104,6 +104,9 @@ export default function RequestCustomProduct() {
               onChange={(e) =>
                 setFormData({ ...formData, budget: e.target.value * 1 })
               }
+              inputProps={{
+                min: 0,
+              }}
               InputProps={{
                 startAdornment: <Typography sx={{ mr: 1 }}>Rs. </Typography>,
               }}
