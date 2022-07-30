@@ -7,6 +7,7 @@ import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
 import ProductPage from "./Pages/ProductPage";
 import LogIn from "./Pages/LogIn";
 import SignUp from "./Pages/Signup/Signup";
+import RequestCustomProduct from "./Pages/RequestCustomProduct";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,10 +18,7 @@ root.render(
         <Route index element={<Homepage />} />
         <Route path="browse" element={<div>Browse Route</div>} />
         <Route path="becomeseller" element={<div>Become a Seller</div>} />
-        <Route
-          path="requestcustomproduct"
-          element={<div>Request Custom Product</div>}
-        />
+        <Route path="requestcustomproduct" element={<RequestCustomProduct />} />
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="search" element={<SearchResultsPage />} />
