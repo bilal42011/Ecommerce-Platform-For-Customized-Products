@@ -10,7 +10,7 @@ console.log(styles);
  console.log(nonActiveClassname);
  const ActiveClassname=[styles.navLink,styles.activeNavLink].join(" ");
  console.log(ActiveClassname);
- const headingStyles={textDecoration:"none",color:"white"};
+ const headingStyles={textDecoration:"none",color:"#061522"};
  
 
 const Header=()=>{
@@ -32,19 +32,20 @@ useEffect(()=>{
 },[location]);
 
 
-return <AppBar sx={{backgroundColor:"rgb(29, 191, 115)",height:"87px"}}>
+return <AppBar sx={{backgroundColor:"white"}}>
 <Container maxWidth="xl">
-<Toolbar disableGutters  sx={{height:"100%",my:1}}>
+<Toolbar disableGutters sx={{my:1}}>
 
 <Box sx={{
     display:{xs:"flex",md:"none"},flexGrow:{xs:1,sm:0}
     }}>
 <IconButton
+size="large"
 aria-label="menu button for small screen"
 aria-controls="menu-appbar"
 aria-haspopup="true"
 onClick={handleMenuButtonClick}>
-<MenuIcon sx={{fontSize:"2.5rem",color:"white"}}/>
+<MenuIcon sx={{fontSize:"2rem"}}/>
 </IconButton>
 <Menu
 anchorEl={anchorEl}
@@ -66,8 +67,8 @@ sx={{
 {
     pages.map((page,index)=><MenuItem key={index} sx={{display:"block"}} >
         <NavLink to={`${page.url}`} 
-        style={({isActive})=>isActive?{textDecoration:"none",display:"block",color:"rgb(29, 191, 115)",borderBottom:"2px solid rgb(29, 191, 115)",fontWeight:"bold"}
-        :{display:"block",color:"rgb(29, 191, 115)",textDecoration:"none",fontWeight:"bold"}}>
+        style={({isActive})=>isActive?{textDecoration:"none",display:"block",color:"#061522",fontWeight:"bold"}
+        :{display:"block",color:"#62646a",textDecoration:"none"}}>
         {page.name}
         </NavLink>
         </MenuItem>)
@@ -87,7 +88,7 @@ sx={{display:{xs:"none",sm:"flex"},flexGrow:1,fontWeight:"bolder",fontFamily:'Ro
     pages.map((page,index)=> <NavLink key={index} to={`${page.url}`} 
     className={({isActive})=>isActive?ActiveClassname:nonActiveClassname}>
         <Button variant="text"
-         sx={{fontSize:"17px",fontFamily:'Roboto, sans-serif',fontWeight:"bold",textTransform:"none", color:"white"}}>
+         sx={{fontSize:"16px",fontFamily:'Roboto, sans-serif',fontWeight:"bold",textTransform:"none"}} color="inherit">
         {page.name}
         </Button>
         </NavLink>
@@ -96,14 +97,7 @@ sx={{display:{xs:"none",sm:"flex"},flexGrow:1,fontWeight:"bolder",fontFamily:'Ro
 </Box>
 <Box sx={{display:"flex"}}>
 <Button variant="outlined" onClick={()=>navigate("login")} 
-sx={{marginLeft:2,fontFamily:'Roboto, sans-serif',fontWeight:"bolder"
-,border:"2px solid white",color:"white",
-"&:hover":{
-border:"2px solid white",
-backgroundColor:"white",
-color:"black",
-fontWeight:"bolder"
-}}}>LOG IN</Button>
+sx={{marginLeft:2,fontFamily:'Roboto, sans-serif',fontWeight:"bolder"}}>LOG IN</Button>
 <Button variant="contained" onClick={()=>navigate("signup")}
  sx={{marginLeft:1,fontFamily:'Roboto, sans-serif',fontWeight:"bolder"}}>JOIN</Button>
 </Box>
