@@ -14,14 +14,17 @@ const TopRatedSellers = () => {
     >
       <Typography
         variant="h3"
-        fontFamily="Roboto sans-serif"
         textAlign="center"
         color="white"
         fontWeight="bold"
+        sx={{
+          paddingBottom: "8px",
+          borderBottom: "2px solid white",
+          width: "fit-content",
+          margin: "auto",
+        }}
       >
-        <span style={{ paddingBottom: "8px", borderBottom: "2px solid white" }}>
-          Top Rated Sellers
-        </span>
+        Top Rated Sellers
       </Typography>
       <SellersSlider />
     </Container>
