@@ -7,7 +7,7 @@ import { Container } from "@mui/material";
 const App=()=>{
 return (
 <Layout>
-    <Container maxWidth="xl" sx={{marginTop:"5.7rem"}} disableGutters>
+    <Container maxWidth="xl" sx={{marginTop:"5.5rem"}} disableGutters>
     <Outlet/>
     </Container>
 </Layout>

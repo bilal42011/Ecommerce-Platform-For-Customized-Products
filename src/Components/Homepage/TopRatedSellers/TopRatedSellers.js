@@ -17,14 +17,10 @@ const TopRatedSellers = () => {
         textAlign="center"
         color="white"
         fontWeight="bold"
-        sx={{
-          paddingBottom: "8px",
-          borderBottom: "2px solid white",
-          width: "fit-content",
-          margin: "auto",
-        }}
       >
-        Top Rated Sellers
+        <span style={{ paddingBottom: "8px", borderBottom: "2px solid white" }}>
+          Top Rated Sellers
+        </span>
       </Typography>
       <SellersSlider />
     </Container>
