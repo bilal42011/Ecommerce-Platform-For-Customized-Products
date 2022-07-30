@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./Pages/Homepage.js";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
 import ProductPage from "./Pages/ProductPage";
+import LogIn from "./Pages/LogIn";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,7 +20,7 @@ root.render(
           path="requestcustomproduct"
           element={<div>Request Custom Product</div>}
         />
-        <Route path="login" element={<div>Welcome to login</div>} />
+        <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<div>Welcome to Sign Up</div>} />
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/*" element={<ProductPage />} />
