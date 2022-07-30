@@ -14,8 +14,8 @@ import {
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
-import AvatarChooser from "../../components/AvatarChooser/AvatarChooser";
-import CityChooser from "../../components/CityChooser";
+import AvatarChooser from "../../Components/AvatarChooser/AvatarChooser";
+import CityChooser from "../../Components/CityChooser";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({

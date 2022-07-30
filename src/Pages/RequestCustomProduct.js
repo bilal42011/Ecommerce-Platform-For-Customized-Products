@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { useState } from "react";
-import CategoryChooser from "../components/CategoryChooser";
-import QuantityInput from "../components/QuantityInput/QuantityInput";
+import CategoryChooser from "../Components/CategoryChooser";
+import QuantityInput from "../Components/QuantityInput/QuantityInput";
 
 export default function RequestCustomProduct() {
   const [formData, setFormData] = useState({
