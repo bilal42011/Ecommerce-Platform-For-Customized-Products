@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <Container maxWidth="xl" sx={{ mt: 11 }}>
+      <Container maxWidth="100%" sx={{ mt: 11 }} disableGutters>
         {children}
       </Container>
       <Footer />
