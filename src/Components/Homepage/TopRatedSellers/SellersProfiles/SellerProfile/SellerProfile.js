@@ -38,7 +38,7 @@ fontWeight="bolder" fontSize="17px">
     </Grid>
 
 <Grid item>
-<Link to={`sellerprofile/${id}`} style={{textDecoration:"none"}}>
+<Link to={`sellerprofile/${id}`} style={{textDecoration:"none",color:"#666666"}}>
 <Typography variant="body1" fontFamily="Roboto , sans-serif" textAlign="center"
  fontSize="21px" sx={{
   "&:hover":{
