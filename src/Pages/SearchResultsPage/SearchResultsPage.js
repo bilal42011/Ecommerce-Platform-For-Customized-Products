@@ -144,7 +144,7 @@ export default function SearchResultsPage() {
     },
   ];
   return (
-    <Box sx={{ pt: 2 }}>
+    <Box sx={{ pt: 2 }} maxWidth="xl" margin="auto">
       <SearchFilters />
       <SearchResults results={results} />
       <Box display="flex" justifyContent={"center"} mt={2}>
