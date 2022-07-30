@@ -15,3 +15,8 @@ padding:0
     padding-bottom: 4.5rem;
     
 }
+
+.swiper-button-prev, .swiper-button-next{
+    color:rgb(29, 191, 115) !important
+    
+}
