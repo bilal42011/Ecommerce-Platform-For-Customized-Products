@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
@@ -19,4 +20,10 @@ padding:0
 .swiper-button-prev, .swiper-button-next{
     color:rgb(29, 191, 115) !important
     
+=======
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap");
+
+* {
+  box-sizing: border-box;
+>>>>>>> productpage
 }
