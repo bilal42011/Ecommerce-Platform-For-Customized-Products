@@ -9,13 +9,14 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 
-export default function QuantityInput({ label = "Quantity" }) {
-  const [quantity, setQuantity] = useState(1);
+export default function QuantityInput({ label = "Quantity", value, onChange }) {
+  const [quantity, setQuantity] = useState(value);
 
   const increment = () => {
     setQuantity((old) => {
       return old * 1 + 1;
     });
+    onChange(quantity);
   };
 
   const decrement = () => {
@@ -23,6 +24,7 @@ export default function QuantityInput({ label = "Quantity" }) {
       if (old <= 1) return old;
       return old - 1;
     });
+    onChange(quantity);
   };
 
   const change = (value) => {
@@ -30,12 +32,13 @@ export default function QuantityInput({ label = "Quantity" }) {
       if (value < 1) return old;
       return value;
     });
+    onChange(quantity);
   };
 
   return (
     <FormControl sx={{ flexDirection: "row", alignItems: "center" }}>
-      <FormLabel sx={{ mr: 2 }}>{label}</FormLabel>
-      <ButtonGroup>
+      <FormLabel sx={{ flex: 1, color: "inherit" }}>{label}</FormLabel>
+      <ButtonGroup sx={{ flex: 2 }}>
         <Button variant="contained" disableElevation onClick={decrement}>
           <RemoveIcon />
         </Button>
