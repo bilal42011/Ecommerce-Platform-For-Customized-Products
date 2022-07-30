@@ -1,0 +1,15 @@
+.navLink{    
+box-sizing: padding-box;
+text-decoration: none;
+margin:4px;
+border-bottom:2px solid rgba(25, 118, 210, 0);
+}
+
+.nonactiveNavLink{
+    color:#62646a;
+}
+.activeNavLink{
+    color: #1976d2;
+    border-bottom:2px solid rgba(25, 118, 210, 1);
+    
+}
