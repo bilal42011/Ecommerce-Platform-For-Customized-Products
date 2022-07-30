@@ -144,12 +144,12 @@ export default function SearchResultsPage() {
     },
   ];
   return (
-    <>
+    <Box sx={{ pt: 2 }}>
       <SearchFilters />
       <SearchResults results={results} />
       <Box display="flex" justifyContent={"center"} mt={2}>
         <Pagination count={10} />
       </Box>
-    </>
+    </Box>
   );
 }
