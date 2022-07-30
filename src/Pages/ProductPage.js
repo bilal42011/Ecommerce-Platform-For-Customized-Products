@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import ProductInfo from "../Components/ProductInfo";
-import ProductMedia from "../Components/ProductMedia/ProductMedia";
+import ProductInfo from "../components/ProductInfo";
+import ProductMedia from "../components/ProductMedia/ProductMedia";
 
 export default function ProductPage() {
   const product = {

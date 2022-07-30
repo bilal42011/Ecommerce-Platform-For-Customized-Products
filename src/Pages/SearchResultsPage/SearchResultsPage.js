@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import { Box } from "@mui/system";
-import SearchFilters from "../../Components/SearchFilters";
-import SearchResults from "../../Components/SearchResults";
+import SearchFilters from "../../components/SearchFilters";
+import SearchResults from "../../components/SearchResults";
 import "./SearchResultsPage.module.css";
 
 export default function SearchResultsPage() {
@@ -144,12 +144,12 @@ export default function SearchResultsPage() {
     },
   ];
   return (
-    <Box sx={{ pt: 2 }}>
+    <>
       <SearchFilters />
       <SearchResults results={results} />
       <Box display="flex" justifyContent={"center"} mt={2}>
         <Pagination count={10} />
       </Box>
-    </Box>
+    </>
   );
 }
