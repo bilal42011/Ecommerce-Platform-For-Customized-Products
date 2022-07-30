@@ -46,11 +46,10 @@ export default function LogIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component={Paper} maxWidth="xs" sx={{ pb: 1 }}>
+      <Container component={Paper} maxWidth="xs" sx={{ pb: 1, mt: 15 }}>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

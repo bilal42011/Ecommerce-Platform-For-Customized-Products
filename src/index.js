@@ -6,6 +6,7 @@ import Homepage from "./Pages/Homepage.js";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
 import ProductPage from "./Pages/ProductPage";
 import LogIn from "./Pages/LogIn";
+import ViewBuyerRequests from "./Pages/ViewBuyerRequests";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -24,6 +25,7 @@ root.render(
         <Route path="signup" element={<div>Welcome to Sign Up</div>} />
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/*" element={<ProductPage />} />
+        <Route path="buyers-requests" element={<ViewBuyerRequests />} />
       </Route>
     </Routes>
   </Router>
