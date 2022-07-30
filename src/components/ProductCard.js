@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
   return (
     <Link to={product.url} style={{ textDecoration: "none" }}>
       <Card variant="outlined">
-        <CardMedia component="img" height={200} image={product.image} />
+        <CardMedia component="img" height={250} image={product.image} />
         <CardContent component={Stack} spacing={1}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Avatar>{product.ownername.charAt(0)}</Avatar>
@@ -35,7 +35,11 @@ export default function ProductCard({ product }) {
           <Typography fontWeight={"bold"}>
             Rs. {product.price.toLocaleString()} /-
           </Typography>
-          <Button sx={{ flexGrow: 1, ml: 2 }} variant="contained">
+          <Button
+            sx={{ flexGrow: 1, ml: 2 }}
+            variant="contained"
+            disableElevation
+          >
             Add to Cart
           </Button>
         </CardActions>

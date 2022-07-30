@@ -8,9 +8,10 @@ export default function ProductSizes({ sizes }) {
     <FormControl sx={{ flexDirection: "row", alignItems: "center" }}>
       <FormLabel sx={{ mr: 2 }}>Size</FormLabel>
       <RadioGroup sx={{ flexDirection: "row", flexWrap: "wrap" }} value={size}>
-        {sizes.map((i) => {
+        {sizes.map((i, index) => {
           return (
             <Chip
+              key={index}
               variant={size === i ? "filled" : "outlined"}
               sx={{ mx: 1 }}
               label={i}

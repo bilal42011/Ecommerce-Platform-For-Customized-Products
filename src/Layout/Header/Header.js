@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Typography,
@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 
 const pages = [
@@ -19,41 +19,42 @@ const pages = [
   { name: "Become a Seller", url: "/becomeseller" },
   { name: "Request a Custom Product", url: "/requestcustomproduct" },
 ];
-console.log(styles);
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
-console.log(nonActiveClassname);
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
-console.log(ActiveClassname);
-const headingStyles = { textDecoration: "none", color: "#061522" };
+const headingStyles = { textDecoration: "none", color: "white" };
 
 const Header = () => {
   let navigate = useNavigate();
+  let location = useLocation();
   let [anchorEl, setanchorEl] = useState(null);
   const handleMenuButtonClick = (event) => {
     setanchorEl(event.currentTarget);
-    console.log(event.currenttarget);
   };
   const handleClose = () => {
     setanchorEl(null);
   };
 
+  useEffect(() => {
+    setanchorEl(null);
+  }, [location]);
+
   return (
-    <AppBar sx={{ backgroundColor: "white" }}>
+    <AppBar sx={{ backgroundColor: "rgb(29, 191, 115)", height: "87px" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ height: "100%", my: 1 }}>
           <Box
             sx={{
               display: { xs: "flex", md: "none" },
+              flexGrow: { xs: 1, sm: 0 },
             }}
           >
             <IconButton
-              size="large"
               aria-label="menu button for small screen"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleMenuButtonClick}
             >
-              <MenuIcon size="large" />
+              <MenuIcon sx={{ fontSize: "2.5rem", color: "white" }} />
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -74,11 +75,7 @@ const Header = () => {
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem
-                  key={index}
-                  sx={{ display: "block", boxSizing: "border-box" }}
-                  divider
-                >
+                <MenuItem key={index} sx={{ display: "block" }}>
                   <NavLink
                     to={`${page.url}`}
                     style={({ isActive }) =>
@@ -86,12 +83,15 @@ const Header = () => {
                         ? {
                             textDecoration: "none",
                             display: "block",
-                            color: "rgba(25, 118, 210)",
+                            color: "rgb(29, 191, 115)",
+                            borderBottom: "2px solid rgb(29, 191, 115)",
+                            fontWeight: "bold",
                           }
                         : {
                             display: "block",
-                            color: "#62646a",
+                            color: "rgb(29, 191, 115)",
                             textDecoration: "none",
+                            fontWeight: "bold",
                           }
                     }
                   >
@@ -105,13 +105,13 @@ const Header = () => {
           <Typography
             variant="h4"
             sx={{
-              display: "flex",
+              display: { xs: "none", sm: "flex" },
               flexGrow: 1,
               fontWeight: "bolder",
               fontFamily: "Roboto Condensed, sans-serif",
             }}
           >
-            <NavLink to="/" style={({ isActive }) => headingStyles} end>
+            <NavLink to="/" style={() => headingStyles} end>
               E-Workers
             </NavLink>
           </Typography>
@@ -127,10 +127,12 @@ const Header = () => {
                 <Button
                   variant="text"
                   sx={{
-                    fontSize: "15px",
-                    fontFamily: "Roboto Condensed, sans-serif",
+                    fontSize: "17px",
+                    fontFamily: "Roboto, sans-serif",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    color: "white",
                   }}
-                  color="inherit"
                 >
                   {page.name}
                 </Button>
@@ -141,14 +143,30 @@ const Header = () => {
             <Button
               variant="outlined"
               onClick={() => navigate("login")}
-              sx={{ marginLeft: 2 }}
+              sx={{
+                marginLeft: 2,
+                fontFamily: "Roboto, sans-serif",
+                fontWeight: "bolder",
+                border: "2px solid white",
+                color: "white",
+                "&:hover": {
+                  border: "2px solid white",
+                  backgroundColor: "white",
+                  color: "black",
+                  fontWeight: "bolder",
+                },
+              }}
             >
               LOG IN
             </Button>
             <Button
               variant="contained"
               onClick={() => navigate("signup")}
-              sx={{ marginLeft: 1 }}
+              sx={{
+                marginLeft: 1,
+                fontFamily: "Roboto, sans-serif",
+                fontWeight: "bolder",
+              }}
             >
               JOIN
             </Button>

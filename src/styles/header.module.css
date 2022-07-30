@@ -2,7 +2,7 @@
   box-sizing: padding-box;
   text-decoration: none;
   margin: 4px;
-  border-bottom: 2px solid rgba(25, 118, 210, 0);
+  border-bottom: 2.5px solid rgb(255, 255, 255, 0);
 }
 
 .nonactiveNavLink {
@@ -10,5 +10,5 @@
 }
 .activeNavLink {
   color: #1976d2;
-  border-bottom: 2px solid rgba(25, 118, 210, 1);
+  border-bottom: 2.5px solid white;
 }
