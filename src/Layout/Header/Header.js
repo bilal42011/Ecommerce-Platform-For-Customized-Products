@@ -5,29 +5,23 @@ import {NavLink,useNavigate,useLocation} from "react-router-dom";
 import styles from "../../styles/header.module.css";
 
 const pages=[{name:"Browse",url:"browse"},{name:"Become a Seller",url:"/becomeseller"},{name:"Request a Custom Product",url:"/requestcustomproduct"}]
-console.log(styles);
  const nonActiveClassname=[styles.navLink,styles.nonactiveNavLink].join(" ");
- console.log(nonActiveClassname);
  const ActiveClassname=[styles.navLink,styles.activeNavLink].join(" ");
- console.log(ActiveClassname);
  const headingStyles={textDecoration:"none",color:"white"};
  
 
 const Header=()=>{
-console.log("component rerendred");
     let navigate=useNavigate();
     let location=useLocation();
 let [anchorEl,setanchorEl]=useState(null);
 const handleMenuButtonClick=(event)=>{
 setanchorEl(event.currentTarget);
-console.log(event.currenttarget)
 }
 const handleClose=()=>{
     setanchorEl(null);
 }
 
 useEffect(()=>{
-    console.log("inside useEffect");
     setanchorEl(null);
 },[location]);
 
