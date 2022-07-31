@@ -4,7 +4,7 @@ import "./styles/index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./Pages/Homepage.js";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
-import ProductPage from "./Pages/ProductPage";
+import ProductPage from "./Pages/ProductPage.js";
 import LogIn from "./Pages/LogIn";
 import SignUp from "./Pages/Signup/Signup";
 import RequestCustomProduct from "./Pages/RequestCustomProduct";

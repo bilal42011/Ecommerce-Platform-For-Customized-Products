@@ -9,7 +9,7 @@ export default function SearchResults({ results }) {
         <Grid container spacing={1}>
           {results.map((item, index) => {
             return (
-              <Grid item xs={12} md={3}>
+              <Grid key={index} item xs={12} md={3}>
                 <ProductCard product={item} />
               </Grid>
             );

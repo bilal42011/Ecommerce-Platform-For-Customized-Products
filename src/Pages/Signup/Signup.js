@@ -35,7 +35,7 @@ export default function SignUp() {
   };
 
   return (
-    <Card sx={{ maxWidth: "md", margin: "auto" }}>
+    <Card sx={{ maxWidth: "md", margin: "auto", mt: 15 }}>
       <CardHeader title="SignUp" subheader="Join E-workers today" />
       <Divider />
       <CardContent component={"form"} onSubmit={onSignUp}>
