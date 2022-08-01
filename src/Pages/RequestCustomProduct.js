@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { useState } from "react";
 import CategoryChooser from "../Components/CategoryChooser";
 import QuantityInput from "../Components/QuantityInput/QuantityInput";
+import FileChooser from "../Components/FileChooser";
 
 export default function RequestCustomProduct() {
   const [formData, setFormData] = useState({
@@ -49,40 +49,13 @@ export default function RequestCustomProduct() {
               setFormData({ ...formData, description: e.target.value })
             }
           />
-          <Stack
-            direction={"row"}
-            component="label"
-            alignItems="center"
-            htmlFor="attachments-button"
-            sx={{ position: "relative" }}
-          >
-            <Button variant="outlined" sx={{ maxWidth: "sm" }}>
-              Attach Files
-              <AttachFileIcon />
-            </Button>
-            {formData.files.map((e, i) => (
-              <Typography key={i} variant="caption" ml={1}>
-                {e.name},
-              </Typography>
-            ))}
-            <input
-              accept="*"
-              id="attachments-button"
-              multiple
-              type="file"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                opacity: 0,
-              }}
-              onChange={(e) =>
-                setFormData({ ...formData, files: [...e.target.files] })
-              }
-            />
-          </Stack>
+          <FileChooser
+            value={formData.files}
+            onChange={(e) =>
+              setFormData({ ...formData, files: [...e.target.files] })
+            }
+            accept="*"
+          />
           <CategoryChooser
             value={formData.category}
             onChange={(e) =>
