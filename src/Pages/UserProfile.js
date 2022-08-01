@@ -134,7 +134,7 @@ export default function UserProfile() {
           {user.products.map((item, index) => {
             return (
               <Grid item xs={12} md={6} lg={4} key={index}>
-                <ProductCard product={item} />
+                <ProductCard product={item} showActions />
               </Grid>
             );
           })}
