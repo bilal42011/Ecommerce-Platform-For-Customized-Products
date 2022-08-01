@@ -29,11 +29,8 @@ root.render(
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
+        <Route path="customproposals" element={<CustomRequestProposals />} />
         <Route path="sellerprofile/:userId" element={<UserProfile />} />
-        <Route
-          path="customproposals"
-          element={<CustomRequestProposals />}
-        ></Route>
         <Route
           path="sellerprofile/:userId/products/create"
           element={<CreateProduct />}
