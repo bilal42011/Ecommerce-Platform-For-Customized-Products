@@ -98,7 +98,7 @@ export default function UserProfile() {
               alignItems="center"
               spacing={1}
             >
-              <Rating value={user.aggregated_rating} />{" "}
+              <Rating readOnly value={user.aggregated_rating} />{" "}
               <Typography fontWeight="bold">
                 {user.aggregated_rating}
               </Typography>

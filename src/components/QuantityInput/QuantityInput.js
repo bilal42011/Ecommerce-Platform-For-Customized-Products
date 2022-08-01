@@ -10,13 +10,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 
 export default function QuantityInput({ label = "Quantity", value, onChange }) {
-  const [quantity, setQuantity] = useState(value);
+  const [quantity, setQuantity] = useState(value || 1);
 
   const increment = () => {
     setQuantity((old) => {
       return old * 1 + 1;
     });
-    onChange(quantity);
+    onChange && onChange(quantity);
   };
 
   const decrement = () => {
@@ -24,7 +24,7 @@ export default function QuantityInput({ label = "Quantity", value, onChange }) {
       if (old <= 1) return old;
       return old - 1;
     });
-    onChange(quantity);
+    onChange && onChange(quantity);
   };
 
   const change = (value) => {
@@ -32,7 +32,8 @@ export default function QuantityInput({ label = "Quantity", value, onChange }) {
       if (value < 1) return old;
       return value;
     });
-    onChange(quantity);
+
+    onChange && onChange(quantity);
   };
 
   return (
