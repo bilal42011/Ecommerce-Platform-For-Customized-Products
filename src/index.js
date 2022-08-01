@@ -26,7 +26,7 @@ root.render(
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/*" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
-        <Route path="users/:userId" element={<UserProfile />} />
+        <Route path="sellerprofile/:userId" element={<UserProfile />} />
       </Route>
     </Routes>
   </Router>

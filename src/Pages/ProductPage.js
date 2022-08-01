@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import { Container } from "@mui/system";
 import ProductInfo from "../Components/ProductInfo";
 import ProductMedia from "../Components/ProductMedia/ProductMedia";
 
@@ -25,13 +26,15 @@ export default function ProductPage() {
     url: "/products/solar-panel-stand",
   };
   return (
-    <Grid container display="flex">
-      <Grid item xs={12} md={6} className="product-media">
-        <ProductMedia product={product} />
+    <Container maxWidth="xl">
+      <Grid container display="flex">
+        <Grid item xs={12} md={6} className="product-media">
+          <ProductMedia product={product} />
+        </Grid>
+        <Grid item xs={12} md={6} className="prodcut-info">
+          <ProductInfo product={product} />
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={6} className="prodcut-info">
-        <ProductInfo product={product} />
-      </Grid>
-    </Grid>
+    </Container>
   );
 }

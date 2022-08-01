@@ -5,6 +5,7 @@ import SellersSlider from "./SellersSlider/SellersSlider";
 const TopRatedSellers = () => {
   return (
     <Container
+      className="top-rated-sellers-slider"
       maxWidth="xl"
       sx={{
         paddingTop: "3rem",
