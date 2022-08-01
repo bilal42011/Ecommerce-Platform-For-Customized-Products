@@ -11,6 +11,8 @@ import RequestCustomProduct from "./Pages/RequestCustomProduct";
 import ViewBuyerRequests from "./Pages/ViewBuyerRequests";
 import UserProfile from "./Pages/UserProfile";
 import CustomRequestProposals from "./Pages/CustomRequestProposals";
+import CreateProduct from "./Pages/CreateProduct";
+import EditProduct from "./Pages/EditProduct";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -25,10 +27,21 @@ root.render(
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="search" element={<SearchResultsPage />} />
-        <Route path="products/*" element={<ProductPage />} />
+        <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
         <Route path="sellerprofile/:userId" element={<UserProfile />} />
-        <Route path="customproposals" element={<CustomRequestProposals />}></Route>
+        <Route
+          path="customproposals"
+          element={<CustomRequestProposals />}
+        ></Route>
+        <Route
+          path="sellerprofile/:userId/products/create"
+          element={<CreateProduct />}
+        />
+        <Route
+          path="sellerprofile/:userId/products/:product_id/edit"
+          element={<EditProduct />}
+        />
       </Route>
     </Routes>
   </Router>

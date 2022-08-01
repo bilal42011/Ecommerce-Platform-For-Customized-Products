@@ -23,6 +23,7 @@ const truncate = (string = "", maxLength = 50) =>
 export default function ProductCard({ product, showActions }) {
   const [anchorElem, setAnchorElem] = useState(null);
 
+  const handleProductDelete = (e) => {};
   const actionsMenu = (
     <Menu
       anchorEl={anchorElem}
@@ -39,8 +40,13 @@ export default function ProductCard({ product, showActions }) {
       open={anchorElem !== null}
       onClose={() => setAnchorElem(null)}
     >
-      <MenuItem>Edit</MenuItem>
-      <MenuItem>Delete</MenuItem>
+      <MenuItem>
+        <Link style={{ color: "inherit" }} to={`products/${product.id}/edit`}>
+          {" "}
+          Edit
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleProductDelete}>Delete</MenuItem>
     </Menu>
   );
 
