@@ -18,6 +18,7 @@ import UserProfile from "./Pages/UserProfile";
 import CustomRequestProposals from "./Pages/CustomRequestProposals";
 import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
+import ChatsPage from "./Pages/ChatsPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -39,6 +40,7 @@ root.render(
           <Route index element={<UserProfile />} />
           <Route path="products/create" element={<CreateProduct />} />
           <Route path="products/:product_id/edit" element={<EditProduct />} />
+          <Route path="chats" element={<ChatsPage />} />
         </Route>
       </Route>
     </Routes>

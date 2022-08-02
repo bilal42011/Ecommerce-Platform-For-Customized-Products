@@ -1,0 +1,14 @@
+.chat-message {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  background-color: lightcyan;
+}
+
+.chat-message.message-primary {
+  background-color: rgb(29, 191, 115);
+  color: white;
+}
+.chat-message.message-secondary {
+  margin-right: 0;
+  margin-left: auto;
+}
