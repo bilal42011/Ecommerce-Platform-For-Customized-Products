@@ -1,7 +1,12 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./styles/index.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import Homepage from "./Pages/Homepage.js";
 import SearchResultsPage from "./Pages/SearchResultsPage/SearchResultsPage";
 import ProductPage from "./Pages/ProductPage.js";
@@ -30,15 +35,14 @@ root.render(
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
         <Route path="customproposals" element={<CustomRequestProposals />} />
-        <Route path="sellerprofile/:userId" element={<UserProfile />} />
-        <Route
-          path="sellerprofile/:userId/products/create"
-          element={<CreateProduct />}
-        />
-        <Route
-          path="sellerprofile/:userId/products/:product_id/edit"
-          element={<EditProduct />}
-        />
+        <Route path="sellerprofile" element={<Outlet />}>
+          <Route path=":userId" element={<UserProfile />} />
+          <Route path=":userId/products/create" element={<CreateProduct />} />
+          <Route
+            path=":userId/products/:product_id/edit"
+            element={<EditProduct />}
+          />
+        </Route>
       </Route>
     </Routes>
   </Router>
