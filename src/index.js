@@ -36,10 +36,15 @@ root.render(
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
-        <Route path="customrequests" element={<CustomRequests />}></Route>
-        <Route path="customproposals" element={<CustomRequestProposals />} />
         <Route path="sellerprofile/:userId" element={<Outlet />}>
           <Route index element={<UserProfile />} />
+             <Route path="customrequests" element={<Outlet />}>
+                 <Route index element={<CustomRequests />}></Route>
+                 <Route path=":requestId" element={<Outlet/>}>
+                      <Route index element={<div>Welcome to new request</div>}></Route>
+                      <Route path="customproposals" element={<CustomRequestProposals />} />
+                 </Route>
+                 </Route>
           <Route path="products/create" element={<CreateProduct />} />
           <Route path="products/:product_id/edit" element={<EditProduct />} />
         </Route>
