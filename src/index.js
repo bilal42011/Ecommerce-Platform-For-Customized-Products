@@ -44,7 +44,7 @@ root.render(
                       <Route index element={<div>Welcome to new request</div>}></Route>
                       <Route path="customproposals" element={<CustomRequestProposals />} />
                  </Route>
-                 </Route>
+             </Route>
           <Route path="products/create" element={<CreateProduct />} />
           <Route path="products/:product_id/edit" element={<EditProduct />} />
         </Route>
