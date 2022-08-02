@@ -16,11 +16,13 @@ import RequestCustomProduct from "./Pages/RequestCustomProduct";
 import ViewBuyerRequests from "./Pages/ViewBuyerRequests";
 import UserProfile from "./Pages/UserProfile";
 import CustomRequestProposals from "./Pages/CustomRequestProposals";
+import CustomRequests from "./Pages/CustomRequests";
 import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
 
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
@@ -34,6 +36,7 @@ root.render(
         <Route path="search" element={<SearchResultsPage />} />
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
+        <Route path="customrequests" element={<CustomRequests />}></Route>
         <Route path="customproposals" element={<CustomRequestProposals />} />
         <Route path="sellerprofile/:userId" element={<Outlet />}>
           <Route index element={<UserProfile />} />
