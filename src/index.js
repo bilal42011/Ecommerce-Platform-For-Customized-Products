@@ -11,9 +11,10 @@ import RequestCustomProduct from "./Pages/RequestCustomProduct";
 import ViewBuyerRequests from "./Pages/ViewBuyerRequests";
 import UserProfile from "./Pages/UserProfile";
 import CustomRequestProposals from "./Pages/CustomRequestProposals";
+import CustomRequests from "./Pages/CustomRequests";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
   <Router>
     <Routes>
@@ -29,6 +30,8 @@ root.render(
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
         <Route path="sellerprofile/:userId" element={<UserProfile />} />
         <Route path="customproposals" element={<CustomRequestProposals />}></Route>
+        <Route path="customrequests" element={<CustomRequests />}></Route>
+        
       </Route>
     </Routes>
   </Router>
