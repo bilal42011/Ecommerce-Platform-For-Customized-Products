@@ -35,13 +35,10 @@ root.render(
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="buyers-requests" element={<ViewBuyerRequests />} />
         <Route path="customproposals" element={<CustomRequestProposals />} />
-        <Route path="sellerprofile" element={<Outlet />}>
-          <Route path=":userId" element={<UserProfile />} />
-          <Route path=":userId/products/create" element={<CreateProduct />} />
-          <Route
-            path=":userId/products/:product_id/edit"
-            element={<EditProduct />}
-          />
+        <Route path="sellerprofile/:userId" element={<Outlet />}>
+          <Route index element={<UserProfile />} />
+          <Route path="products/create" element={<CreateProduct />} />
+          <Route path="products/:product_id/edit" element={<EditProduct />} />
         </Route>
       </Route>
     </Routes>
