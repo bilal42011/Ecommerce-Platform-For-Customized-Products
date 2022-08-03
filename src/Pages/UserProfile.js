@@ -1,18 +1,8 @@
-import {
-  Avatar,
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  Rating,
-  Stack,
-  Typography,
-} from "@mui/material";
+import {Grid} from "@mui/material";
 import { Container } from "@mui/system";
-import PlaceIcon from "@mui/icons-material/Place";
-import avatarImage from "../assets/safwan.webp";
 import ProductCard from "../Components/ProductCard";
-import { Link } from "react-router-dom";
+import avatarImage from "../assets/safwan.webp";
+import SellerProfileDescription from "../Components/SellerProfileDescription";
 
 export default function UserProfile() {
   const user = {
@@ -80,63 +70,7 @@ export default function UserProfile() {
     <Container maxWidth="xl" sx={{ mt: 15 }}>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={4}>
-          <Paper
-            variant="outlined"
-            sx={{ p: 2, textAlign: "center" }}
-            component={Stack}
-            spacing={1}
-          >
-            <Avatar
-              sx={{ width: 125, height: 125, m: "auto" }}
-              src={user.avatar}
-            >
-              {user.username.charAt(0)}
-            </Avatar>
-            <Typography variant="h6">{user.full_name}</Typography>
-            <Stack
-              direction="row"
-              justifyContent={"center"}
-              alignItems="center"
-              spacing={1}
-            >
-              <Rating readOnly value={user.aggregated_rating} />{" "}
-              <Typography fontWeight="bold">
-                {user.aggregated_rating}
-              </Typography>
-              <Typography color="GrayText">
-                ({user.total_reviews} reviews)
-              </Typography>
-            </Stack>
-            <Stack direction={"row"} justifyContent="space-between">
-              <Typography
-                textAlign="left"
-                alignItems="center"
-                sx={{ display: "flex" }}
-              >
-                <PlaceIcon sx={{ mr: 1, verticalAlign: "middle" }} /> City
-              </Typography>
-              <Typography fontWeight="bold">{user.city}</Typography>
-            </Stack>
-            <Divider />
-            <Button variant="contained">
-              <Link
-                to="chats"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                {" "}
-                Contact Me
-              </Link>
-            </Button>
-          </Paper>
-          <Paper
-            variant="outlined"
-            sx={{ p: 2, mt: 1 }}
-            component={Stack}
-            spacing={1}
-          >
-            <Typography variant="h6">DESCRIPTION</Typography>
-            <Typography>{user.description}</Typography>
-          </Paper>
+          <SellerProfileDescription user={user} />
         </Grid>
         <Grid container item xs={12} sm={8} spacing={1}>
           {/* Products by seller */}
