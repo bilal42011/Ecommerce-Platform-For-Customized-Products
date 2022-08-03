@@ -1,4 +1,13 @@
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import {
+  Box,
+  Divider,
+  Grid,
+  Paper,
+  Slide,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
 import ChatCard from "../Components/ChatsPage/ChatCard/ChatCard";
@@ -100,6 +109,42 @@ export default function ChatsPage() {
 
   const [activeChat, setActiveChat] = useState(null);
 
+  const matches = useMediaQuery("(max-width: 600px)");
+
+  const desktopUI = (
+    <Grid container>
+      <Grid item xs={12} sm={4}>
+        <ChatsList chats={chats} onChatClick={(chat) => setActiveChat(chat)} />
+      </Grid>
+      <Grid item xs={0} sm={8}>
+        <ChatCard chat={activeChat} onClose={(_) => setActiveChat(null)} />
+      </Grid>
+    </Grid>
+  );
+
+  const mobileUI = (
+    <Box>
+      <Slide direction="right" in={!activeChat} mountOnEnter unmountOnExit>
+        <Box>
+          <ChatsList
+            chats={chats}
+            onChatClick={(chat) => setActiveChat(chat)}
+          />
+        </Box>
+      </Slide>
+      <Slide
+        direction="left"
+        in={Boolean(activeChat)}
+        mountOnEnter
+        unmountOnExit
+      >
+        <Box>
+          <ChatCard chat={activeChat} onClose={(_) => setActiveChat(null)} />
+        </Box>
+      </Slide>
+    </Box>
+  );
+
   return (
     <Container
       maxWidth="xl"
@@ -111,17 +156,7 @@ export default function ChatsPage() {
         Chats
       </Typography>
       <Divider sx={{ mb: 1 }} />
-      <Grid container>
-        <Grid item xs={12} sm={4}>
-          <ChatsList
-            chats={chats}
-            onChatClick={(chat) => setActiveChat(chat)}
-          />
-        </Grid>
-        <Grid item xs={0} sm={8}>
-          <ChatCard chat={activeChat} onClose={(_) => setActiveChat(null)} />
-        </Grid>
-      </Grid>
+      {matches ? mobileUI : desktopUI}
     </Container>
   );
 }

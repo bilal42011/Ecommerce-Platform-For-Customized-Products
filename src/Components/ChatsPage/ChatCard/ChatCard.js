@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MessageList from "./MessageList";
 
 export default function ChatCard({ chat, onClose }) {
@@ -82,7 +82,12 @@ export default function ChatCard({ chat, onClose }) {
     ]);
     setMessage("");
   };
-
+  const chatRef = useRef(null);
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+    }
+  });
   return (
     <Card
       variant="outlined"
@@ -115,6 +120,7 @@ export default function ChatCard({ chat, onClose }) {
           />
           <Divider />
           <CardContent
+            ref={chatRef}
             sx={{
               height: "100%",
               maxHeight: "100%",
@@ -122,7 +128,7 @@ export default function ChatCard({ chat, onClose }) {
               bgcolor: grey[100],
             }}
           >
-            <MessageList messages={messages} />
+            <MessageList ref={chatRef} messages={messages} />
           </CardContent>
           <CardActions>
             <form onSubmit={onNewMessage} style={{ width: "100%" }}>
