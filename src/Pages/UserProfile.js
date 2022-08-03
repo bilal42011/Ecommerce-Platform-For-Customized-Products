@@ -12,6 +12,7 @@ import { Container } from "@mui/system";
 import PlaceIcon from "@mui/icons-material/Place";
 import avatarImage from "../assets/safwan.webp";
 import ProductCard from "../Components/ProductCard";
+import { Link } from "react-router-dom";
 
 export default function UserProfile() {
   const user = {
@@ -117,7 +118,15 @@ export default function UserProfile() {
               <Typography fontWeight="bold">{user.city}</Typography>
             </Stack>
             <Divider />
-            <Button variant="contained">Contact Me</Button>
+            <Button variant="contained">
+              <Link
+                to="chats"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {" "}
+                Contact Me
+              </Link>
+            </Button>
           </Paper>
           <Paper
             variant="outlined"

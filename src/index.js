@@ -19,6 +19,7 @@ import CustomRequestProposals from "./Pages/CustomRequestProposals";
 import CustomRequests from "./Pages/CustomRequests";
 import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
+import ChatsPage from "./Pages/ChatsPage";
 
 
 
@@ -47,6 +48,7 @@ root.render(
              </Route>
           <Route path="products/create" element={<CreateProduct />} />
           <Route path="products/:product_id/edit" element={<EditProduct />} />
+          <Route path="chats" element={<ChatsPage />} />
         </Route>
       </Route>
     </Routes>
