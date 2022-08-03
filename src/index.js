@@ -20,6 +20,7 @@ import CustomRequests from "./Pages/CustomRequests";
 import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
 import ChatsPage from "./Pages/ChatsPage";
+import CustomProposalDetails from "./Pages/CustomProposalDetails";
 
 
 
@@ -42,8 +43,11 @@ root.render(
              <Route path="customrequests" element={<Outlet />}>
                  <Route index element={<CustomRequests />}></Route>
                  <Route path=":requestId" element={<Outlet/>}>
-                      <Route index element={<div>Welcome to new request</div>}></Route>
-                      <Route path="customproposals" element={<CustomRequestProposals />} />
+                      <Route index element={<div>Welcome to new request</div>} />
+                      <Route path="customproposals" element={<Outlet/>}>
+                         <Route index element={<CustomRequestProposals />} />
+                         <Route path=":proposalID" element={<CustomProposalDetails />} />
+                      </Route> 
                  </Route>
              </Route>
           <Route path="products/create" element={<CreateProduct />} />
