@@ -5,7 +5,7 @@ import ProposalDetails from '../Components/CustomProposalDetails/ProposalDetails
 
 const CustomProposalDetails = () => {
   return (
-    <Container maxWidth="100%" disableGutters>
+    <Container maxWidth="100%" disableGutters sx={{mt:15}}>
     <ProposalDetails/>
     </Container>
   )
