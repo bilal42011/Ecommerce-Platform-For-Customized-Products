@@ -74,7 +74,7 @@ let ProposalsDataGrid=()=>{
 <Typography sx={{paddingBottom:"3rem",width:"fit-content",fontSize:"2.5rem",
 color:"#152035",margin:"auto",textAlign:"center",
 fontFamily: "Roboto condensed, sans-serif",fontWeight:"bold"}}
-variant="h5">Your Custom Requests</Typography>
+variant="h5">Your Custom Proposals</Typography>
 <Box  sx={{width:1300,margin:"auto"}}>
 <DataGrid
 autoHeight
