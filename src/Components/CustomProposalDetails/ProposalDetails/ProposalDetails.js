@@ -2,8 +2,10 @@ import React from 'react';
 import {Grid} from "@mui/material";
 import SellerProfileDescription from '../../SellerProfileDescription';
 import avatarImage from "../../../assets/bilal.jpg"
+import ProposalDescription from './ProposalDescription/ProposalDescription';
 
-const user = {
+
+const userDetail = {
   username: "username",
   full_name: "Muhammad Bilal Malik",
   aggregated_rating: 5,
@@ -17,12 +19,14 @@ const user = {
 
 const ProposalDetails = () => {
   return (
-    <Grid container>
-<Grid item sm={8}>
-
+    <Grid container justifyContent="center" columnSpacing={4}
+     rowSpacing={{xs:4,sm:0}}>
+<Grid item xs={12} sm={7} 
+sx={{paddingTop:4,border:"1px solid rgba(0, 0, 0, 0.12)",paddingX:5}}>
+<ProposalDescription />
 </Grid>
-<Grid item sm={4}>
-<SellerProfileDescription user={user}/>
+<Grid item xs={12} sm={3.5}>
+<SellerProfileDescription user={userDetail}/>
 </Grid>
 
     </Grid>
