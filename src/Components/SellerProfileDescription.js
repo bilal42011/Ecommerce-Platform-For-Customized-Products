@@ -11,7 +11,7 @@ import {
 import PlaceIcon from "@mui/icons-material/Place";
 import { Link } from "react-router-dom";
 
-const SellerProfileDescription = ({ user }) => {
+const SellerProfileDescription = ({ user, dashboard }) => {
   return (
     <>
       <Paper
@@ -52,25 +52,37 @@ const SellerProfileDescription = ({ user }) => {
           <Typography fontWeight="bold">{user.city}</Typography>
         </Stack>
         <Divider />
-        <Button variant="contained">
-          <Link
-            to="/profile/userid/chats"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            {" "}
-            Contact Me
-          </Link>
-        </Button>
+        {!dashboard ? (
+          <Button variant="contained">
+            <Link
+              to="/profile/userid/chats"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Contact Me
+            </Link>
+          </Button>
+        ) : (
+          <Button variant="contained">
+            <Link
+              to="/profile/userid/edit"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Edit Profile
+            </Link>
+          </Button>
+        )}
       </Paper>
-      <Paper
-        variant="outlined"
-        sx={{ p: 2, mt: 1 }}
-        component={Stack}
-        spacing={1}
-      >
-        <Typography variant="h6">DESCRIPTION</Typography>
-        <Typography>{user.description}</Typography>
-      </Paper>
+      {user.description && (
+        <Paper
+          variant="outlined"
+          sx={{ p: 2, mt: 1 }}
+          component={Stack}
+          spacing={1}
+        >
+          <Typography variant="h6">DESCRIPTION</Typography>
+          <Typography>{user.description}</Typography>
+        </Paper>
+      )}
     </>
   );
 };
