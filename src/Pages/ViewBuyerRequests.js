@@ -13,7 +13,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
@@ -26,7 +26,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
@@ -39,7 +39,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
@@ -52,7 +52,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
@@ -65,7 +65,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
@@ -78,7 +78,7 @@ export default function ViewBuyerRequests() {
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
-      title: "Looking for an experience Carpenter",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
