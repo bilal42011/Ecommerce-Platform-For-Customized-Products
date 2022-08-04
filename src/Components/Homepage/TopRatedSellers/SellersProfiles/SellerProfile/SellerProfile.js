@@ -70,7 +70,7 @@ const SellerProfile = ({ id, avatarSrc, name, ratings, description }) => {
 
       <Grid item>
         <Link
-          to={`sellerprofile/${id}`}
+          to={`profile/${id}`}
           style={{ textDecoration: "none", color: "#666666" }}
         >
           <Typography
