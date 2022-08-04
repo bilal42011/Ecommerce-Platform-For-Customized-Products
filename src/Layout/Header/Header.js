@@ -17,7 +17,7 @@ import styles from "../../styles/header.module.css";
 const pages = [
   { name: "Browse", url: "/search" },
   { name: "Become a Seller", url: "/signup" },
-  { name: "Request a Custom Product", url: "/requestcustomproduct" },
+  { name: "Request a Custom Product", url: "profile/1/requestcustomproduct" },
 ];
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");

@@ -26,3 +26,8 @@ img {
   display: block;
   width: 100%;
 }
+.ghost-link {
+  color: inherit;
+  display: inherit;
+  text-decoration: inherit;
+}

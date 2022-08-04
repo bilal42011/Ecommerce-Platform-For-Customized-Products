@@ -9,12 +9,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Box } from "@mui/system";
 
 export default function BuyerRequestListItem({ request }) {
   return (
-    <ListItem width="100%">
+    <ListItem>
       <Paper width="100%" variant="outlined" sx={{ flex: 1, p: 1 }}>
         <Stack spacing={1} width="100%">
           <Stack direction="row" alignItems={"center"} width="100%">
@@ -24,10 +25,12 @@ export default function BuyerRequestListItem({ request }) {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={request.buyer_username}
+              primary={
+                <Typography fontWeight="bold">{request.title}</Typography>
+              }
               secondary={
                 <Typography variant="body2">
-                  {request.buyer_city}, Pakistan
+                  {request.buyer_username}, {request.buyer_city}
                 </Typography>
               }
             />
@@ -47,9 +50,19 @@ export default function BuyerRequestListItem({ request }) {
             <Typography color="GrayText">{request.description}</Typography>
           </Box>
           <Divider />
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Button variant="outlined">Contact Buyer</Button>
-            <Button variant="contained">Send Proposal</Button>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            flexWrap="wrap"
+          >
+            <RouterLink to="/profile/userid/chats" className="ghost-link">
+              <Button variant="outlined">Contact Buyer</Button>
+            </RouterLink>
+            <RouterLink to={`${request.id}`} className="ghost-link">
+              <Button variant="contained">View Proposal</Button>
+            </RouterLink>
+
             <Box flexGrow={1}></Box>
             <Box className="attachments">
               {request.attachments.map((elem, index) => {
