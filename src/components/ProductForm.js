@@ -2,6 +2,7 @@ import { Button, Icon, Stack } from "@mui/material";
 import { Chat } from "@mui/icons-material";
 import ProductSizes from "./ProductSizes";
 import QuantityInput from "./QuantityInput/QuantityInput";
+import { Link } from "react-router-dom";
 
 export default function ProductForm({ product }) {
   return (
@@ -13,10 +14,16 @@ export default function ProductForm({ product }) {
       <Button variant="contained">
         Buy Now <Icon></Icon>
       </Button>
-      <Button type="button" variant="outlined">
-        Contact Seller
-        <Chat sx={{ ml: 2 }} />
-      </Button>
+      <Link
+        className="ghost-link"
+        to="/profile/userId/chats"
+        style={{ width: "100%" }}
+      >
+        <Button type="button" variant="outlined" fullWidth>
+          Contact Seller
+          <Chat sx={{ ml: 2 }} />
+        </Button>
+      </Link>
     </Stack>
   );
 }

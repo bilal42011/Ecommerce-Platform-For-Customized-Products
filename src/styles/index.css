@@ -28,7 +28,7 @@ img {
 }
 .ghost-link {
   color: inherit;
-  display: inherit;
+  display: block;
   text-decoration: inherit;
   width: inherit;
 }

@@ -17,11 +17,11 @@ export default function ProductPage() {
     title: "Solar Panel Stand",
     rating: 4,
     description: `Buy Solar Stand 3 Pv for three solar panel only from E-Workers at best rates- Easy to mount on Wall or to mount on Roof. True quality and durability. Strong Structure Solar Brackets Panel System Mounting Stand with Ground ScreW 
-      
-      1.Made from high quality galvanized pipe      
-      2.High durability and stable for strong wind and snow.
-      3.Easy installation. Components pre-assembled into few units ensure fast installation.
-      4.High stability and long life for many years.`,
+      \n\n
+      1.Made from high quality galvanized pipe      \n
+      2.High durability and stable for strong wind and snow.\n
+      3.Easy installation. Components pre-assembled into few units ensure fast installation.\n
+      4.High stability and long life for many years.\n`,
     price: 4999,
     url: "/products/solar-panel-stand",
   };
