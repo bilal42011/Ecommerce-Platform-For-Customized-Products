@@ -32,7 +32,7 @@ root.render(
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="search" element={<SearchResultsPage />} />
-        <Route path="browse" element={<div>Browse Route</div>} />
+        <Route path="browse" element={<SearchResultsPage />} />
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="profile/:userId" element={<Outlet />}>
           <Route index element={<UserProfile />} />
