@@ -1,6 +1,9 @@
 import React from 'react';
-import {Stack,Paper as Item,Typography,Divider} from "@mui/material";
+import {Stack,Paper as Item,Typography,Divider,Button} from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import avatarImage from "../../../../assets/bilal.jpg";
+
 
 const proposalData={
         _id:1,
@@ -15,7 +18,7 @@ const proposalData={
 
 const ProposalDescription = () => {
   return (
-    <Stack justifyContent="center" spacing={2}>
+    <Stack justifyContent="center" spacing={2} sx={{paddingX:5}}>
 <Item sx={{paddingBottom:1,borderTop:"2px"}} align="center" variant="none">
     <Typography variant="h3" color="rgba(0, 0, 0, 0.87)"
      fontSize="2.5rem" fontFamily="Roboto,Helvetica,Arial,sans-serif" sx={{fontWeight:"900"}}>
@@ -23,14 +26,14 @@ const ProposalDescription = () => {
     </Typography>
 </Item>
 <Divider />
-<Stack direction="row" justifyContent="center" sx={{paddingTop:2}} spacing={4}>
-<Item sx={{backgroundColor:"#1976d2",padding:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
-  <Typography>
+<Stack direction="row" justifyContent="center" sx={{pt:2}} spacing={4}>
+<Item sx={{backgroundColor:"gray",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
+  <Typography fontFamily="Roboto, sans-serif">
     {`Price:  ${proposalData.price}`}
   </Typography>
 </Item>
-<Item sx={{backgroundColor:"#1976d2",padding:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
-<Typography>
+<Item sx={{backgroundColor:"gray",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
+<Typography fontFamily="Roboto, sans-serif">
     {`Timeline:  ${proposalData.timeline}`}
   </Typography>
 </Item>
@@ -40,10 +43,34 @@ const ProposalDescription = () => {
    fontWeight="bold" fontFamily="Roboto,Helvetica,Arial,sans-serif">
     Description
   </Typography>
-  <Typography textAlign="justify">
+  <Typography textAlign="justify" color="rgba(0, 0, 0, 0.87)">
   {proposalData.description}
   </Typography>
 </Stack>
+
+<Stack direction="row" spacing={2} justifyContent="center" sx={{pt:2.5}}>
+    <Button variant='contained'
+    size="large"
+    disableElevation
+    sx={{backgroundColor:"red",
+"&:hover":{
+
+backgroundColor:"rgb(255, 0, 0,0.75)"
+
+}}}
+     startIcon={<CancelIcon />}>Decline</Button>
+    <Button variant='contained'
+    disableElevation
+    size="large"
+    sx={{backgroundColor:"green",
+    "&:hover":{
+
+        backgroundColor:"rgb(0, 128, 0,0.75)"
+        
+        }}}
+     startIcon={<CheckCircleIcon />}>Accept</Button>
+    </Stack>
+
     </Stack>
   )
 }
