@@ -22,6 +22,7 @@ import EditProduct from "./Pages/EditProduct";
 import ChatsPage from "./Pages/ChatsPage";
 import BuyerRequestInfo from "./Pages/BuyerRequestInfo";
 import CreateProposal from "./Pages/CreateProposal";
+import Dashboard from "./Pages/Dashboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -36,6 +37,7 @@ root.render(
         <Route path="products/:product_id" element={<ProductPage />} />
         <Route path="profile/:userId" element={<Outlet />}>
           <Route index element={<UserProfile />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="becomeseller" element={<div>Become a Seller</div>} />
           <Route
             path="requestcustomproduct"
