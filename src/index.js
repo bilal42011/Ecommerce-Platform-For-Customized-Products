@@ -21,6 +21,7 @@ import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
 import ChatsPage from "./Pages/ChatsPage";
 import BuyerRequestInfo from "./Pages/BuyerRequestInfo";
+import CreateProposal from "./Pages/CreateProposal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -43,6 +44,7 @@ root.render(
           <Route path="buyers-requests" element={<Outlet />}>
             <Route index element={<ViewBuyerRequests />} />
             <Route path=":request_id" element={<BuyerRequestInfo />} />
+            <Route path=":request_id/proposal" element={<CreateProposal />} />
           </Route>
           <Route path="customrequests" element={<Outlet />}>
             <Route index element={<CustomRequests />}></Route>

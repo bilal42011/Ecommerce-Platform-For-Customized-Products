@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
+import { Link } from "react-router-dom";
 import SellerProfileDescription from "../Components/SellerProfileDescription";
 
 export default function BuyerRequestInfo() {
@@ -77,9 +78,15 @@ export default function BuyerRequestInfo() {
             {/* Rendering attachments */}
 
             <CardActions>
-              <Button variant="contained" fullWidth>
-                Create Proposal
-              </Button>
+              <Link
+                className="ghost-link"
+                to="proposal"
+                style={{ width: "100%" }}
+              >
+                <Button variant="contained" fullWidth>
+                  Create Proposal
+                </Button>
+              </Link>
             </CardActions>
           </Card>
         </Grid>
