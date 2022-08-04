@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import ProductInfo from "../Components/ProductInfo";
 import ProductMedia from "../Components/ProductMedia/ProductMedia";
+import ProductReviews from "../Components/ProductPage/ProductReviews";
 
 export default function ProductPage() {
   const product = {
@@ -33,6 +34,9 @@ export default function ProductPage() {
         </Grid>
         <Grid item xs={12} md={6} className="prodcut-info">
           <ProductInfo product={product} />
+        </Grid>
+        <Grid item xs={12}>
+          <ProductReviews product={product} />
         </Grid>
       </Grid>
     </Container>
