@@ -15,6 +15,7 @@ import FileChooser from "../Components/FileChooser";
 
 export default function RequestCustomProduct() {
   const [formData, setFormData] = useState({
+    title: "",
     description: "",
     files: [],
     category: "",
@@ -39,6 +40,14 @@ export default function RequestCustomProduct() {
       />
       <CardContent>
         <Stack spacing={2}>
+          <TextField
+            label="Title"
+            fullWidth
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+          />
           <TextField
             multiline
             label="I am looking for..."

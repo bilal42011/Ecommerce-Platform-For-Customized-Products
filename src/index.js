@@ -21,31 +21,36 @@ import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
 import ChatsPage from "./Pages/ChatsPage";
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Homepage />} />
-        <Route path="browse" element={<div>Browse Route</div>} />
-        <Route path="becomeseller" element={<div>Become a Seller</div>} />
-        <Route path="requestcustomproduct" element={<RequestCustomProduct />} />
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="search" element={<SearchResultsPage />} />
+        <Route path="browse" element={<div>Browse Route</div>} />
         <Route path="products/:product_id" element={<ProductPage />} />
-        <Route path="buyers-requests" element={<ViewBuyerRequests />} />
-        <Route path="sellerprofile/:userId" element={<Outlet />}>
+        <Route path="profile/:userId" element={<Outlet />}>
           <Route index element={<UserProfile />} />
-             <Route path="customrequests" element={<Outlet />}>
-                 <Route index element={<CustomRequests />}></Route>
-                 <Route path=":requestId" element={<Outlet/>}>
-                      <Route index element={<div>Welcome to new request</div>}></Route>
-                      <Route path="customproposals" element={<CustomRequestProposals />} />
-                 </Route>
-             </Route>
+          <Route
+            path="requestcustomproduct"
+            element={<RequestCustomProduct />}
+          />
+
+          <Route path="becomeseller" element={<div>Become a Seller</div>} />
+          <Route path="buyers-requests" element={<ViewBuyerRequests />} />
+          <Route path="customrequests" element={<Outlet />}>
+            <Route index element={<CustomRequests />}></Route>
+            <Route path=":requestId" element={<Outlet />}>
+              <Route index element={<div>Welcome to new request</div>}></Route>
+              <Route
+                path="customproposals"
+                element={<CustomRequestProposals />}
+              />
+            </Route>
+          </Route>
           <Route path="products/create" element={<CreateProduct />} />
           <Route path="products/:product_id/edit" element={<EditProduct />} />
           <Route path="chats" element={<ChatsPage />} />
