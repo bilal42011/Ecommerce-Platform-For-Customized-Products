@@ -108,7 +108,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              label="Last Name"
+              label="Confirm Password"
               fullWidth
               value={formData.confirmPassword}
               onChange={(e) =>

@@ -128,7 +128,7 @@ export default function ChatCard({ chat, onClose }) {
               bgcolor: grey[100],
             }}
           >
-            <MessageList ref={chatRef} messages={messages} />
+            <MessageList messages={messages} />
           </CardContent>
           <CardActions>
             <form onSubmit={onNewMessage} style={{ width: "100%" }}>

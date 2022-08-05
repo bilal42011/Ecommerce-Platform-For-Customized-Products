@@ -7,66 +7,78 @@ export default function ViewBuyerRequests() {
   const [page, setPage] = useState(1);
   const buyerRequests = [
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
       attachments: ["file1.jpg", "file2.docx"],
     },
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
       attachments: ["file1.jpg", "file2.docx"],
     },
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
       attachments: ["file1.jpg", "file2.docx"],
     },
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
       attachments: ["file1.jpg", "file2.docx"],
     },
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
       attachments: ["file1.jpg", "file2.docx"],
     },
     {
+      id: 1,
       buyer_avatar: "",
       buyer_full_name: "User 3849",
       buyer_id: "",
       buyer_username: "user3849",
       buyer_city: "Islamabad",
+      title: "Looking for an experienced Carpenter",
       budget: 7500,
       time: 12, //days
       description: "We are looking for a....",
