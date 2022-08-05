@@ -18,7 +18,7 @@ const proposalData={
 
 const ProposalDescription = () => {
   return (
-    <Stack justifyContent="center" spacing={2} sx={{paddingX:5}}>
+    <Stack justifyContent="center" spacing={2} sx={{paddingX:5,paddingY:4}}>
 <Item sx={{paddingBottom:1,borderTop:"2px"}} align="center" variant="none">
     <Typography variant="h3" color="rgba(0, 0, 0, 0.87)"
      fontSize="2.5rem" fontFamily="Roboto,Helvetica,Arial,sans-serif" sx={{fontWeight:"900"}}>
@@ -27,12 +27,12 @@ const ProposalDescription = () => {
 </Item>
 <Divider />
 <Stack direction="row" justifyContent="center" sx={{pt:2}} spacing={4}>
-<Item sx={{backgroundColor:"gray",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
+<Item sx={{backgroundColor:"purple",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
   <Typography fontFamily="Roboto, sans-serif">
     {`Price:  ${proposalData.price}`}
   </Typography>
 </Item>
-<Item sx={{backgroundColor:"gray",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
+<Item sx={{backgroundColor:"purple",p:1,color:"white",fontFamily:"Roboto, sans-serif"}}>
 <Typography fontFamily="Roboto, sans-serif">
     {`Timeline:  ${proposalData.timeline}`}
   </Typography>

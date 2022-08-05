@@ -19,12 +19,12 @@ const userDetail = {
 
 const ProposalDetails = () => {
   return (
-    <Grid container justifyContent="center" columnSpacing={4} rowSpacing={4}>
+    <Grid container justifyContent="center" columnSpacing={4}>
 <Grid item xs={12} md={7} 
-sx={{paddingTop:4,border:"1px solid rgba(0, 0, 0, 0.12)"}}>
+sx={{border:"1px solid rgba(0, 0, 0, 0.12)"}}>
 <ProposalDescription />
 </Grid>
-<Grid item xs={12} md={3.5}>
+<Grid item xs={12} md={3.5} sx={{mt:{xs:4,md:0}}}>
 <SellerProfileDescription user={userDetail}/>
 </Grid>
 
