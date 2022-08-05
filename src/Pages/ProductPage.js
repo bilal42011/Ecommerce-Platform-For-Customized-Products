@@ -25,6 +25,21 @@ export default function ProductPage() {
       4.High stability and long life for many years.\n`,
     price: 4999,
     url: "/products/solar-panel-stand",
+    fullRating: {
+      average: 4.0,
+      count: 25,
+      reviews: [
+        {
+          rating: 4.0,
+          user: {
+            username: "user2020",
+            fullname: "Dr. User",
+          },
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit provident, quia consequuntur quidem optio maxime tempora voluptatibus repudiandae ipsum. In, quidem perferendis. Veniam, unde. Eum totam quam iusto maiores aliquid!",
+        },
+      ],
+    },
   };
   return (
     <Container maxWidth="xl">
@@ -36,7 +51,7 @@ export default function ProductPage() {
           <ProductInfo product={product} />
         </Grid>
         <Grid item xs={12}>
-          <Reviews />
+          <Reviews rating={product.fullRating} />
         </Grid>
       </Grid>
     </Container>

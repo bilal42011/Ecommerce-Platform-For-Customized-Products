@@ -1,4 +1,4 @@
-import { ArrowBack, Close, Send } from "@mui/icons-material";
+import { Close, Send } from "@mui/icons-material";
 import {
   Avatar,
   Card,
@@ -85,7 +85,10 @@ export default function ChatCard({ chat, onClose }) {
   const chatRef = useRef(null);
   useEffect(() => {
     if (chatRef.current) {
-      chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+      chatRef.current.scroll({
+        top: chatRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   });
   return (
