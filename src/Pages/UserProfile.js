@@ -1,8 +1,9 @@
-import {Grid} from "@mui/material";
+import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import ProductCard from "../Components/ProductCard";
 import avatarImage from "../assets/safwan.webp";
 import SellerProfileDescription from "../Components/SellerProfileDescription";
+import Reviews from "../Components/ProductPage/Reviews";
 
 export default function UserProfile() {
   const user = {
@@ -11,8 +12,23 @@ export default function UserProfile() {
     aggregated_rating: 5,
     total_reviews: 125,
     avatar: avatarImage,
-    // avatar: "",
+
     city: "Islamabad",
+    fullRating: {
+      average: 5.0,
+      count: 125,
+      reviews: [
+        {
+          rating: 5.0,
+          user: {
+            username: "user2020",
+            fullname: "Dr. User",
+          },
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit provident, quia consequuntur quidem optio maxime tempora voluptatibus repudiandae ipsum. In, quidem perferendis. Veniam, unde. Eum totam quam iusto maiores aliquid!",
+        },
+      ],
+    },
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     products: [
@@ -71,6 +87,7 @@ export default function UserProfile() {
       <Grid container spacing={1}>
         <Grid item xs={12} sm={4}>
           <SellerProfileDescription user={user} />
+          <Reviews rating={user.fullRating} />
         </Grid>
         <Grid container item xs={12} sm={8} spacing={1}>
           {/* Products by seller */}

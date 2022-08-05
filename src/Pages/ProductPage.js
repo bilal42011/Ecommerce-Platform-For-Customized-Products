@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import ProductInfo from "../Components/ProductInfo";
 import ProductMedia from "../Components/ProductMedia/ProductMedia";
+import Reviews from "../Components/ProductPage/Reviews";
 
 export default function ProductPage() {
   const product = {
@@ -24,6 +25,21 @@ export default function ProductPage() {
       4.High stability and long life for many years.\n`,
     price: 4999,
     url: "/products/solar-panel-stand",
+    fullRating: {
+      average: 4.0,
+      count: 25,
+      reviews: [
+        {
+          rating: 4.0,
+          user: {
+            username: "user2020",
+            fullname: "Dr. User",
+          },
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit provident, quia consequuntur quidem optio maxime tempora voluptatibus repudiandae ipsum. In, quidem perferendis. Veniam, unde. Eum totam quam iusto maiores aliquid!",
+        },
+      ],
+    },
   };
   return (
     <Container maxWidth="xl">
@@ -33,6 +49,9 @@ export default function ProductPage() {
         </Grid>
         <Grid item xs={12} md={6} className="prodcut-info">
           <ProductInfo product={product} />
+        </Grid>
+        <Grid item xs={12}>
+          <Reviews rating={product.fullRating} />
         </Grid>
       </Grid>
     </Container>
