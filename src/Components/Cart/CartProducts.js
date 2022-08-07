@@ -37,11 +37,11 @@ export default function CartProducts({ cart, onProductRemove }) {
                     primary={item.title}
                     secondary={
                       <>
-                        <Typography display="inline">
+                        <Typography component="span">
                           Rs. {item.price.toLocaleString()} /-
                         </Typography>
                         {" X "}
-                        <Typography display="inline" fontWeight="bold">
+                        <Typography component="span" fontWeight="bold">
                           {item.quantity < 10 && "0"}
                           {item.quantity}
                         </Typography>
