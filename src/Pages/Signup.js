@@ -27,6 +27,7 @@ export default function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
+    address: "",
   });
 
   const onSignUp = (e) => {
@@ -50,6 +51,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               label="First Name"
               fullWidth
               value={formData.firstName}
@@ -60,6 +62,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               label="Last Name"
               fullWidth
               value={formData.lastName}
@@ -78,18 +81,24 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={8}>
             <TextField
-              label="Phone Number"
+              required
+              label="Address"
               fullWidth
-              value={formData.phone}
+              value={formData.address}
               onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
+                setFormData({ ...formData, address: e.target.value })
               }
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <TextField
+              required
               label="Email"
               fullWidth
+              InputProps={{
+                inputMode: "email",
+                type: "email",
+              }}
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -98,6 +107,18 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
+              label="Phone Number"
+              fullWidth
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              required
               label="Password"
               fullWidth
               value={formData.password}
@@ -108,6 +129,7 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              required
               label="Confirm Password"
               fullWidth
               value={formData.confirmPassword}

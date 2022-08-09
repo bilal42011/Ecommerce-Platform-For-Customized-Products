@@ -26,7 +26,7 @@ import CustomProposalDetails from "./Pages/CustomProposalDetails";
 import BuyerRequestInfo from "./Pages/BuyerRequestInfo";
 import CreateProposal from "./Pages/CreateProposal";
 import Dashboard from "./Pages/Dashboard";
-
+import Cart from "./Pages/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -44,6 +44,7 @@ root.render(
           <Route index element={<UserProfile />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="becomeseller" element={<div>Become a Seller</div>} />
+          <Route path="cart" element={<Cart />} />
           <Route
             path="requestcustomproduct"
             element={<RequestCustomProduct />}
@@ -57,10 +58,10 @@ root.render(
             <Route index element={<CustomRequests />}></Route>
             <Route path=":requestId" element={<Outlet />}>
               <Route index element={<div>Welcome to new request</div>}></Route>
-              <Route path="customproposals" element={<Outlet/>}>
-                 <Route index element={<CustomRequestProposals />} />
-                 <Route path=":proposalID" element={<CustomProposalDetails />} />
-              </Route> 
+              <Route path="customproposals" element={<Outlet />}>
+                <Route index element={<CustomRequestProposals />} />
+                <Route path=":proposalID" element={<CustomProposalDetails />} />
+              </Route>
             </Route>
           </Route>
           <Route path="products/create" element={<CreateProduct />} />
