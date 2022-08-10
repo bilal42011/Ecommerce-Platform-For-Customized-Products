@@ -31,45 +31,48 @@ import Cart from "./Pages/Cart";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-  <Router>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<Homepage />} />
-        <Route path="login" element={<LogIn />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="search" element={<SearchResultsPage />} />
-        <Route path="browse" element={<SearchResultsPage />} />
-        <Route path="products/:product_id" element={<ProductPage />} />
-        <Route path="profile/:userId" element={<Outlet />}>
-          <Route index element={<UserProfile />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="becomeseller" element={<div>Become a Seller</div>} />
-          <Route path="cart" element={<Cart />} />
-          <Route
-            path="requestcustomproduct"
-            element={<RequestCustomProduct />}
-          />
-          <Route path="buyers-requests" element={<Outlet />}>
-            <Route index element={<ViewBuyerRequests />} />
-            <Route path=":request_id" element={<BuyerRequestInfo />} />
-            <Route path=":request_id/proposal" element={<CreateProposal />} />
-          </Route>
-          <Route path="customrequests" element={<Outlet />}>
-            <Route index element={<CustomRequests />}></Route>
-            <Route path=":requestId" element={<Outlet />}>
-              <Route index element={<div>Welcome to new request</div>}></Route>
-              <Route path="customproposals" element={<Outlet />}>
-                <Route index element={<CustomRequestProposals />} />
-                <Route path=":proposalID" element={<CustomProposalDetails />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Homepage />} />
+          <Route path="login" element={<LogIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="search" element={<SearchResultsPage />} />
+          <Route path="browse" element={<SearchResultsPage />} />
+          <Route path="products/:product_id" element={<ProductPage />} />
+          <Route path="profile/:userId" element={<Outlet />}>
+            <Route index element={<UserProfile />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="becomeseller" element={<div>Become a Seller</div>} />
+            <Route path="cart" element={<Cart />} />
+            <Route
+              path="requestcustomproduct"
+              element={<RequestCustomProduct />}
+            />
+            <Route path="buyers-requests" element={<Outlet />}>
+              <Route index element={<ViewBuyerRequests />} />
+              <Route path=":request_id" element={<BuyerRequestInfo />} />
+              <Route path=":request_id/proposal" element={<CreateProposal />} />
+            </Route>
+            <Route path="customrequests" element={<Outlet />}>
+              <Route index element={<CustomRequests />}></Route>
+              <Route path=":requestId" element={<Outlet />}>
+                <Route index element={<div>Welcome to new request</div>} />
+                <Route path="customproposals" element={<Outlet />}>
+                  <Route index element={<CustomRequestProposals />} />
+                  <Route
+                    path=":proposalID"
+                    element={<CustomProposalDetails />}
+                  />
+                </Route>
               </Route>
             </Route>
+            <Route path="products/create" element={<CreateProduct />} />
+            <Route path="products/:product_id/edit" element={<EditProduct />} />
+            <Route path="chats" element={<ChatsPage />} />
           </Route>
-          <Route path="products/create" element={<CreateProduct />} />
-          <Route path="products/:product_id/edit" element={<EditProduct />} />
-          <Route path="chats" element={<ChatsPage />} />
         </Route>
-      </Route>
-    </Routes>
-  </Router>
+      </Routes>
+    </Router>
   </Provider>
 );
