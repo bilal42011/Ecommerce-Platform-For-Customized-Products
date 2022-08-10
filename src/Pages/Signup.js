@@ -11,13 +11,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import AvatarChooser from "../Components/AvatarChooser/AvatarChooser";
 import CityChooser from "../Components/CityChooser";
+import { useSelector,useDispatch } from "react-redux/";
+import {reset} from "../Store/Slices/authSlice/authSlice";
+import { register } from "../Store/Slices/authSlice/authSlice";
+
+
 
 export default function SignUp() {
+  let navigate=useNavigate();
+let auth=useSelector(state=>state.auth);
+let {user,isLoading,isSuccess,isError,message}=auth;
+let dispatch=useDispatch();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -31,8 +41,21 @@ export default function SignUp() {
 
   const onSignUp = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(register({...formData,address:"Bahra Kau"}));
   };
+
+  useEffect(()=>{
+    console.log(auth);
+    if(isSuccess){
+navigate("/profile/123")
+    }
+    if(isError){
+      console.log("Error occured");
+    }
+    dispatch(reset());
+    },[isSuccess,isError]);
+
+console.log("component rendered");
 
   return (
     <Card sx={{ maxWidth: "md", margin: "auto", mt: 15 }}>
