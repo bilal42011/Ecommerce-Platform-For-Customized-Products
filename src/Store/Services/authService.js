@@ -2,6 +2,9 @@ import axios from "../../axiosInstance";
 
 let Register_POST_URL="api/auth/signup";
 
+let register = async (data) => {
+  let response = await axios.post(POST_URL, data);
+
 
 let register=async( data )=>{
 let response=await axios.post(Register_POST_URL,data);

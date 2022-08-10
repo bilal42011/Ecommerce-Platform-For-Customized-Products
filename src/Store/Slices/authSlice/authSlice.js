@@ -1,5 +1,6 @@
-import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../../Services/authService";
+
 
 let user=JSON.parse(localStorage.getItem("user"));
 
@@ -71,12 +72,9 @@ state.isLoading=true;
 .addCase(login.pending,(state)=>{
 state.isLoading=true;
 })
-}
-
 
 });
 
-
-export let {reset}=authSlice.actions;
+export let { reset } = authSlice.actions;
 
 export default authSlice.reducer;
