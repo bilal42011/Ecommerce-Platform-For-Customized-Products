@@ -13,8 +13,8 @@ export default function AvatarChooser({ value, onChange }) {
         setImage(e.target.result);
       };
       reader.readAsDataURL(event.target.files[0]);
+      onChange(event.target.files[0]);
     }
-    onChange(event);
   };
 
   return (

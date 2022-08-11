@@ -13,25 +13,23 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import AvatarChooser from "../Components/AvatarChooser/AvatarChooser";
 import CityChooser from "../Components/CityChooser";
-import { useSelector,useDispatch } from "react-redux/";
-import {reset} from "../Store/Slices/authSlice/authSlice";
+import { useSelector, useDispatch } from "react-redux/";
+import { reset } from "../Store/Slices/authSlice/authSlice";
 import { register } from "../Store/Slices/authSlice/authSlice";
 
-
-
 export default function SignUp() {
-  let navigate=useNavigate();
-let auth=useSelector(state=>state.auth);
-let {user,isLoading,isSuccess,isError,message}=auth;
-let dispatch=useDispatch();
+  let navigate = useNavigate();
+  let auth = useSelector((state) => state.auth);
+  let { user, isLoading, isSuccess, isError, message } = auth;
+  let dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
+  const [formDataJson, setFormData] = useState({
     firstName: "",
     lastName: "",
-    avatar: "",
+    avatar: {},
     city: "",
     phone: "",
     email: "",
@@ -42,21 +40,27 @@ let dispatch=useDispatch();
 
   const onSignUp = (e) => {
     e.preventDefault();
-    dispatch(register({...formData,address:"Bahra Kau"}));
+    const formData = new FormData();
+    Object.keys(formDataJson).forEach(
+      (key) => key !== "avatar" && formData.append(key, formDataJson[key])
+    );
+    formData.append("avatar", formDataJson.avatar);
+
+    dispatch(register(formData));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(auth);
-    if(isSuccess){
-navigate("/profile/123")
+    if (isSuccess) {
+      navigate("/profile/123");
     }
-    if(isError){
+    if (isError) {
       console.log("Error occured");
     }
     dispatch(reset());
-    },[isSuccess,isError]);
+  }, [isSuccess, isError]);
 
-console.log("component rendered");
+  console.log("component rendered");
 
   return (
     <Card sx={{ maxWidth: "md", margin: "auto", mt: 15 }}>
@@ -66,9 +70,9 @@ console.log("component rendered");
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <AvatarChooser
-              value={formData.avatar}
-              onChange={(e) => {
-                setFormData({ ...formData, avatar: e.target.value });
+              value={formDataJson.avatar}
+              onChange={(file) => {
+                setFormData({ ...formDataJson, avatar: file });
               }}
             />
           </Grid>
@@ -77,9 +81,9 @@ console.log("component rendered");
               required
               label="First Name"
               fullWidth
-              value={formData.firstName}
+              value={formDataJson.firstName}
               onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
+                setFormData({ ...formDataJson, firstName: e.target.value })
               }
             />
           </Grid>
@@ -88,17 +92,17 @@ console.log("component rendered");
               required
               label="Last Name"
               fullWidth
-              value={formData.lastName}
+              value={formDataJson.lastName}
               onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
+                setFormData({ ...formDataJson, lastName: e.target.value })
               }
             />
           </Grid>
           <Grid item xs={12} md={4}>
             <CityChooser
-              value={formData.city}
+              value={formDataJson.city}
               onChange={(e) =>
-                setFormData({ ...formData, city: e.target.value })
+                setFormData({ ...formDataJson, city: e.target.value })
               }
             />
           </Grid>
@@ -107,9 +111,9 @@ console.log("component rendered");
               required
               label="Address"
               fullWidth
-              value={formData.address}
+              value={formDataJson.address}
               onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
+                setFormData({ ...formDataJson, address: e.target.value })
               }
             />
           </Grid>
@@ -122,9 +126,9 @@ console.log("component rendered");
                 inputMode: "email",
                 type: "email",
               }}
-              value={formData.email}
+              value={formDataJson.email}
               onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
+                setFormData({ ...formDataJson, email: e.target.value })
               }
             />
           </Grid>
@@ -132,10 +136,14 @@ console.log("component rendered");
             <TextField
               required
               label="Phone Number"
+              InputProps={{
+                inputMode: "numeric",
+                type: "number",
+              }}
               fullWidth
-              value={formData.phone}
+              value={formDataJson.phone}
               onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
+                setFormData({ ...formDataJson, phone: e.target.value })
               }
             />
           </Grid>
@@ -144,9 +152,12 @@ console.log("component rendered");
               required
               label="Password"
               fullWidth
-              value={formData.password}
+              InputProps={{
+                type: "password",
+              }}
+              value={formDataJson.password}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+                setFormData({ ...formDataJson, password: e.target.value })
               }
             />
           </Grid>
@@ -155,9 +166,15 @@ console.log("component rendered");
               required
               label="Confirm Password"
               fullWidth
-              value={formData.confirmPassword}
+              InputProps={{
+                type: "password",
+              }}
+              value={formDataJson.confirmPassword}
               onChange={(e) =>
-                setFormData({ ...formData, confirmPassword: e.target.value })
+                setFormData({
+                  ...formDataJson,
+                  confirmPassword: e.target.value,
+                })
               }
             />
           </Grid>
