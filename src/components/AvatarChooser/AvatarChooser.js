@@ -27,7 +27,7 @@ export default function AvatarChooser({ value, onChange }) {
           className="avatarChooser"
           type="file"
           name="avatar"
-          accept="image/png, image/jpeg"
+          accept="image/*"
           onChange={onImageChange}
         />
       </IconButton>

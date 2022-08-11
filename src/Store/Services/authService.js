@@ -13,7 +13,8 @@ let login = async (data) => {
   let response = await axios.post(endPoints.LOGIN, data);
 
   if (response?.data?.token) {
-    localStorage.setItem("user", JSON.stringify(response.data.token));
+    localStorage.setItem("token", JSON.stringify(response.data.token));
+    localStorage.setItem("user", JSON.stringify(response.data));
     return response.data.token;
   }
 };
