@@ -41,10 +41,9 @@ export default function SignUp() {
   const onSignUp = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    Object.keys(formDataJson).forEach(
-      (key) => key !== "avatar" && formData.append(key, formDataJson[key])
+    Object.keys(formDataJson).forEach((key) =>
+      formData.append(key, formDataJson[key])
     );
-    formData.append("avatar", formDataJson.avatar);
 
     dispatch(register(formData));
   };

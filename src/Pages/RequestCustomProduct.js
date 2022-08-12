@@ -1,9 +1,13 @@
 import {
+  Alert,
+  AlertTitle,
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
+  Snackbar,
   Stack,
   TextField,
   Typography,
@@ -12,9 +16,12 @@ import { useState } from "react";
 import CategoryChooser from "../Components/CategoryChooser";
 import QuantityInput from "../Components/QuantityInput/QuantityInput";
 import FileChooser from "../Components/FileChooser";
+import axiosInstance, { endPoints } from "../axiosInstance";
+import OverlaySpinner from "../Components/OverlaySpinner";
+import { useSelector } from "react-redux";
 
 export default function RequestCustomProduct() {
-  const [formData, setFormData] = useState({
+  const [formInfo, setFormInfo] = useState({
     title: "",
     description: "",
     files: [],
@@ -22,86 +29,145 @@ export default function RequestCustomProduct() {
     deliveryTime: 1,
     budget: 0,
   });
+  const [formBusy, setFormBusy] = useState(false);
+  const [alert, setAlert] = useState(<></>);
 
-  const onSubmit = (e) => {
+  const token = useSelector((state) => state.auth.user?.token);
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setFormBusy(true);
+    const formData = new FormData();
+    Object.keys(formInfo).forEach((key) => {
+      key !== "files" && formData.append(key, formInfo[key]);
+    });
+
+    // Files must be added seperately to the same field for form
+    [...formInfo.files].forEach((item) => formData.append("files", item));
+
+    try {
+      const response = await axiosInstance.post(
+        endPoints.BUYER_REQUEST,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFormBusy(false);
+      setAlert(
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={(_) => setAlert(<></>)}
+        >
+          <Alert variant="filled" severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Request uploaded successfully
+          </Alert>
+        </Snackbar>
+      );
+    } catch (err) {
+      console.log(err);
+      setAlert(
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={(_) => setAlert(<></>)}
+        >
+          <Alert variant="filled" severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {err.response.data.message}
+          </Alert>
+        </Snackbar>
+      );
+      setFormBusy(false);
+    }
   };
 
   return (
-    <Card
-      sx={{ maxWidth: "md", margin: "auto", mt: 15 }}
-      component="form"
-      onSubmit={onSubmit}
-    >
-      <CardHeader
-        title="Which Product Are You Looking For?"
-        subheader="Describe the service you're looking to purchase - please be as detailed as possible"
-      />
-      <CardContent>
-        <Stack spacing={2}>
-          <TextField
-            label="Title"
-            fullWidth
-            value={formData.title}
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
-          />
-          <TextField
-            multiline
-            label="I am looking for..."
-            fullWidth
-            rows={6}
-            value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-          />
-          <FileChooser
-            value={formData.files}
-            onChange={(e) =>
-              setFormData({ ...formData, files: [...e.target.files] })
-            }
-            accept="*"
-          />
-          <CategoryChooser
-            value={formData.category}
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
-          />
-          <QuantityInput
-            label="Delivery Time"
-            value={formData.deliveryTime}
-            onChange={(e) => setFormData({ ...formData, deliveryTime: e })}
-          />
-          <Stack direction="row" alignItems="center">
-            <Typography flex={1}>Budget</Typography>
+    <>
+      <Card
+        sx={{ maxWidth: "md", margin: "auto", mt: 15, position: "relative" }}
+        component="form"
+        onSubmit={onSubmit}
+      >
+        {formBusy && <OverlaySpinner />}
+        <CardHeader
+          title="Which Product Are You Looking For?"
+          subheader="Describe the service you're looking to purchase - please be as detailed as possible"
+        />
+        <CardContent>
+          <Stack spacing={2}>
             <TextField
-              sx={{ flex: 2 }}
-              type={"number"}
-              inputMode="numeric"
-              value={formData.budget}
+              label="Title"
+              fullWidth
+              required
+              value={formInfo.title}
               onChange={(e) =>
-                setFormData({ ...formData, budget: e.target.value * 1 })
+                setFormInfo({ ...formInfo, title: e.target.value })
               }
-              inputProps={{
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: <Typography sx={{ mr: 1 }}>Rs. </Typography>,
-              }}
-            ></TextField>
+            />
+            <TextField
+              multiline
+              label="I am looking for..."
+              fullWidth
+              required
+              rows={6}
+              value={formInfo.description}
+              onChange={(e) =>
+                setFormInfo({ ...formInfo, description: e.target.value })
+              }
+            />
+            <FileChooser
+              value={formInfo.files}
+              onChange={(e, files) =>
+                setFormInfo({ ...formInfo, files: files })
+              }
+              accept="*"
+            />
+            <CategoryChooser
+              value={formInfo.category}
+              onChange={(e) =>
+                setFormInfo({ ...formInfo, category: e.target.value })
+              }
+              required
+            />
+            <QuantityInput
+              required
+              label="Delivery Time"
+              value={formInfo.deliveryTime}
+              onChange={(e) => setFormInfo({ ...formInfo, deliveryTime: e })}
+            />
+            <Stack direction="row" alignItems="center">
+              <Typography flex={1}>Budget</Typography>
+              <TextField
+                required
+                sx={{ flex: 2 }}
+                type={"number"}
+                inputMode="numeric"
+                value={formInfo.budget}
+                onChange={(e) =>
+                  setFormInfo({ ...formInfo, budget: e.target.value * 1 })
+                }
+                inputProps={{
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: <Typography sx={{ mr: 1 }}>Rs. </Typography>,
+                }}
+              ></TextField>
+            </Stack>
           </Stack>
-        </Stack>
-      </CardContent>
+        </CardContent>
 
-      <CardActions>
-        <Button type="submit" variant="contained" fullWidth>
-          Submit
-        </Button>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Button type="submit" variant="contained" fullWidth>
+            Submit
+          </Button>
+        </CardActions>
+      </Card>
+      {alert}
+    </>
   );
 }

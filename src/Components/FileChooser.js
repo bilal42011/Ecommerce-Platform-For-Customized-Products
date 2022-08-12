@@ -14,7 +14,7 @@ export default function FileChooser({ value, onChange, accept = "*" }) {
         Attach Files
         <AttachFile />
       </Button>
-      {value.map((e, i) => (
+      {[...value].map((e, i) => (
         <Typography key={i} variant="caption" ml={1}>
           {e.name},
         </Typography>
@@ -32,7 +32,7 @@ export default function FileChooser({ value, onChange, accept = "*" }) {
           height: "100%",
           opacity: 0,
         }}
-        onChange={onChange}
+        onChange={(e) => onChange(e, e.target.files)}
       />
     </Stack>
   );

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function CategoryChooser({ value, onChange }) {
+export default function CategoryChooser({ value, onChange, required }) {
   return (
     <Stack direction="row" alignItems={"center"}>
       <Typography minWidth={"20ch"} flex={1}>
@@ -22,6 +22,7 @@ export default function CategoryChooser({ value, onChange }) {
           label="Choose Category"
           onChange={onChange}
           fullWidth
+          required={required}
         >
           <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
           <MenuItem value={"Iron Works"}>Iron Works</MenuItem>

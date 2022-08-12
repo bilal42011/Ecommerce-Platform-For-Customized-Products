@@ -14,6 +14,7 @@ export default function QuantityInput({
   value = 1,
   onChange,
   sx,
+  required,
 }) {
   const [quantity, setQuantity] = useState(value || 1);
 
@@ -29,17 +30,17 @@ export default function QuantityInput({
       let newValue = 0;
       if (old <= 1) newValue = old;
       newValue = old - 1;
-      onChange && onChange(newValue);
+      onChange && onChange(newValue * 1);
       return newValue;
     });
   };
 
   const change = (value) => {
     if (value > 1) {
-      setQuantity(value);
+      setQuantity(value * 1);
     }
 
-    onChange && onChange(value);
+    onChange && onChange(value * 1);
   };
 
   return (
@@ -57,6 +58,7 @@ export default function QuantityInput({
           inputProps={{ inputMode: "numeric", min: 1 }}
           value={quantity}
           onChange={(e) => change(e.target.value)}
+          required={required}
         />
         <Button variant="contained" disableElevation onClick={increment}>
           <AddIcon />
