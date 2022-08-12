@@ -6,7 +6,7 @@ const instance = axios.create({
 
 export const endPoints = {
   REGISTER: "auth/signup",
-  LOGIN: "auth/login,",
+  LOGIN: "auth/login",
 };
 
 export default instance;
