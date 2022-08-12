@@ -49,7 +49,6 @@ export default function SignUp() {
   };
 
   useEffect(() => {
-    console.log(auth);
     if (isSuccess) {
       navigate("/profile/123");
     }
@@ -57,7 +56,7 @@ export default function SignUp() {
       console.log("Error occured");
     }
     dispatch(reset());
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, navigate, dispatch]);
 
   console.log("component rendered");
 
