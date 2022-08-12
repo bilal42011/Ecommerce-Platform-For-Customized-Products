@@ -1,11 +1,11 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,14 +13,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Paper } from "@mui/material";
-import { useSelector,useDispatch } from "react-redux/";
-import {reset} from "../Store/Slices/authSlice/authSlice";
-import { login} from "../Store/Slices/authSlice/authSlice";
-
-
+import { useSelector, useDispatch } from "react-redux/";
+import { reset } from "../Store/Slices/authSlice/authSlice";
+import { login } from "../Store/Slices/authSlice/authSlice";
 
 function Copyright(props) {
-
   return (
     <Typography
       variant="body2"
@@ -41,24 +38,23 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogIn() {
+  let navigate = useNavigate();
+  let auth = useSelector((state) => state.auth);
+  let { user, isLoading, isSuccess, isError, message } = auth;
+  let dispatch = useDispatch();
 
-  let navigate=useNavigate();
-  let auth=useSelector(state=>state.auth);
-  let {user,isLoading,isSuccess,isError,message}=auth;
-  let dispatch=useDispatch();  
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log(auth);
-    if(isSuccess || user){
-navigate("/profile/123")
+    if (isSuccess || user) {
+      navigate("/profile/123");
     }
-    if(isError){
+    if (isError) {
       console.log(message);
     }
     dispatch(reset());
-    },[isSuccess,isError,user]);
+  }, [isSuccess, isError, user]);
 
-console.log("component rendered");
+  console.log("component rendered");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -68,10 +64,12 @@ console.log("component rendered");
       password: data.get("password"),
     });
 
-    dispatch(login({
-      email: data.get("email"),
-      password: data.get("password"),
-    }));
+    dispatch(
+      login({
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    );
   };
 
   return (
