@@ -40,7 +40,7 @@ export default function RequestCustomProduct() {
       key !== "files" && formData.append(key, formInfo[key]);
     });
 
-    // Files must be added seperately to the same field for form
+    // Files must be added seperately to the same field
     [...formInfo.files].forEach((item) => formData.append("files", item));
 
     try {
