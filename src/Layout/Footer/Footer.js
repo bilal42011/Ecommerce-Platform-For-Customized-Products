@@ -52,7 +52,7 @@ const Footer = () => {
               alignSelf="center"
             >
               <Typography fontFamily="Roboto, sans-serif" fontSize="20px">
-                @ E-workers Pvt. Ltd
+                &copy; E-workers Pvt. Ltd
               </Typography>
             </Grid>
           </Grid>
