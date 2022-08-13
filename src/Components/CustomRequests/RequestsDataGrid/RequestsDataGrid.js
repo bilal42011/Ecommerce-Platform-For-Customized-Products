@@ -9,14 +9,14 @@ let columns = [
     headerName: "Request ID",
     align: "center",
     headerAlign: "center",
-    width: 200,
+    flex: 1,
   },
   {
     field: "description",
     headerName: "Description",
-    width: 250,
     align: "center",
     headerAlign: "center",
+    flex: 1,
   },
   {
     field: "budget",
@@ -24,23 +24,24 @@ let columns = [
     type: "number",
     align: "center",
     headerAlign: "center",
-    width: 200,
+    flex: 1,
+    valueFormatter: (params) => `Rs. ${params.value} /-`,
   },
 
   {
-    field: "timeline",
-    headerName: "Tiemline",
+    field: "deliveryTime",
+    headerName: "Timeline",
     align: "center",
     headerAlign: "center",
-    width: 200,
-    valueFormatter: (params) => `${params.value} Days`,
+    flex: 1,
+    valueFormatter: (params) => `${params.value} Day(s)`,
   },
   {
     field: "requestStatus",
     headerName: "Request Status",
     headerAlign: "center",
     align: "center",
-    width: 200,
+    flex: 1,
     renderCell: (params) => {
       return params.value === "Pending" ? (
         <Chip label="Pending" />
@@ -51,11 +52,11 @@ let columns = [
   },
 ];
 
-let ProposalsDataGrid = () => {
+let CustomRequestsDataGrid = ({ requests }) => {
   let [pageSize, setPageSize] = useState(5);
   let [selectionModel, setSelectionModel] = useState([]);
-
   const navigate = useNavigate();
+  const rows = requests;
 
   return (
     <Box sx={{ paddingTop: "3rem" }}>
@@ -75,7 +76,7 @@ let ProposalsDataGrid = () => {
         Your Custom Requests
       </Typography>
 
-      <Box sx={{ width: 1100, margin: "auto" }}>
+      <Box sx={{ width: "100%", margin: "auto" }}>
         <DataGrid
           autoHeight
           rowHeight={95}
@@ -106,89 +107,89 @@ let ProposalsDataGrid = () => {
   );
 };
 
-export default ProposalsDataGrid;
+export default CustomRequestsDataGrid;
 
 // Dummy Values to Fill the Rows
 
-let rows = [
-  {
-    _id: 1,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 2,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Open",
-  },
-  {
-    _id: 3,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 4,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 5,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 6,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Open",
-  },
-  {
-    _id: 7,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 8,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-  {
-    _id: 9,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Open",
-  },
-  {
-    _id: 10,
-    description:
-      "We are looking for a craftsman who can build a iron frame with vast expertise in field",
-    budget: 400,
-    timeline: 3,
-    requestStatus: "Pending",
-  },
-];
+// let rows = [
+//   {
+//     _id: 1,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 2,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Open",
+//   },
+//   {
+//     _id: 3,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 4,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 5,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 6,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Open",
+//   },
+//   {
+//     _id: 7,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 8,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+//   {
+//     _id: 9,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Open",
+//   },
+//   {
+//     _id: 10,
+//     description:
+//       "We are looking for a craftsman who can build a iron frame with vast expertise in field",
+//     budget: 400,
+//     timeline: 3,
+//     requestStatus: "Pending",
+//   },
+// ];

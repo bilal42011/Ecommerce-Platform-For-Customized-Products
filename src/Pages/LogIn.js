@@ -46,7 +46,7 @@ export default function LogIn() {
   useEffect(() => {
     console.log(auth);
     if (isSuccess || user) {
-      navigate("/profile/123");
+      navigate("/profile/dashboard");
     }
     if (isError) {
       console.log(message);
@@ -59,10 +59,6 @@ export default function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
 
     dispatch(
       login({

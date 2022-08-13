@@ -56,7 +56,7 @@ export default function BuyerRequestListItem({ request }) {
             alignItems="center"
             flexWrap="wrap"
           >
-            <RouterLink to="/profile/userid/chats" className="ghost-link">
+            <RouterLink to="/profile/chats" className="ghost-link">
               <Button variant="outlined">Contact Buyer</Button>
             </RouterLink>
             <RouterLink to={`${request.id}`} className="ghost-link">

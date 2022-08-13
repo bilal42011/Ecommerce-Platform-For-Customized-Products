@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import ProposalsDataGrid from "../Components/CustomRequestProposals/PoposalsDataGrid/ProposalsDataGrid/ProposalsDataGrid";
+import { useParams } from "react-router-dom";
+import axiosInstance, { endPoints } from "../axiosInstance";
 
 const CustomRequestProposals = () => {
+  const { requestId } = useParams();
+  const [request, setRequest] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axiosInstance.get(
+        `${endPoints.BUYER_REQUEST}/${requestId}`
+      );
+      setRequest(response.data.request);
+    })();
+  }, [requestId]);
+
   return (
     <Container maxWidth="xl" disableGutters>
-      <ProposalsDataGrid />
+      <ProposalsDataGrid request={request} />
     </Container>
   );
 };

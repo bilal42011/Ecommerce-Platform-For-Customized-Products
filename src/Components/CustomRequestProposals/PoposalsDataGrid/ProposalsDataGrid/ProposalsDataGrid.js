@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, Avatar, Typography, Grid } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  CircularProgress,
+  Stack,
+} from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import bilal from "../../../../assets/bilal.jpg";
 import UsersActions from "./UsersActions/UsersActions";
@@ -76,28 +82,39 @@ let columns = [
   },
 ];
 
-let ProposalsDataGrid = () => {
+let ProposalsDataGrid = ({ request }) => {
   let [pageSize, setPageSize] = useState(5);
   const navigate = useNavigate();
 
-  const request = {
-    id: 1,
-    buyer: {
-      avatar: "",
-      full_name: "User 3849",
-      id: "",
-      username: "user3849",
-      city: "Islamabad",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    title: "Looking for an experienced Carpenter",
-    budget: 7500,
-    time: 12, //days
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    attachments: ["file1.jpg", "file2.docx"],
-  };
+  // const req = {
+  //   id: 1,
+  //   buyer: {
+  //     avatar: "",
+  //     full_name: "User 3849",
+  //     id: "",
+  //     username: "user3849",
+  //     city: "Islamabad",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  //   },
+  //   title: "Looking for an experienced Carpenter",
+  //   budget: 7500,
+  //   time: 12, //days
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  //   attachments: ["file1.jpg", "file2.docx"],
+  // };
+
+  if (!request)
+    return (
+      <Stack
+        sx={{ height: "100%", widht: "100%" }}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <CircularProgress />
+      </Stack>
+    );
 
   return (
     <Box sx={{ paddingTop: "3rem" }}>

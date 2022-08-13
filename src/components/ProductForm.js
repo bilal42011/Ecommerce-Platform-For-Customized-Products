@@ -16,7 +16,7 @@ export default function ProductForm({ product }) {
       </Button>
       <Link
         className="ghost-link"
-        to="/profile/userId/chats"
+        to="/profile/chats"
         style={{ width: "100%" }}
       >
         <Button type="button" variant="outlined" fullWidth>

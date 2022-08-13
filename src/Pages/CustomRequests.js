@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import RequestsDataGrid from "../Components/CustomRequests/RequestsDataGrid/RequestsDataGrid";
+import axiosInstance, { endPoints, getAuthHeader } from "../axiosInstance";
 
 const CustomRequests = () => {
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axiosInstance.get(
+        endPoints.CUSTOM_REQUESTS_HISTORY,
+        getAuthHeader()
+      );
+      setRequests(response.data.buyerRequests);
+    })();
+  }, []);
+
   return (
-    <Container maxWidth="100%" disableGutters>
-      <RequestsDataGrid />
+    <Container maxWidth="xl" disableGutters>
+      <RequestsDataGrid requests={requests} />
     </Container>
   );
 };

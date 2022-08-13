@@ -18,6 +18,7 @@ import FileChooser from "../Components/FileChooser";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import OverlaySpinner from "../Components/OverlaySpinner";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function RequestCustomProduct() {
   const [formInfo, setFormInfo] = useState({
@@ -30,6 +31,7 @@ export default function RequestCustomProduct() {
   });
   const [formBusy, setFormBusy] = useState(false);
   const [alert, setAlert] = useState(<></>);
+  const navigate = useNavigate();
 
   const token = useSelector((state) => state.auth.user?.token);
   const onSubmit = async (e) => {
@@ -44,15 +46,11 @@ export default function RequestCustomProduct() {
     [...formInfo.files].forEach((item) => formData.append("files", item));
 
     try {
-      const response = await axiosInstance.post(
-        endPoints.BUYER_REQUEST,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axiosInstance.post(endPoints.BUYER_REQUEST, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setFormBusy(false);
       setAlert(
         <Snackbar
@@ -66,6 +64,7 @@ export default function RequestCustomProduct() {
           </Alert>
         </Snackbar>
       );
+      navigate("/profile/customrequests");
     } catch (err) {
       console.log(err);
       setAlert(

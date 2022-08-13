@@ -13,7 +13,7 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, useNavigate, useLocation, Link } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 import { useSelector } from "react-redux";
 import { apiServerUrl } from "../../assets/js/utils";
@@ -36,12 +36,14 @@ const Header = () => {
       name: "Become a Seller",
       url: `${!user ? "/signup" : "/profile/become-a-seller"}`,
     },
-    { name: "Request a Custom Product", url: "profile/requestcustomproduct" },
+    { name: "Request a Custom Product", url: "/profile/requestcustomproduct" },
     {
       name: "Buyer Requests",
-      url: `${
-        user.isSeller ? "/profile/buyers-requests" : "/profile/customrequests"
-      }`,
+      url: (() => {
+        if (!user) return "/login";
+        else if (user.isSeller) return "/profile/buyers-requests";
+        else return "/profile/customrequests";
+      })(),
     },
   ];
 
@@ -200,7 +202,7 @@ const Header = () => {
                 <Button onClick={onLogOut} sx={{ color: "white" }}>
                   Log Out
                 </Button>
-                <Link className="ghost-link" to="/profile">
+                <Link className="ghost-link" to="/profile/dashboard">
                   <CardHeader
                     title={user.firstName}
                     sx={{ color: "white" }}

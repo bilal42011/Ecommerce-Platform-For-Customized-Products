@@ -30,7 +30,7 @@ export default function BuyerRequestInfoCard({ hideActions, request }) {
             <Stack direction="row">
               <Typography>Timeframe:</Typography>
               <Typography marginLeft={1} fontWeight="bold">
-                {request.time} Days
+                {request.deliveryTime} Day(s)
               </Typography>
             </Stack>
           </Stack>
