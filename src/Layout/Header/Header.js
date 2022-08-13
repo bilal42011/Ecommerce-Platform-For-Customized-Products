@@ -32,7 +32,7 @@ const Header = () => {
       name: "Become a Seller",
       url: `${!user ? "/signup" : "profile/become-a-seller"}`,
     },
-    { name: "Request a Custom Product", url: "profile/1/requestcustomproduct" },
+    { name: "Request a Custom Product", url: "profile/requestcustomproduct" },
   ];
 
   const handleMenuButtonClick = (event) => {

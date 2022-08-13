@@ -36,11 +36,10 @@ export default function QuantityInput({
   };
 
   const change = (value) => {
-    if (value > 1) {
+    if (value >= 1) {
       setQuantity(value * 1);
+      onChange && onChange(value * 1);
     }
-
-    onChange && onChange(value * 1);
   };
 
   return (
