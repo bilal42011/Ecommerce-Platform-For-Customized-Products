@@ -53,23 +53,17 @@ const SellerProfileDescription = ({ user, dashboard }) => {
         </Stack>
         <Divider />
         {!dashboard ? (
-          <Button variant="contained">
-            <Link
-              to="/profile/userid/chats"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+          <Link className="ghost-link" to="/profile/chats">
+            <Button variant="contained" fullWidth>
               Contact Me
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         ) : (
-          <Button variant="contained">
-            <Link
-              to="/profile/userid/edit"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+          <Link className="ghost-link" to="/profile/edit">
+            <Button variant="contained" fullWidth>
               Edit Profile
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         )}
       </Paper>
       {user.description && (

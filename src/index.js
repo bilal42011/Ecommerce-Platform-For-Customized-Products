@@ -23,7 +23,7 @@ import CreateProduct from "./Pages/CreateProduct";
 import EditProduct from "./Pages/EditProduct";
 import ChatsPage from "./Pages/ChatsPage";
 import CustomProposalDetails from "./Pages/CustomProposalDetails";
-import BuyerRequestInfo from "./Pages/BuyerRequestInfo";
+import BuyerRequestInfoPage from "./Pages/BuyerRequestInfoPage";
 import CreateProposal from "./Pages/CreateProposal";
 import Dashboard from "./Pages/Dashboard";
 import Cart from "./Pages/Cart";
@@ -52,20 +52,17 @@ root.render(
             />
             <Route path="buyers-requests" element={<Outlet />}>
               <Route index element={<ViewBuyerRequests />} />
-              <Route path=":request_id" element={<BuyerRequestInfo />} />
+              <Route path=":request_id" element={<BuyerRequestInfoPage />} />
               <Route path=":request_id/proposal" element={<CreateProposal />} />
             </Route>
             <Route path="customrequests" element={<Outlet />}>
               <Route index element={<CustomRequests />}></Route>
               <Route path=":requestId" element={<Outlet />}>
-                <Route index element={<div>Welcome to new request</div>} />
-                <Route path="customproposals" element={<Outlet />}>
-                  <Route index element={<CustomRequestProposals />} />
-                  <Route
-                    path=":proposalID"
-                    element={<CustomProposalDetails />}
-                  />
-                </Route>
+                <Route index element={<CustomRequestProposals />} />
+                <Route
+                  path="proposals/:proposalID"
+                  element={<CustomProposalDetails />}
+                />
               </Route>
             </Route>
             <Route path="products/create" element={<CreateProduct />} />

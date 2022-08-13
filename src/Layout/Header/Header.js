@@ -9,30 +9,40 @@ import {
   Box,
   IconButton,
   Button,
+  CardHeader,
+  Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation, Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 import { useSelector } from "react-redux";
+import { apiServerUrl } from "../../assets/js/utils";
 
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
 const headingStyles = { textDecoration: "none", color: "white" };
 
 const Header = () => {
-  let navigate = useNavigate();
   let location = useLocation();
   let [anchorEl, setanchorEl] = useState(null);
 
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user?.user);
+  console.log("user", user);
+  const isLoggedIn = Boolean(user);
 
   const pages = [
     { name: "Browse", url: "/search" },
     {
       name: "Become a Seller",
-      url: `${!user ? "/signup" : "profile/become-a-seller"}`,
+      url: `${!user ? "/signup" : "/profile/become-a-seller"}`,
     },
     { name: "Request a Custom Product", url: "profile/requestcustomproduct" },
+    {
+      name: "Buyer Requests",
+      url: `${
+        user.isSeller ? "/profile/buyers-requests" : "/profile/customrequests"
+      }`,
+    },
   ];
 
   const handleMenuButtonClick = (event) => {
@@ -41,6 +51,8 @@ const Header = () => {
   const handleClose = () => {
     setanchorEl(null);
   };
+
+  const onLogOut = () => {};
 
   useEffect(() => {
     setanchorEl(null);
@@ -148,36 +160,59 @@ const Header = () => {
             ))}
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Button
-              variant="outlined"
-              onClick={() => navigate("login")}
-              sx={{
-                marginLeft: 2,
-                fontFamily: "Roboto, sans-serif",
-                fontWeight: "bolder",
-                border: "2px solid white",
-                color: "white",
-                "&:hover": {
-                  border: "2px solid white",
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: "bolder",
-                },
-              }}
-            >
-              LOG IN
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => navigate("signup")}
-              sx={{
-                marginLeft: 1,
-                fontFamily: "Roboto, sans-serif",
-                fontWeight: "bolder",
-              }}
-            >
-              JOIN
-            </Button>
+            {!isLoggedIn ? (
+              <>
+                <Link className="ghost-link" to="/login">
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      marginLeft: 2,
+                      fontFamily: "Roboto, sans-serif",
+                      fontWeight: "bolder",
+                      border: "2px solid white",
+                      color: "white",
+                      "&:hover": {
+                        border: "2px solid white",
+                        backgroundColor: "white",
+                        color: "black",
+                        fontWeight: "bolder",
+                      },
+                    }}
+                  >
+                    LOG IN
+                  </Button>
+                </Link>
+                <Link className="ghost-link" to="/signup">
+                  <Button
+                    variant="contained"
+                    sx={{
+                      marginLeft: 1,
+                      fontFamily: "Roboto, sans-serif",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    JOIN
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Button onClick={onLogOut} sx={{ color: "white" }}>
+                  Log Out
+                </Button>
+                <Link className="ghost-link" to="/profile">
+                  <CardHeader
+                    title={user.firstName}
+                    sx={{ color: "white" }}
+                    avatar={
+                      <Avatar src={apiServerUrl(user.avatar)}>
+                        {user.firstName.charAt(0)}
+                      </Avatar>
+                    }
+                  />
+                </Link>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>
