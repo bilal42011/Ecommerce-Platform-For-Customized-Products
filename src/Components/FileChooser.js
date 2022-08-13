@@ -1,7 +1,12 @@
 import AttachFile from "@mui/icons-material/AttachFile";
 import { Button, Stack, Typography } from "@mui/material";
 
-export default function FileChooser({ value, onChange, accept = "*" }) {
+export default function FileChooser({
+  value,
+  onChange,
+  accept = "*",
+  required,
+}) {
   return (
     <Stack
       direction={"row"}
@@ -33,6 +38,7 @@ export default function FileChooser({ value, onChange, accept = "*" }) {
           opacity: 0,
         }}
         onChange={(e) => onChange(e, e.target.files)}
+        required={required}
       />
     </Stack>
   );

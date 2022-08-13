@@ -13,12 +13,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import styles from "../../styles/header.module.css";
+import { useSelector } from "react-redux";
 
-const pages = [
-  { name: "Browse", url: "/search" },
-  { name: "Become a Seller", url: "/signup" },
-  { name: "Request a Custom Product", url: "profile/1/requestcustomproduct" },
-];
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
 const headingStyles = { textDecoration: "none", color: "white" };
@@ -27,6 +23,18 @@ const Header = () => {
   let navigate = useNavigate();
   let location = useLocation();
   let [anchorEl, setanchorEl] = useState(null);
+
+  const user = useSelector((state) => state.auth.user);
+
+  const pages = [
+    { name: "Browse", url: "/search" },
+    {
+      name: "Become a Seller",
+      url: `${!user ? "/signup" : "profile/become-a-seller"}`,
+    },
+    { name: "Request a Custom Product", url: "profile/1/requestcustomproduct" },
+  ];
+
   const handleMenuButtonClick = (event) => {
     setanchorEl(event.currentTarget);
   };

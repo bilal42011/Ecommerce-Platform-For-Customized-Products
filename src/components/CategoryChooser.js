@@ -7,14 +7,19 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function CategoryChooser({ value, onChange, required }) {
+export default function CategoryChooser({
+  value,
+  onChange,
+  required,
+  label = "Product Category",
+}) {
   return (
     <Stack direction="row" alignItems={"center"}>
       <Typography minWidth={"20ch"} flex={1}>
-        Product Category
+        {label}
       </Typography>
       <FormControl sx={{ flex: 2 }} fullWidth>
-        <InputLabel id="city-chooser-label">Product Category</InputLabel>
+        <InputLabel id="city-chooser-label">{label}</InputLabel>
         <Select
           labelId="city-chooser-label"
           id="city-chooser"

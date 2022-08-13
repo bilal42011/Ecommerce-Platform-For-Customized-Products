@@ -28,6 +28,7 @@ const GridLabel = ({ children, ...props }) => {
 
 export default function SellerProductForm({
   product: propsProduct,
+  onSubmit,
   formTitle = "Create a new Product",
 }) {
   const [product, setProduct] = useState(
@@ -37,14 +38,15 @@ export default function SellerProductForm({
       category: "",
       images: [],
       sizes: [],
-      price: 0,
-      quantity: 0,
+      price: 1,
+      quantity: 1,
     }
   );
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(product);
+    onSubmit(product);
   };
 
   const gridControlParams = {
@@ -67,6 +69,7 @@ export default function SellerProductForm({
         <Grid {...gridControlParams}>
           <TextField
             fullWidth
+            required
             label="Product Title"
             value={product.title}
             onChange={(e) => setProduct({ ...product, title: e.target.value })}
@@ -74,7 +77,7 @@ export default function SellerProductForm({
         </Grid>
         <GridLabel>Product Category</GridLabel>
         <Grid {...gridControlParams}>
-          <FormControl sx={{ flex: 2 }} fullWidth>
+          <FormControl sx={{ flex: 2 }} fullWidth required>
             <InputLabel id="city-chooser-label">Product Category</InputLabel>
             <Select
               labelId="city-chooser-label"
@@ -85,6 +88,7 @@ export default function SellerProductForm({
                 setProduct({ ...product, category: e.target.value })
               }
               fullWidth
+              required
             >
               <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
               <MenuItem value={"Iron Works"}>Iron Works</MenuItem>
@@ -98,6 +102,7 @@ export default function SellerProductForm({
         <Grid {...gridControlParams}>
           <TextField
             fullWidth
+            required
             label="Description"
             multiline
             rows={4}
@@ -122,12 +127,14 @@ export default function SellerProductForm({
               setProduct({ ...product, images: [...e.target.files] })
             }
             accept="image/*"
+            required
           />
         </Grid>
         <GridLabel>Price</GridLabel>
         <Grid {...gridControlParams}>
           <TextField
             fullWidth
+            required
             sx={{ flex: 2 }}
             type={"number"}
             inputMode="numeric"
@@ -136,7 +143,7 @@ export default function SellerProductForm({
               setProduct({ ...product, price: e.target.value * 1 })
             }
             inputProps={{
-              min: 0,
+              min: 1,
             }}
             InputProps={{
               startAdornment: <Typography sx={{ mr: 1 }}>Rs. </Typography>,
@@ -145,6 +152,7 @@ export default function SellerProductForm({
         </Grid>
         <Grid item xs={12}>
           <QuantityInput
+            required
             value={product.quantity}
             onChange={(e) => setProduct({ ...product, quantity: e })}
             label="Product Quantity"
@@ -152,7 +160,7 @@ export default function SellerProductForm({
           />
         </Grid>
         <Grid item xs={12}>
-          <Button type="submit" fullWidth variant="contained">
+          <Button type="submit" fullWidth required variant="contained">
             Create Product
           </Button>
         </Grid>
