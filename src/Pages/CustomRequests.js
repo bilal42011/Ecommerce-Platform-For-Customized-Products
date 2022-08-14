@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import RequestsDataGrid from "../Components/CustomRequests/RequestsDataGrid/RequestsDataGrid";
-import axiosInstance, { endPoints, getAuthHeader } from "../axiosInstance";
+import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 
 const CustomRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -10,7 +10,11 @@ const CustomRequests = () => {
     (async () => {
       const response = await axiosInstance.get(
         endPoints.CUSTOM_REQUESTS_HISTORY,
-        getAuthHeader()
+        {
+          headers: {
+            Authorization: "Bearer " + getToken(),
+          },
+        }
       );
       setRequests(response.data.buyerRequests);
     })();

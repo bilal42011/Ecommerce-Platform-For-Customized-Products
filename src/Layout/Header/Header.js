@@ -34,7 +34,7 @@ const Header = () => {
     { name: "Browse", url: "/search" },
     {
       name: "Become a Seller",
-      url: `${!user ? "/signup" : "/profile/become-a-seller"}`,
+      url: `${!user ? "/login" : "/profile/become-a-seller"}`,
     },
     { name: "Request a Custom Product", url: "/profile/requestcustomproduct" },
     {

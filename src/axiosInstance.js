@@ -5,13 +5,9 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:8000/api/",
 });
 
-export const getAuthHeader = () => {
+export const getToken = (contentType) => {
   const token = store.getState().auth.user.token;
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  return token;
 };
 
 export const endPoints = {
@@ -19,6 +15,7 @@ export const endPoints = {
   LOGIN: "auth/login",
   BUYER_REQUEST: "/buyer-requests",
   CUSTOM_REQUESTS_HISTORY: "/user/buyer-requests",
+  UPGRADE_ACCOUNT: "/user/upgrade",
 };
 
 export default axiosInstance;

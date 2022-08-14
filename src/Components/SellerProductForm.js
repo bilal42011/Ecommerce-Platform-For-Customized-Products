@@ -4,6 +4,7 @@ import {
   CardContent,
   CardHeader,
   Checkbox,
+  CircularProgress,
   Divider,
   FormControl,
   Grid,
@@ -16,6 +17,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import FileChooser from "./FileChooser";
+import OverlaySpinner from "./OverlaySpinner";
 import QuantityInput from "./QuantityInput/QuantityInput";
 
 const GridLabel = ({ children, ...props }) => {
@@ -29,6 +31,7 @@ const GridLabel = ({ children, ...props }) => {
 export default function SellerProductForm({
   product: propsProduct,
   onSubmit,
+  buttonLabel = "Creat Product",
   formTitle = "Create a new Product",
 }) {
   const [product, setProduct] = useState(
@@ -58,7 +61,7 @@ export default function SellerProductForm({
   return (
     <Card
       component="form"
-      sx={{ maxWidth: "md", m: "auto" }}
+      sx={{ maxWidth: "md", m: "auto", position: "relative" }}
       onSubmit={onFormSubmit}
     >
       <CardHeader title={formTitle} />
@@ -161,7 +164,7 @@ export default function SellerProductForm({
         </Grid>
         <Grid item xs={12}>
           <Button type="submit" fullWidth required variant="contained">
-            Create Product
+            {buttonLabel}
           </Button>
         </Grid>
       </CardContent>

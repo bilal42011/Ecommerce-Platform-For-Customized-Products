@@ -21,7 +21,7 @@ export default function FileChooser({
             accept={accept}
             id="attachments-button"
             multiple
-            hidden
+            name="files"
             type="file"
             style={{
               position: "absolute",

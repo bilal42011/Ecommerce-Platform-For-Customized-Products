@@ -8,18 +8,30 @@ import Typography from "@mui/material/Typography";
 import { Box, Container } from "@mui/system";
 import { Card, Stack } from "@mui/material";
 import CategoryChooser from "../Components/CategoryChooser";
-import SellerProductForm from "../Components/SellerProductForm";
+
+import axiosInstance, { endPoints, getToken } from "../axiosInstance";
+import { CheckCircleOutline, ArrowRight } from "@mui/icons-material/";
+import { Link } from "react-router-dom";
 
 export default function BecomeASeller() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [category, setCategory] = React.useState("");
-  const [product, setProduct] = React.useState(null);
-  const onCreateProduct = (product) => {
-    setProduct(product);
-  };
 
-  const handleFinish = () => {};
+  const handleFinish = async (e) => {
+    try {
+      const response = await axiosInstance.post(
+        endPoints.UPGRADE_ACCOUNT,
+        { category },
+        {
+          headers: {
+            Authorization: "Bearer " + getToken(),
+          },
+        }
+      );
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } catch (err) {}
+  };
 
   const steps = [
     {
@@ -38,10 +50,15 @@ export default function BecomeASeller() {
     {
       title: "Create your first Product",
       element: (
-        <SellerProductForm
-          onSubmit={onCreateProduct}
-          formTitle={"Create your first Product"}
-        />
+        <Stack justifyContent={"center"} alignItems="center">
+          <CheckCircleOutline sx={{ mb: 3 }} />
+          <Typography>
+            You have successfully registered yourself as a seller
+          </Typography>
+          <Link to="/profile/products/create" className="ghost-link">
+            <Button endIcon={<ArrowRight />}>Create your first Product</Button>
+          </Link>
+        </Stack>
       ),
     },
   ];
@@ -54,27 +71,8 @@ export default function BecomeASeller() {
     return skipped.has(step);
   };
 
-  const handleNext = (e) => {
-    e.preventDefault();
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-    handleFinish();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   return (
@@ -101,7 +99,14 @@ export default function BecomeASeller() {
 
       <Card variant="outlined" sx={{ mt: 5, border: "none" }}>
         <Box>{steps[activeStep].element}</Box>
-        <Container sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            pt: 2,
+            justifyContent: "space-between",
+          }}
+        >
           <Button
             color="inherit"
             disabled={activeStep === 0}
@@ -110,20 +115,14 @@ export default function BecomeASeller() {
           >
             Back
           </Button>
-          <Container sx={{ flex: "1 1 auto" }} />
-          {isStepOptional(activeStep) && (
-            <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-              Skip &amp; Save
-            </Button>
-          )}
           {activeStep === 0 ? (
-            <Button onClick={handleNext} disabled={!category}>
-              Next
+            <Button onClick={handleFinish} disabled={!category}>
+              Save
             </Button>
           ) : (
-            <Button onClick={handleFinish} disabled={!product}>
-              Finish
-            </Button>
+            <Link to="/" className="ghost-link" style={{ width: "auto" }}>
+              <Button disabled={!category}>Go to Homepage</Button>
+            </Link>
           )}
         </Container>
       </Card>
