@@ -15,8 +15,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, useLocation, Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { apiServerUrl } from "../../assets/js/utils";
+import { logout } from "../../Store/Slices/authSlice/authSlice";
 
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
@@ -47,6 +48,8 @@ const Header = () => {
     },
   ];
 
+  const dispatch = useDispatch();
+
   const handleMenuButtonClick = (event) => {
     setanchorEl(event.currentTarget);
   };
@@ -54,7 +57,9 @@ const Header = () => {
     setanchorEl(null);
   };
 
-  const onLogOut = () => {};
+  const onLogOut = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
     setanchorEl(null);

@@ -35,12 +35,18 @@ let authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    reset: (state) => {
+    reset(state) {
       console.log("inside reset");
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+    },
+
+    logout(state) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      state.user = null;
     },
   },
   extraReducers: (builder) => {
@@ -78,6 +84,6 @@ let authSlice = createSlice({
   },
 });
 
-export let { reset } = authSlice.actions;
+export let { reset, logout } = authSlice.actions;
 
 export default authSlice.reducer;

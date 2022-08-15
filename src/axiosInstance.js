@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:8000/api/",
 });
 
-export const getToken = (contentType) => {
+export const getToken = () => {
   const token = store.getState().auth.user.token;
   return token;
 };
