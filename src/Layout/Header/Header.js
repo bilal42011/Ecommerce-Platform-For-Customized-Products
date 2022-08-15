@@ -31,22 +31,36 @@ const Header = () => {
   console.log("user", user);
   const isLoggedIn = Boolean(user);
 
-  const pages = [
-    { name: "Browse", url: "/search" },
-    {
-      name: "Become a Seller",
-      url: `${!user ? "/login" : "/profile/become-a-seller"}`,
-    },
-    { name: "Request a Custom Product", url: "/profile/requestcustomproduct" },
-    {
-      name: "Buyer Requests",
-      url: (() => {
-        if (!user) return "/login";
-        else if (user.isSeller) return "/profile/buyers-requests";
-        else return "/profile/customrequests";
-      })(),
-    },
-  ];
+  const pages = (() => {
+    if (!user) {
+      return [
+        { name: "Browse", url: "/search" },
+        { name: "Become a Seller", url: `/login` },
+        { name: "Request a Custom Product", url: "/login" },
+      ];
+    } else if (!user.isSeller) {
+      return [
+        { name: "Browse", url: "/search" },
+        { name: "Become a Seller", url: `/become-a-seller` },
+        {
+          name: "Request a Custom Product",
+          url: "/profile/requestcustomproduct",
+        },
+        { name: "Your Custom Requests", url: "/profile/customrequests" },
+      ];
+    } else {
+      return [
+        { name: "Browse", url: "/search" },
+        { name: "Become a Seller", url: `/become-a-seller` },
+        {
+          name: "Request a Custom Product",
+          url: "/profile/requestcustomproduct",
+        },
+        { name: "Buyers Requests", url: "/profile/buyers-requests" },
+        { name: "Your Custom Requests", url: "/profile/customrequests" },
+      ];
+    }
+  })();
 
   const dispatch = useDispatch();
 
