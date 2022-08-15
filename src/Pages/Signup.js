@@ -50,7 +50,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/profile/123");
+      navigate("/profile/dashboard");
     }
     if (isError) {
       console.log("Error occured");
