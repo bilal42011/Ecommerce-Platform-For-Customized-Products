@@ -1,12 +1,11 @@
 import axios from "axios";
-import store from "./Store/Store";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:8000/api/",
 });
 
 export const getToken = () => {
-  const token = store.getState().auth.user.token;
+  const token = localStorage.getItem("token");
   return token;
 };
 
