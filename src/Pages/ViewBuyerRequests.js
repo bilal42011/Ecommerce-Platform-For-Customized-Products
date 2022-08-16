@@ -14,30 +14,32 @@ export default function ViewBuyerRequests() {
   });
 
   const [buyerRequests, setBuyerRequests] = useState(null);
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get("/buyer-requests", {
+        headers: { Authorization: `Bearer ${getToken()}` },
+        params: { page: paginationInfo.page },
+      });
+      console.log(response);
+      setBuyerRequests(response.data.buyerRequests);
+      setPaginationInfo((prev) => {
+        return { ...prev, count: response.data.totalPages };
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axiosInstance.get("/buyer-requests", {
-          headers: { Authorization: `Bearer ${getToken()}` },
-          params: { page: paginationInfo.page },
-        });
-        console.log(response);
-        setBuyerRequests(response.data.buyerRequests);
-        setPaginationInfo((prev) => {
-          return { ...prev, count: response.data.totalPages };
-        });
-      } catch (err) {
-        console.error(err);
-        alert(err.message);
-      }
-    })();
+    fetchData();
   }, []);
 
-  const onPageChange = (event, newPage) => {
+  const onPageChange = async (event, newPage) => {
     setPaginationInfo((prev) => {
-      return { ...prev, page: prev.page + 1 };
+      return { ...prev, page: newPage };
     });
+    await fetchData();
   };
 
   return (
