@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Divider,
+  Link,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -10,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { apiServerUrl } from "../assets/js/utils";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Box } from "@mui/system";
 
@@ -57,18 +59,20 @@ export default function BuyerRequestListItem({ request }) {
             <RouterLink to="/profile/chats" className="ghost-link">
               <Button variant="outlined">Contact Buyer</Button>
             </RouterLink>
-            <RouterLink to={`${request.id}`} className="ghost-link">
-              <Button variant="contained">View Proposal</Button>
+            <RouterLink to={`${request._id}`} className="ghost-link">
+              <Button variant="contained">View Request</Button>
             </RouterLink>
 
             <Box flexGrow={1}></Box>
             <Box className="attachments">
               {request.attachments.map((elem, index) => {
                 return (
-                  <Button size="small" key={index} endIcon={<DownloadIcon />}>
-                    {/* TODO: Add file link */}
-                    {elem}
-                  </Button>
+                  <Link key={index} href={apiServerUrl(elem)} target="_blank">
+                    <Button size="small" endIcon={<DownloadIcon />}>
+                      {/* TODO: Add file link */}
+                      {elem.split("\\").pop()}
+                    </Button>
+                  </Link>
                 );
               })}
             </Box>
