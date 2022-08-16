@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { apiServerUrl } from "../assets/js/utils";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Box } from "@mui/system";
+import ExternalLink from "./ExternalLink";
 
 export default function BuyerRequestListItem({ request }) {
   return (
@@ -66,14 +67,7 @@ export default function BuyerRequestListItem({ request }) {
             <Box flexGrow={1}></Box>
             <Box className="attachments">
               {request.attachments.map((elem, index) => {
-                return (
-                  <Link key={index} href={apiServerUrl(elem)} target="_blank">
-                    <Button size="small" endIcon={<DownloadIcon />}>
-                      {/* TODO: Add file link */}
-                      {elem.split("\\").pop()}
-                    </Button>
-                  </Link>
-                );
+                return <ExternalLink link={elem} key={index} />;
               })}
             </Box>
           </Stack>

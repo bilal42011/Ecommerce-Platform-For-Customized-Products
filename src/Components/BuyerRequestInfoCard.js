@@ -5,10 +5,13 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { apiServerUrl } from "../assets/js/utils";
+import ExternalLink from "./ExternalLink";
 
 export default function BuyerRequestInfoCard({ hideActions, request }) {
   return (
@@ -40,23 +43,22 @@ export default function BuyerRequestInfoCard({ hideActions, request }) {
         <Typography variant="h6">DETAILS</Typography>
         <Typography sx={{ flex: 1 }}>{request.description}</Typography>
         <Stack direction="row">
-          {request.attachments.map((elem, index) => {
-            return (
-              <Button size="small" key={index} endIcon={<Download />}>
-                {/* TODO: Add file link */}
-                {elem}
-              </Button>
-            );
-          })}
+          {request.attachments.map((elem, index) => (
+            <ExternalLink link={elem} key={index} />
+          ))}
         </Stack>
       </CardContent>
       {!hideActions && (
         <CardActions>
-          <Link className="ghost-link" to="proposal" style={{ width: "100%" }}>
+          <RouterLink
+            className="ghost-link"
+            to="proposal"
+            style={{ width: "100%" }}
+          >
             <Button variant="contained" fullWidth>
               Create Proposal
             </Button>
-          </Link>
+          </RouterLink>
         </CardActions>
       )}
     </Card>

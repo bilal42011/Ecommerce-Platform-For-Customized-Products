@@ -53,21 +53,21 @@ root.render(
             />
             <Route path="buyers-requests" element={<Outlet />}>
               <Route index element={<ViewBuyerRequests />} />
-              <Route path=":request_id" element={<BuyerRequestInfoPage />} />
-              <Route path=":request_id/proposal" element={<CreateProposal />} />
+              <Route path=":requestId" element={<BuyerRequestInfoPage />} />
+              <Route path=":requestId/proposal" element={<CreateProposal />} />
             </Route>
             <Route path="customrequests" element={<Outlet />}>
               <Route index element={<CustomRequests />}></Route>
               <Route path=":requestId" element={<Outlet />}>
                 <Route index element={<CustomRequestProposals />} />
                 <Route
-                  path="proposals/:proposalID"
+                  path="proposals/:proposalId"
                   element={<CustomProposalDetails />}
                 />
               </Route>
             </Route>
             <Route path="products/create" element={<CreateProduct />} />
-            <Route path="products/:product_id/edit" element={<EditProduct />} />
+            <Route path="products/:productId/edit" element={<EditProduct />} />
             <Route path="chats" element={<ChatsPage />} />
           </Route>
         </Route>
