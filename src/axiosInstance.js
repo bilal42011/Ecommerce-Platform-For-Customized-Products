@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
 });
 
 export const getToken = () => {
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"));
   return token;
 };
 

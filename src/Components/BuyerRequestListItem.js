@@ -20,8 +20,8 @@ export default function BuyerRequestListItem({ request }) {
         <Stack spacing={1} width="100%">
           <Stack direction="row" alignItems={"center"} width="100%">
             <ListItemAvatar>
-              <Avatar src={request.buyer_avatar}>
-                {request.buyer_full_name.charAt(0)}
+              <Avatar src={request.buyerId.avatar}>
+                {request.buyerId.fullName.charAt(0)}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -29,9 +29,7 @@ export default function BuyerRequestListItem({ request }) {
                 <Typography fontWeight="bold">{request.title}</Typography>
               }
               secondary={
-                <Typography variant="body2">
-                  {request.buyer_username}, {request.buyer_city}
-                </Typography>
+                <Typography variant="body2">{request.buyerId.city}</Typography>
               }
             />
             <Box flexGrow={1}></Box>
@@ -41,7 +39,7 @@ export default function BuyerRequestListItem({ request }) {
             </Typography>
             <Typography ml={2}>
               Timeframe:{"  "}
-              <strong>{request.time} Days</strong>
+              <strong>{request.deliveryTime} Days</strong>
             </Typography>
           </Stack>
           <Box mt={2}>

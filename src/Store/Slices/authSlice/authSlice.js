@@ -35,7 +35,6 @@ let authSlice = createSlice({
   initialState,
   reducers: {
     reset(state) {
-      console.log("inside reset");
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
