@@ -6,9 +6,9 @@ export default function ExternalLink({
   link,
 }) {
   return (
-    <Link href={`${baseUrl}/${link}`} target="_blank">
+    <Link href={`${baseUrl}/${link.path}`} target="_blank">
       <Button size="small" endIcon={<Download />}>
-        {link.split("\\").pop()}
+        {link.filename}
       </Button>
     </Link>
   );

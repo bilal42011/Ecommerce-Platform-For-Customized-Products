@@ -41,7 +41,7 @@ const Header = () => {
     } else if (!user.isSeller) {
       return [
         { name: "Browse", url: "/search" },
-        { name: "Become a Seller", url: `/become-a-seller` },
+        { name: "Become a Seller", url: `/profile/become-a-seller` },
         {
           name: "Request a Custom Product",
           url: "/profile/requestcustomproduct",
@@ -52,7 +52,6 @@ const Header = () => {
     } else {
       return [
         { name: "Browse", url: "/search" },
-        { name: "Become a Seller", url: `/become-a-seller` },
         {
           name: "Request a Custom Product",
           url: "/profile/requestcustomproduct",

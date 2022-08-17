@@ -12,14 +12,17 @@ import UsersActions from "./UsersActions/UsersActions";
 import safwan from "../../../../assets/safwan.webp";
 import BuyerRequestInfoCard from "../../../BuyerRequestInfoCard";
 import { useNavigate } from "react-router-dom";
+import { apiServerUrl } from "../../../../assets/js/utils";
 
 let columns = [
   {
-    field: "username",
-    headerName: "Username",
+    headerName: "ID",
     flex: 1,
     align: "center",
     headerAlign: "center",
+    valueGetter: (params) => {
+      return params.row._id;
+    },
   },
   {
     field: "photoURL",
@@ -30,10 +33,11 @@ let columns = [
     renderCell: (params) => {
       return (
         <Avatar
-          src={params.value}
-          alt={params.row.name}
+          src={apiServerUrl(params.row.sellerId.avatar)}
           sx={{ width: 51, height: 51 }}
-        />
+        >
+          {params.row.sellerId.fullName[0]}
+        </Avatar>
       );
     },
   },
@@ -43,14 +47,20 @@ let columns = [
     align: "center",
     headerAlign: "center",
     flex: 1,
+    valueGetter: (params) => {
+      return params.row.sellerId.fullName;
+    },
   },
   {
-    field: "price",
-    headerName: "Price",
+    field: "budget",
+    headerName: "Budget",
     align: "center",
     headerAlign: "center",
     type: "number",
     flex: 1,
+    valueGetter: (params) => {
+      return `Rs. ${params.row.budget.toLocaleString()} /-`;
+    },
   },
   {
     field: "location",
@@ -58,6 +68,9 @@ let columns = [
     align: "center",
     headerAlign: "center",
     flex: 1,
+    valueGetter: (params) => {
+      return params.row.sellerId.city;
+    },
   },
   {
     field: "timeline",
@@ -66,7 +79,7 @@ let columns = [
     align: "center",
     headerAlign: "center",
     valueGetter: (params) => {
-      return `${params.row.timeline} Days`;
+      return `${params.row.deliveryTime} Days`;
     },
     flex: 1,
   },
@@ -140,7 +153,8 @@ let ProposalsDataGrid = ({ request }) => {
         <DataGrid
           autoHeight
           rowHeight={95}
-          {...{ columns, rows }}
+          columns={columns}
+          rows={request.proposals}
           pageSize={pageSize}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onSelectionModelChange={(ids) => {

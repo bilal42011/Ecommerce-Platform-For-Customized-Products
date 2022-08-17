@@ -21,11 +21,11 @@ const SellerProfileDescription = ({ user, dashboard }) => {
         spacing={1}
       >
         <Avatar sx={{ width: 125, height: 125, m: "auto" }} src={user.avatar}>
-          {user.fullName.charAt(0)}
+          {user.fullName?.charAt(0)}
         </Avatar>
         <Typography variant="h6">{user.fullName}</Typography>
         <Typography variant="body2" marginTop={"0px"}>
-          {user.username} {user.city}
+          {user.city}
         </Typography>
         {user.aggregated_rating && (
           <Stack

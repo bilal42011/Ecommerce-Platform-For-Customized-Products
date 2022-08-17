@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import ProposalsDataGrid from "../Components/CustomRequestProposals/PoposalsDataGrid/ProposalsDataGrid/ProposalsDataGrid";
 import { useParams } from "react-router-dom";
-import axiosInstance, { endPoints } from "../axiosInstance";
+import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 
 const CustomRequestProposals = () => {
   const { requestId } = useParams();
@@ -11,7 +11,12 @@ const CustomRequestProposals = () => {
   useEffect(() => {
     (async () => {
       const response = await axiosInstance.get(
-        `${endPoints.BUYER_REQUEST}/${requestId}`
+        `${endPoints.BUYER_REQUEST}/${requestId}/${endPoints.PROPOSALS}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
       );
       setRequest(response.data.request);
     })();
