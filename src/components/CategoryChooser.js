@@ -10,6 +10,7 @@ import {
 export default function CategoryChooser({
   value,
   onChange,
+  name,
   required,
   label = "Product Category",
 }) {
@@ -28,6 +29,7 @@ export default function CategoryChooser({
           onChange={onChange}
           fullWidth
           required={required}
+          name={name}
         >
           <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
           <MenuItem value={"Iron Works"}>Iron Works</MenuItem>

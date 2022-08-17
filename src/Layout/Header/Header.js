@@ -47,6 +47,7 @@ const Header = () => {
           url: "/profile/requestcustomproduct",
         },
         { name: "Your Custom Requests", url: "/profile/customrequests" },
+        { name: "Chat", url: "/profile/chats" },
       ];
     } else {
       return [
@@ -58,6 +59,7 @@ const Header = () => {
         },
         { name: "Buyers Requests", url: "/profile/buyers-requests" },
         { name: "Your Custom Requests", url: "/profile/customrequests" },
+        { name: "Chat", url: "/profile/chats" },
       ];
     }
   })();

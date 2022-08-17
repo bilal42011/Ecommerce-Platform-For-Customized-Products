@@ -37,13 +37,13 @@ export default function RequestCustomProduct() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormBusy(true);
-    const formData = new FormData();
-    Object.keys(formInfo).forEach((key) => {
-      key !== "files" && formData.append(key, formInfo[key]);
-    });
+    const formData = new FormData(e.target);
+    // Object.keys(formInfo).forEach((key) => {
+    //   key !== "files" && formData.append(key, formInfo[key]);
+    // });
 
-    // Files must be added seperately to the same field
-    [...formInfo.files].forEach((item) => formData.append("files", item));
+    // // Files must be added seperately to the same field
+    // [...formInfo.files].forEach((item) => formData.append("files", item));
 
     try {
       await axiosInstance.post(endPoints.BUYER_REQUEST, formData, {
@@ -99,6 +99,7 @@ export default function RequestCustomProduct() {
           <Stack spacing={2}>
             <TextField
               label="Title"
+              name="title"
               fullWidth
               required
               value={formInfo.title}
@@ -110,6 +111,7 @@ export default function RequestCustomProduct() {
               multiline
               label="I am looking for..."
               fullWidth
+              name="description"
               required
               rows={6}
               value={formInfo.description}
@@ -118,6 +120,7 @@ export default function RequestCustomProduct() {
               }
             />
             <FileChooser
+              name="files"
               value={formInfo.files}
               onChange={(e, files) =>
                 setFormInfo({ ...formInfo, files: files })
@@ -125,6 +128,7 @@ export default function RequestCustomProduct() {
               accept="*"
             />
             <CategoryChooser
+              name="category"
               value={formInfo.category}
               onChange={(e) =>
                 setFormInfo({ ...formInfo, category: e.target.value })
@@ -132,6 +136,7 @@ export default function RequestCustomProduct() {
               required
             />
             <QuantityInput
+              name="deliveryTime"
               required
               label="Delivery Time"
               value={formInfo.deliveryTime}
@@ -141,6 +146,7 @@ export default function RequestCustomProduct() {
               <Typography flex={1}>Budget</Typography>
               <TextField
                 required
+                name="budget"
                 sx={{ flex: 2 }}
                 type={"number"}
                 inputMode="numeric"

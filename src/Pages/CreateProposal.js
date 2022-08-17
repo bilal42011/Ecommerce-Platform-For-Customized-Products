@@ -10,24 +10,49 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 import FileChooser from "../Components/FileChooser";
+import OverlaySpinner from "../Components/OverlaySpinner";
 import QuantityInput from "../Components/QuantityInput/QuantityInput";
 
 export default function CreateProposal() {
+  const { requestId } = useParams();
+  const navigate = useNavigate();
+  const [formBusy, setFormBusy] = useState(false);
   const [formData, setFormData] = useState({
     description: "",
     files: [],
     deliveryTime: 1,
-    budget: 0,
+    budget: 1,
   });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setFormBusy(true);
+    const formDataObj = new FormData(e.target);
+    try {
+      const response = await axiosInstance.post(
+        `${endPoints.BUYER_REQUEST}/${requestId}/${endPoints.PROPOSALS}`,
+        formDataObj,
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
+      console.log(response.data);
+
+      alert("Proposal successfully sent");
+      navigate("/profile/buyers-requests");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+    setFormBusy(false);
   };
   return (
     <Container maxWidth="xl" sx={{ mt: 15 }}>
       <Card
-        sx={{ maxWidth: "md", margin: "auto", mt: 15 }}
+        sx={{ maxWidth: "md", margin: "auto", mt: 15, position: "relative" }}
         component="form"
         onSubmit={onSubmit}
       >
@@ -35,14 +60,17 @@ export default function CreateProposal() {
           title="Cover Letter"
           subheader="Describe your services - please be as detailed as possible"
         />
+
         <CardContent>
           <Stack spacing={2}>
             <TextField
               multiline
               label="Cover letter..."
               fullWidth
+              name="coverLetter"
               rows={6}
               value={formData.description}
+              required
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
@@ -52,9 +80,11 @@ export default function CreateProposal() {
               onChange={(e) =>
                 setFormData({ ...formData, files: [...e.target.files] })
               }
+              name="files"
               accept="*"
             />
             <QuantityInput
+              name="deliveryTime"
               label="Delivery Time"
               value={formData.deliveryTime}
               onChange={(e) => setFormData({ ...formData, deliveryTime: e })}
@@ -62,6 +92,7 @@ export default function CreateProposal() {
             <Stack direction="row" alignItems="center">
               <Typography flex={1}>Budget</Typography>
               <TextField
+                name="budget"
                 sx={{ flex: 2 }}
                 type={"number"}
                 inputMode="numeric"
@@ -70,7 +101,7 @@ export default function CreateProposal() {
                   setFormData({ ...formData, budget: e.target.value * 1 })
                 }
                 inputProps={{
-                  min: 0,
+                  min: 1,
                 }}
                 InputProps={{
                   startAdornment: <Typography sx={{ mr: 1 }}>Rs. </Typography>,
@@ -85,6 +116,7 @@ export default function CreateProposal() {
             Send Proposal
           </Button>
         </CardActions>
+        {formBusy && <OverlaySpinner />}
       </Card>
     </Container>
   );

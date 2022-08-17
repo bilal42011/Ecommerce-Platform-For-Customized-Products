@@ -1,11 +1,12 @@
 import AttachFile from "@mui/icons-material/AttachFile";
-import { Button, FormLabel, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 export default function FileChooser({
   value,
   onChange,
   accept = "*",
   required,
+  name = "files",
 }) {
   return (
     <Stack
@@ -21,7 +22,7 @@ export default function FileChooser({
             accept={accept}
             id="attachments-button"
             multiple
-            name="files"
+            name={name}
             type="file"
             style={{
               position: "absolute",

@@ -25,7 +25,7 @@ export default function OverlaySpinner({ completed }) {
           top: 0,
           left: 0,
           bgcolor: "white",
-          opacity: 0.5,
+          opacity: "0.5",
         }}
       />
       {!completed ? <CircularProgress /> : <CheckCircleOutlineIcon />}

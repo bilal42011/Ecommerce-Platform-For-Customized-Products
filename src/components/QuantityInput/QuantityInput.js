@@ -15,6 +15,7 @@ export default function QuantityInput({
   onChange,
   sx,
   required,
+  name,
 }) {
   const [quantity, setQuantity] = useState(value || 1);
 
@@ -58,6 +59,7 @@ export default function QuantityInput({
           value={quantity}
           onChange={(e) => change(e.target.value)}
           required={required}
+          name={name}
         />
         <Button variant="contained" disableElevation onClick={increment}>
           <AddIcon />

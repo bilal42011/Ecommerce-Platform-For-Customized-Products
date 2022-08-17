@@ -15,6 +15,7 @@ export const endPoints = {
   BUYER_REQUEST: "/buyer-requests",
   CUSTOM_REQUESTS_HISTORY: "/user/buyer-requests",
   UPGRADE_ACCOUNT: "/user/upgrade",
+  PROPOSALS: "proposals",
 };
 
 export default axiosInstance;
