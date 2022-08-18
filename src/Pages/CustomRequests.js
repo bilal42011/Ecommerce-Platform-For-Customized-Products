@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import RequestsDataGrid from "../Components/CustomRequests/RequestsDataGrid/RequestsDataGrid";
+import RequestsDataGrid from "../Components/CustomRequests/RequestsDataGrid";
 import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 
 const CustomRequests = () => {

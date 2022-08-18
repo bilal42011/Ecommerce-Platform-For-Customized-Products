@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import ProposalsDataGrid from "../Components/CustomRequestProposals/PoposalsDataGrid/ProposalsDataGrid/ProposalsDataGrid";
+import ProposalsDataGrid from "../Components/CustomRequestProposals/ProposalsDataGrid/ProposalsDataGrid";
 import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 

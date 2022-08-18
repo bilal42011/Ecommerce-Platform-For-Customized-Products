@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
-import ChatCard from "../Components/ChatsPage/ChatCard/ChatCard";
+import ChatCard from "../Components/ChatsPage/ChatCard";
 import ChatsList from "../Components/ChatsPage/ChatsList";
 
 export default function ChatsPage() {

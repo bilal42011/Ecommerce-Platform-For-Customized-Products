@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Link } from "react-router-dom";
+import { apiServerUrl } from "../assets/js/utils";
 
 const SellerProfileDescription = ({ user, dashboard }) => {
   return (
@@ -20,7 +21,10 @@ const SellerProfileDescription = ({ user, dashboard }) => {
         component={Stack}
         spacing={1}
       >
-        <Avatar sx={{ width: 125, height: 125, m: "auto" }} src={user.avatar}>
+        <Avatar
+          sx={{ width: 125, height: 125, m: "auto" }}
+          src={apiServerUrl(user.avatar)}
+        >
           {user.fullName?.charAt(0)}
         </Avatar>
         <Typography variant="h6">{user.fullName}</Typography>

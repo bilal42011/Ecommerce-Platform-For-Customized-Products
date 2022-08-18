@@ -1,6 +1,6 @@
 import { List } from "@mui/material";
 
-import ChatMessage from "./ChatMessage/ChatMessage";
+import ChatMessage from "./ChatMessage";
 
 export default function MessageList({ messages }) {
   return (

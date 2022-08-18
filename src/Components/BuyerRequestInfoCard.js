@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { apiServerUrl } from "../assets/js/utils";
+import Attachments from "./Attachments";
 import ExternalLink from "./ExternalLink";
 
 export default function BuyerRequestInfoCard({ hideActions, request }) {
@@ -42,11 +43,7 @@ export default function BuyerRequestInfoCard({ hideActions, request }) {
       <CardContent component={Stack} sx={{ height: "100%" }}>
         <Typography variant="h6">DETAILS</Typography>
         <Typography sx={{ flex: 1 }}>{request.description}</Typography>
-        <Stack direction="row">
-          {request.attachments.map((elem, index) => (
-            <ExternalLink link={elem} key={index} />
-          ))}
-        </Stack>
+        <Attachments files={request.attachments} />
       </CardContent>
       {!hideActions && (
         <CardActions>

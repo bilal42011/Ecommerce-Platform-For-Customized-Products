@@ -5,14 +5,15 @@ import {
   Typography,
   CircularProgress,
   Stack,
+  Chip,
 } from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import bilal from "../../../../assets/bilal.jpg";
-import UsersActions from "./UsersActions/UsersActions";
+import UsersActions from "./UsersActions";
 import safwan from "../../../../assets/safwan.webp";
 import BuyerRequestInfoCard from "../../../BuyerRequestInfoCard";
 import { useNavigate } from "react-router-dom";
-import { apiServerUrl } from "../../../../assets/js/utils";
+import { apiServerUrl, statusColors } from "../../../../assets/js/utils";
 
 let columns = [
   {
@@ -74,7 +75,7 @@ let columns = [
   },
   {
     field: "timeline",
-    headerName: "Tiemline",
+    headerName: "Timeline",
     type: "number",
     align: "center",
     headerAlign: "center",
@@ -84,13 +85,28 @@ let columns = [
     flex: 1,
   },
   {
+    field: "status",
+    headerName: "Status",
+    headerAlign: "center",
+    align: "center",
+    renderCell: (params) => {
+      return (
+        <Chip
+          color={statusColors[params.row.status.toUpperCase()]}
+          variant="filled"
+          label={params.row.status}
+        />
+      );
+    },
+  },
+  {
     field: "actions",
     headerName: "Actions",
     headerAlign: "center",
     align: "center",
     flex: 2,
     renderCell: (params) => {
-      return <UsersActions {...{ params }} />;
+      return <UsersActions disabled={params.row.status !== "Pending"} />;
     },
   },
 ];
