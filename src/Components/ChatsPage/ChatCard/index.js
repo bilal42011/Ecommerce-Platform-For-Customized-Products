@@ -97,7 +97,7 @@ export default function ChatCard({ chat, onClose }) {
       sx={{ height: "100%", maxHeight: "75vh" }}
       component={Stack}
     >
-      {!chat ? (
+      {!chat || !messages.length ? (
         <Box
           sx={{
             display: "flex",
@@ -107,7 +107,7 @@ export default function ChatCard({ chat, onClose }) {
             justifyContent: "center",
           }}
         >
-          <Typography>Select a Chat</Typography>
+          <Typography>{!chat ? "Select a Chat" : "No messages yet"}</Typography>
         </Box>
       ) : (
         <>
@@ -139,6 +139,7 @@ export default function ChatCard({ chat, onClose }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 fullWidth
+                required
                 label="Type a message..."
                 InputProps={{
                   endAdornment: (
