@@ -33,7 +33,7 @@ export default function RequestCustomProduct() {
   const [alert, setAlert] = useState(<></>);
   const navigate = useNavigate();
 
-  const token = useSelector((state) => state.auth.user?.token);
+  const token = useSelector((state) => state.auth.token);
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormBusy(true);

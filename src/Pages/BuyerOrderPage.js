@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints } from "../axiosInstance";
-import BuyerRequestInfoCard from "../Components/BuyerRequestInfoCard";
 import ProposalDetails from "../Components/CustomProposalDetails/ProposalDetails";
 import OverlaySpinner from "../Components/OverlaySpinner";
 import CartProducts from "../Components/Cart/CartProducts";
-import { Box, Button, Card, Paper, Stack, Typography } from "@mui/material";
-import { getRemainingTime } from "../assets/js/utils";
-import DeliverOrderModal from "../Components/BuyerOrderPage/DeliverOrderModal";
+import { Paper, Stack, Typography } from "@mui/material";
 import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
 import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescription";
@@ -19,28 +16,11 @@ import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellatio
 export default function BuyerOrderPage() {
   const [order, setOrder] = useState(null);
 
-  const [deliverModalVisible, setDeliverModalVisible] = useState(false);
   const [cancelModalVisble, setCancelModalVisble] = useState(false);
 
   const { orderId } = useParams();
 
-  const { token, user } = useSelector((state) => state.auth.user);
-
-  /**
-   *
-   * @param {FormData} formData
-   */
-  const onDeliver = async (formData) => {
-    try {
-      const response = await axiosInstance.post(
-        `${endPoints.ORDER}/${orderId}/${endPoints.DELIVER_ORDER}`
-      );
-      setOrder(response.data.order);
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
-    }
-  };
+  const { token, user } = useSelector((state) => state.auth);
 
   /**
    *
@@ -49,7 +29,13 @@ export default function BuyerOrderPage() {
   const onCancel = async (formData) => {
     try {
       const response = await axiosInstance.patch(
-        `${endPoints.ORDER}/${orderId}/${endPoints.REQUEST_CANCEL}`
+        `${endPoints.ORDER}/${orderId}/${endPoints.REQUEST_CANCEL}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setOrder(response.data.order);
     } catch (err) {
@@ -61,7 +47,13 @@ export default function BuyerOrderPage() {
   const onConfirmCancel = async () => {
     try {
       const response = await axiosInstance.patch(
-        `${endPoints.ORDER}/${orderId}/${endPoints.CONFIRM_CANCEL}`
+        `${endPoints.ORDER}/${orderId}/${endPoints.CONFIRM_CANCEL}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setOrder(response.data.order);
     } catch (err) {
@@ -107,7 +99,13 @@ export default function BuyerOrderPage() {
 
   switch (order.orderStatus) {
     case "DELIVERED":
-      elem = <DeliveryDescription order={order} />;
+      elem = (
+        <DeliveryDescription
+          order={order}
+          onActionPerformed={(newOrder) => setOrder(newOrder)}
+          token={token}
+        />
+      );
       break;
     case "PENDING_CANCEL":
       if (user._id === order.cancelInitiator) {
@@ -122,6 +120,20 @@ export default function BuyerOrderPage() {
         );
       }
       break;
+    case "CANCELLED":
+      elem = (
+        <Typography variant="h4" color="error" fontWeight="bold">
+          Order Cancelled
+        </Typography>
+      );
+      break;
+    case "COMPLETED":
+      elem = (
+        <Typography variant="h4" color="success.main" fontWeight="bold">
+          Order Completed
+        </Typography>
+      );
+      break;
     default:
       elem = (
         <>
@@ -129,7 +141,6 @@ export default function BuyerOrderPage() {
           <RemainingTime time={order.dueIn} />
           <OrderActions
             hideDeliver
-            onDeliverOrder={() => setDeliverModalVisible(true)}
             onCancelOrder={() => setCancelModalVisble(true)}
           />
         </>
@@ -151,11 +162,6 @@ export default function BuyerOrderPage() {
       ) : (
         <CartProducts cart={order} />
       )}
-      <DeliverOrderModal
-        open={deliverModalVisible}
-        handleClose={(_) => setDeliverModalVisible(false)}
-        onDeliver={onDeliver}
-      />
       <CancelOrderModal
         open={cancelModalVisble}
         handleClose={(_) => setCancelModalVisble(false)}

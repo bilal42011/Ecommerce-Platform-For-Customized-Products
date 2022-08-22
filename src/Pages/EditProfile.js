@@ -1,73 +1,56 @@
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
-  Checkbox,
   Divider,
-  FormControlLabel,
+  FormLabel,
   Grid,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Container } from "@mui/system";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useState, useEffect } from "react";
+import axiosInstance, { endPoints } from "../axiosInstance";
 import AvatarChooser from "../Components/AvatarChooser/AvatarChooser";
 import CityChooser from "../Components/CityChooser";
-import { useSelector, useDispatch } from "react-redux/";
-import { reset } from "../Store/Slices/authSlice/authSlice";
-import { register } from "../Store/Slices/authSlice/authSlice";
+import { authActions } from "../Store/Slices/authSlice/authSlice";
 
-export default function SignUp() {
-  let navigate = useNavigate();
-  let auth = useSelector((state) => state.auth);
-  let { user, isLoading, isSuccess, isError, message } = auth;
-  let dispatch = useDispatch();
+export default function EditProfile() {
+  const { user, token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const [formDataJson, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    avatar: {},
-    city: "",
-    phone: "",
-    email: "",
+    description: "",
+    ...user,
     password: "",
     confirmPassword: "",
-    address: "",
   });
 
-  const onSignUp = (e) => {
+  const onSaveChanges = async (e) => {
     e.preventDefault();
-    if (formDataJson.password !== formDataJson.confirmPassword) {
-      return alert("Password and Confirm Password Must be same");
-    }
     const formData = new FormData();
     Object.keys(formDataJson).forEach((key) =>
       formData.append(key, formDataJson[key])
     );
 
-    dispatch(register(formData));
+    try {
+      const response = await axiosInstance.patch(endPoints.USER, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      dispatch(authActions.updateUser(response.data.user));
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate("/profile/dashboard");
-    }
-    if (isError) {
-      console.log("Error occured");
-    }
-    dispatch(reset());
-  }, [isSuccess, isError, navigate, dispatch]);
-
-  console.log("component rendered");
 
   return (
     <Card sx={{ maxWidth: "md", margin: "auto", mt: 15 }}>
-      <CardHeader title="SignUp" subheader="Join E-workers today" />
+      <CardHeader title="Edit Your Profile" subheader="Join E-workers today" />
       <Divider />
-      <CardContent component={"form"} onSubmit={onSignUp}>
+      <CardContent component={"form"} onSubmit={onSaveChanges}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <AvatarChooser
@@ -148,7 +131,7 @@ export default function SignUp() {
               }
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          {/* <Grid item xs={12} md={6}>
             <TextField
               required
               label="Password"
@@ -178,25 +161,32 @@ export default function SignUp() {
                 })
               }
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
-            <FormControlLabel
-              control={<Checkbox required />}
-              label="I accept Terms and Conditions"
+            <TextField
+              label="Description"
+              fullWidth
+              InputProps={{
+                type: "text",
+              }}
+              multiline
+              rows={5}
+              value={formDataJson.description}
+              onChange={(e) =>
+                setFormData({
+                  ...formDataJson,
+                  description: e.target.value,
+                })
+              }
             />
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" fullWidth>
-              SignUp
+              Save Changes
             </Button>
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Typography variant="body2" sx={{ paddingX: 1 }}>
-          Already have an account? <Link to="/login">Sign In</Link>{" "}
-        </Typography>
-      </CardActions>
     </Card>
   );
 }

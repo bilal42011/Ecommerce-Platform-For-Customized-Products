@@ -9,7 +9,7 @@ import OverlaySpinner from "../../../../OverlaySpinner";
 
 const UsersActions = ({ disabled, onProposalStateChange }) => {
   const { proposalId, requestId } = useParams();
-  const token = useSelector((state) => state.auth.user?.token);
+  const token = useSelector((state) => state.auth.token);
 
   const [formBusy, setFormBusy] = useState(false);
 

@@ -1,10 +1,11 @@
 import { Avatar, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import { apiServerUrl } from "../../assets/js/utils";
 import "./AvatarChooser.css";
 
 export default function AvatarChooser({ value, onChange }) {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -20,7 +21,10 @@ export default function AvatarChooser({ value, onChange }) {
   return (
     <Box position={"relative"} width="fit-content" margin="auto">
       <IconButton sx={{ cursor: "pointer" }}>
-        <Avatar src={image} sx={{ width: 100, height: 100, margin: "auto" }}>
+        <Avatar
+          src={!image && apiServerUrl(value)}
+          sx={{ width: 100, height: 100, margin: "auto" }}
+        >
           OP
         </Avatar>
         <input

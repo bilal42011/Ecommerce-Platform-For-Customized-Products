@@ -67,7 +67,6 @@ export default function DeliverOrderModal({ open, handleClose, onDeliver }) {
               label={"Describe your delivery in detail"}
             />
             <FileChooser
-              required
               value={files}
               onChange={(e, newFiles) => setFiles(newFiles)}
               name="files"

@@ -30,12 +30,12 @@ export default function ActiveOrdersTable({ orders, asSeller }) {
       headerAlign: "center",
       renderCell: (params) => {
         const user = asSeller ? params.row.buyerId : params.row.sellerId;
-
+        console.log("Seller", user);
         return (
           <CardHeader
             avatar={
-              <Avatar src={apiServerUrl(params.row.sellerId.avatar)}>
-                {params.row.sellerId.fullName[0]}
+              <Avatar src={apiServerUrl(user.avatar)}>
+                {user.fullName[0]}
               </Avatar>
             }
             title={user.fullName}
@@ -61,7 +61,9 @@ export default function ActiveOrdersTable({ orders, asSeller }) {
       align: "center",
       headerAlign: "center",
       valueGetter: (params) => {
-        return getRemainingTime(params.row.dueIn);
+        return params.row.orderStatus === "IN_PROGRESS"
+          ? getRemainingTime(params.row.dueIn)
+          : " - ";
       },
       flex: 1,
     },

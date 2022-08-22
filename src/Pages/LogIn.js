@@ -39,13 +39,13 @@ const theme = createTheme();
 
 export default function LogIn() {
   let navigate = useNavigate();
-  let auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
   let { user, isLoading, isSuccess, isError, message } = auth;
   let dispatch = useDispatch();
 
   useEffect(() => {
     console.log(auth);
-    if (isSuccess || user) {
+    if (isSuccess) {
       navigate("/profile/dashboard");
     }
     if (isError) {

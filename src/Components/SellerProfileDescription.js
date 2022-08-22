@@ -70,17 +70,18 @@ const SellerProfileDescription = ({ user, dashboard }) => {
           </Link>
         )}
       </Paper>
-      {user.description && (
-        <Paper
-          variant="outlined"
-          sx={{ p: 2, mt: 1 }}
-          component={Stack}
-          spacing={1}
-        >
-          <Typography variant="h6">DESCRIPTION</Typography>
-          <Typography>{user.description}</Typography>
-        </Paper>
-      )}
+
+      <Paper
+        variant="outlined"
+        sx={{ p: 2, mt: 1 }}
+        component={Stack}
+        spacing={1}
+      >
+        <Typography variant="h6">DESCRIPTION</Typography>
+        <Typography>
+          {user.description ? user.description : "No Description Provided"}
+        </Typography>
+      </Paper>
     </>
   );
 };

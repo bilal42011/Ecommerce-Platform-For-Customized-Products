@@ -9,7 +9,7 @@ const CustomProposalDetails = () => {
   const { proposalId, requestId } = useParams();
   const [proposal, setProposal] = useState(null);
 
-  const token = useSelector((state) => state.auth.user?.token);
+  const token = useSelector((state) => state.auth.token);
 
   const fetchProposal = async () => {
     try {

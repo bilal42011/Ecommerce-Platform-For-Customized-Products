@@ -17,7 +17,7 @@ import { NavLink, useLocation, Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { apiServerUrl } from "../../assets/js/utils";
-import { logout } from "../../Store/Slices/authSlice/authSlice";
+import { authActions } from "../../Store/Slices/authSlice/authSlice";
 
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
@@ -27,7 +27,7 @@ const Header = () => {
   let location = useLocation();
   let [anchorEl, setanchorEl] = useState(null);
 
-  const user = useSelector((state) => state.auth.user?.user);
+  const user = useSelector((state) => state.auth.user);
   console.log("user", user);
   const isLoggedIn = Boolean(user);
 
@@ -58,6 +58,7 @@ const Header = () => {
         },
         { name: "Buyers Requests", url: "/profile/buyers-requests" },
         { name: "Your Custom Requests", url: "/profile/customrequests" },
+        { name: "Products", url: "/profile/products" },
         { name: "Chat", url: "/profile/chats" },
       ];
     }
@@ -73,7 +74,7 @@ const Header = () => {
   };
 
   const onLogOut = () => {
-    dispatch(logout());
+    dispatch(authActions.logout());
   };
 
   useEffect(() => {

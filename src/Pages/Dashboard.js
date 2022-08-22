@@ -8,7 +8,7 @@ import OverlaySpinner from "../Components/OverlaySpinner";
 import SellerProfileDescription from "../Components/SellerProfileDescription";
 
 export default function Dashboard() {
-  const { user, token } = useSelector((state) => state.auth.user);
+  const { user, token } = useSelector((state) => state.auth);
 
   const [orders, setOrders] = useState([]);
   const [activeTab, setActiveTab] = useState(0);

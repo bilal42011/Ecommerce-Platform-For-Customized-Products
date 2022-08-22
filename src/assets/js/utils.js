@@ -48,7 +48,7 @@ export const orderStatus = {
     color: "primary",
     text: "In Progress",
   },
-  DELIVERD: {
+  DELIVERED: {
     color: "secondary",
     text: "Deliverd",
   },

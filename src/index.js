@@ -31,6 +31,7 @@ import BecomeASeller from "./Pages/BecomeASeller";
 import Protect from "./Components/Protect";
 import SellerOrderPage from "./Pages/SellerOrderPage";
 import BuyerOrderPage from "./Pages/BuyerOrderPage";
+import EditProfile from "./Pages/EditProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,6 +47,8 @@ root.render(
           <Route path="products/:product_id" element={<ProductPage />} />
           <Route path="users/:userId" element={<UserProfile />} />
           <Route path="profile" element={<Protect />}>
+            <Route index element={<UserProfile />} />
+            <Route path="edit" element={<EditProfile />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="become-a-seller" element={<BecomeASeller />} />
             <Route

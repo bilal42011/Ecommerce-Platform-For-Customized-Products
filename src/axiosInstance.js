@@ -22,6 +22,9 @@ export const endPoints = {
   DELIVER_ORDER: "deliver",
   REQUEST_CANCEL: "cancel",
   CONFIRM_CANCEL: "cancel-confirm",
+  APPROVE_ORDER: "approve",
+  DECLINE_ORDER: "decline",
+  USER: "user",
 };
 
 export default axiosInstance;
