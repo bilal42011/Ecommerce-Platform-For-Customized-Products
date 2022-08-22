@@ -52,6 +52,10 @@ export const orderStatus = {
     color: "secondary",
     text: "Deliverd",
   },
+  PENDING_CANCEL: {
+    color: "error",
+    text: "Cancellation Requested",
+  },
   CANCELLED: {
     color: "error",
     text: "Cancelled",

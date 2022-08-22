@@ -14,6 +14,7 @@ import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
 import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescription";
 import CancelOrderModal from "../Components/BuyerOrderPage/CancelOrderModal";
+import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellation";
 
 export default function BuyerOrderPage() {
   const [order, setOrder] = useState(null);
@@ -23,7 +24,7 @@ export default function BuyerOrderPage() {
 
   const { orderId } = useParams();
 
-  const token = useSelector((state) => state.auth.user?.token);
+  const { token, user } = useSelector((state) => state.auth.user);
 
   /**
    *
@@ -49,6 +50,18 @@ export default function BuyerOrderPage() {
     try {
       const response = await axiosInstance.patch(
         `${endPoints.ORDER}/${orderId}/${endPoints.REQUEST_CANCEL}`
+      );
+      setOrder(response.data.order);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  const onConfirmCancel = async () => {
+    try {
+      const response = await axiosInstance.patch(
+        `${endPoints.ORDER}/${orderId}/${endPoints.CONFIRM_CANCEL}`
       );
       setOrder(response.data.order);
     } catch (err) {
@@ -97,11 +110,17 @@ export default function BuyerOrderPage() {
       elem = <DeliveryDescription order={order} />;
       break;
     case "PENDING_CANCEL":
-      elem = (
-        <Typography variant="h4">
-          Cancellation Request Sent. Waiting for Approval
-        </Typography>
-      );
+      if (user._id === order.cancelInitiator) {
+        elem = (
+          <Typography variant="h4">
+            Cancellation Request Sent. Waiting for Approval
+          </Typography>
+        );
+      } else {
+        elem = (
+          <ConfirmCancellation order={order} onConfirm={onConfirmCancel} />
+        );
+      }
       break;
     default:
       elem = (
@@ -122,6 +141,7 @@ export default function BuyerOrderPage() {
       <Stack
         component={Paper}
         variant="outlined"
+        position="relative"
         sx={{ alignItems: "center", padding: { xs: 2, sm: 10 }, width: "100%" }}
       >
         {elem}

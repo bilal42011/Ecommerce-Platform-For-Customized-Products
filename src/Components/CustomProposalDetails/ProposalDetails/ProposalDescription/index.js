@@ -58,7 +58,7 @@ const ProposalDescription = ({ proposal, request, hideActions }) => {
             color: "white",
             borderRadius: 1,
           }}
-        >{`Price:  Rs. ${proposal.budget} /-`}</Typography>
+        >{`Price:  Rs. ${proposal.budget.toLocaleString()} /-`}</Typography>
 
         <Typography
           sx={{

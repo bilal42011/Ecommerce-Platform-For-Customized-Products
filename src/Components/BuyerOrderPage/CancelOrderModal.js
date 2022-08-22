@@ -9,11 +9,7 @@ import {
   Modal,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
-import { useState } from "react";
-import FileChooser from "../FileChooser";
 
 const style = {
   position: "absolute",
@@ -38,8 +34,6 @@ export default function CancelOrderModal({
   onCancel,
   order,
 }) {
-  const [files, setFiles] = useState([]);
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -57,10 +51,7 @@ export default function CancelOrderModal({
         <IconButton sx={closeButtonStyles} onClick={handleClose}>
           <Close />
         </IconButton>
-        <CardHeader
-          title={"Provide details to cancel the order"}
-          subheader="Attach a receipt or another proof of delivery"
-        />
+        <CardHeader title={"Provide details to cancel the order"} />
         <Divider />
         <CardContent component={"form"} onSubmit={onSubmit}>
           <Stack spacing={1}>

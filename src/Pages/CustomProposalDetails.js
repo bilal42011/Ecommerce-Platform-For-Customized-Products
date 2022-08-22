@@ -33,7 +33,7 @@ const CustomProposalDetails = () => {
   }, []);
 
   return (
-    <Container maxWidth="100%" disableGutters sx={{ mt: 15 }}>
+    <Container maxWidth="xl" disableGutters sx={{ mt: 15 }}>
       <ProposalDetails proposal={proposal} />
     </Container>
   );

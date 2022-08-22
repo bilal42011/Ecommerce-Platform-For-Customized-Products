@@ -1,9 +1,9 @@
-import { Paper, Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getRemainingTime } from "../../assets/js/utils";
 
 export default function RemainingTime({ label = "Time Left", time }) {
-  const [remainingTime, setRemainingTime] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(getRemainingTime(time));
 
   useEffect(() => {
     setInterval(() => {
