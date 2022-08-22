@@ -1,14 +1,14 @@
-import { Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import ProductCard from "../Components/ProductCard";
-import avatarImage from "../assets/safwan.webp";
 import SellerProfileDescription from "../Components/SellerProfileDescription";
 import Reviews from "../Components/ProductPage/Reviews";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axiosInstance, { endPoints } from "../axiosInstance";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import OverlaySpinner from "../Components/OverlaySpinner";
+import { ArrowRight } from "@mui/icons-material";
 
 export default function UserProfile() {
   // const user = {
@@ -125,13 +125,39 @@ export default function UserProfile() {
         </Grid>
         <Grid container item xs={12} sm={8} spacing={1}>
           {/* Products by seller */}
-          {user.products.map((item, index) => {
-            return (
-              <Grid item xs={12} md={6} lg={4} key={index}>
-                <ProductCard product={item} showActions />
-              </Grid>
-            );
-          })}
+          {user.products.length === 0 && user.isSeller ? (
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              <Typography variant="h5" color="GrayText">
+                No Ready Made Products Available
+                {!userId && (
+                  <Link to="/profile/products/create" className="ghost-link">
+                    <Button endIcon={<ArrowRight />}>
+                      Create your first Product
+                    </Button>
+                  </Link>
+                )}
+              </Typography>
+            </Box>
+          ) : (
+            <>
+              {user.products.map((item, index) => {
+                return (
+                  <Grid item xs={12} md={6} lg={4} key={index}>
+                    <ProductCard product={item} showActions />
+                  </Grid>
+                );
+              })}
+            </>
+          )}
         </Grid>
       </Grid>
     </Container>

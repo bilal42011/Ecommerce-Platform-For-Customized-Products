@@ -40,7 +40,7 @@ export default function SellerProductForm({
       description: "",
       category: "",
       images: [],
-      sizes: [],
+      hasSizes: false,
       price: 1,
       quantity: 1,
     }
@@ -48,8 +48,9 @@ export default function SellerProductForm({
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
-    onSubmit(product);
+    const formData = new FormData(e.target);
+    formData.set("hasSizes", product.hasSizes);
+    onSubmit && onSubmit(formData);
   };
 
   const gridControlParams = {
@@ -73,6 +74,7 @@ export default function SellerProductForm({
           <TextField
             fullWidth
             required
+            name="title"
             label="Product Title"
             value={product.title}
             onChange={(e) => setProduct({ ...product, title: e.target.value })}
@@ -91,6 +93,7 @@ export default function SellerProductForm({
                 setProduct({ ...product, category: e.target.value })
               }
               fullWidth
+              name="category"
               required
             >
               <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
@@ -106,6 +109,7 @@ export default function SellerProductForm({
           <TextField
             fullWidth
             required
+            name="description"
             label="Description"
             multiline
             rows={4}
@@ -118,13 +122,20 @@ export default function SellerProductForm({
         <GridLabel>Has Sizes</GridLabel>
         <Grid {...gridControlParams}>
           <Stack direction="row">
-            <Checkbox />
+            <Checkbox
+              name="hasSizes"
+              checked={product.hasSizes}
+              onChange={(e) =>
+                setProduct((old) => ({ ...old, hasSizes: e.target.checked }))
+              }
+            />
           </Stack>
         </Grid>
 
         <GridLabel>Images</GridLabel>
         <Grid {...gridControlParams}>
           <FileChooser
+            name="images"
             value={product.images}
             onChange={(e) =>
               setProduct({ ...product, images: [...e.target.files] })
@@ -137,6 +148,7 @@ export default function SellerProductForm({
         <Grid {...gridControlParams}>
           <TextField
             fullWidth
+            name="price"
             required
             sx={{ flex: 2 }}
             type={"number"}
@@ -155,6 +167,7 @@ export default function SellerProductForm({
         </Grid>
         <Grid item xs={12}>
           <QuantityInput
+            name="quantity"
             required
             value={product.quantity}
             onChange={(e) => setProduct({ ...product, quantity: e })}

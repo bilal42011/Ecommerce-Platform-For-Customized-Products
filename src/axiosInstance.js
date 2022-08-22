@@ -25,6 +25,7 @@ export const endPoints = {
   APPROVE_ORDER: "approve",
   DECLINE_ORDER: "decline",
   USER: "user",
+  PRODUCT: "product",
 };
 
 export default axiosInstance;

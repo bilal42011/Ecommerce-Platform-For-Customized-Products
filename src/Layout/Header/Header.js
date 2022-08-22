@@ -57,7 +57,7 @@ const Header = () => {
         },
         { name: "Buyers Requests", url: "/profile/buyers-requests" },
         { name: "Your Custom Requests", url: "/profile/customrequests" },
-        { name: "Products", url: "/profile/products" },
+        { name: "Products", url: "/profile/" },
         { name: "Chat", url: "/profile/chats" },
       ];
     }
