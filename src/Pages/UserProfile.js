@@ -89,7 +89,7 @@ export default function UserProfile() {
   // };
 
   const [user, setUser] = useState(null);
-  const { token } = useSelector((state) => state.auth.user);
+  const { token } = useSelector((state) => state.auth);
   const { userId } = useParams();
 
   const fetchUser = async () => {

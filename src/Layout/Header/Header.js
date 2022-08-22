@@ -28,7 +28,6 @@ const Header = () => {
   let [anchorEl, setanchorEl] = useState(null);
 
   const user = useSelector((state) => state.auth.user);
-  console.log("user", user);
   const isLoggedIn = Boolean(user);
 
   const pages = (() => {

@@ -8,10 +8,9 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import { Container } from "@mui/system";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import axiosInstance, { endPoints } from "../axiosInstance";
 import AvatarChooser from "../Components/AvatarChooser/AvatarChooser";
 import CityChooser from "../Components/CityChooser";
@@ -20,6 +19,7 @@ import { authActions } from "../Store/Slices/authSlice/authSlice";
 export default function EditProfile() {
   const { user, token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formDataJson, setFormData] = useState({
     description: "",
@@ -40,6 +40,7 @@ export default function EditProfile() {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(authActions.updateUser(response.data.user));
+      navigate("/profile");
     } catch (err) {
       console.error(err);
       alert(err.message);
