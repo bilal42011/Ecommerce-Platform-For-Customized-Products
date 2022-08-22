@@ -29,6 +29,8 @@ import Dashboard from "./Pages/Dashboard";
 import Cart from "./Pages/Cart";
 import BecomeASeller from "./Pages/BecomeASeller";
 import Protect from "./Components/Protect";
+import SellerOrderPage from "./Pages/SellerOrderPage";
+import BuyerOrderPage from "./Pages/BuyerOrderPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,6 +48,11 @@ root.render(
           <Route path="profile" element={<Protect />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="become-a-seller" element={<BecomeASeller />} />
+            <Route
+              path="orders/seller/:orderId"
+              element={<SellerOrderPage />}
+            />
+            <Route path="orders/buyer/:orderId" element={<BuyerOrderPage />} />
             <Route path="cart" element={<Cart />} />
             <Route
               path="requestcustomproduct"

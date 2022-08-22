@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography, Box, Chip } from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
+import { requestStatus } from "../../../assets/js/utils";
 
 let columns = [
   {
@@ -43,10 +44,12 @@ let columns = [
     align: "center",
     flex: 1,
     renderCell: (params) => {
-      return params.value === "Pending" ? (
-        <Chip label="Pending" />
-      ) : (
-        <Chip label="Open" color="success" />
+      console.log("params", params);
+      return (
+        <Chip
+          label={requestStatus[params.row.status].text}
+          color={requestStatus[params.row.status].color}
+        />
       );
     },
   },

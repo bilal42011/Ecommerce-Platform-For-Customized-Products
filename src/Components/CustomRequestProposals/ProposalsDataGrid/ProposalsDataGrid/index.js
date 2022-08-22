@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Avatar,
-  Typography,
-  CircularProgress,
-  Stack,
-  Chip,
-} from "@mui/material";
+import { Box, Avatar, Typography, Chip } from "@mui/material";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
-import bilal from "../../../../assets/bilal.jpg";
-import UsersActions from "./UsersActions";
-import safwan from "../../../../assets/safwan.webp";
+
 import BuyerRequestInfoCard from "../../../BuyerRequestInfoCard";
 import { useNavigate } from "react-router-dom";
-import { apiServerUrl, statusColors } from "../../../../assets/js/utils";
+import { apiServerUrl, proposalStatus } from "../../../../assets/js/utils";
+import OverlaySpinner from "../../../OverlaySpinner";
 
 let columns = [
   {
@@ -44,7 +36,7 @@ let columns = [
   },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Seller Name",
     align: "center",
     headerAlign: "center",
     flex: 1,
@@ -89,30 +81,21 @@ let columns = [
     headerName: "Status",
     headerAlign: "center",
     align: "center",
+    flex: 1,
     renderCell: (params) => {
       return (
         <Chip
-          color={statusColors[params.row.status.toUpperCase()]}
+          color={proposalStatus[params.row.status].color}
           variant="filled"
-          label={params.row.status}
+          label={proposalStatus[params.row.status].text}
         />
       );
     },
   },
-  {
-    field: "actions",
-    headerName: "Actions",
-    headerAlign: "center",
-    align: "center",
-    flex: 2,
-    renderCell: (params) => {
-      return <UsersActions disabled={params.row.status !== "Pending"} />;
-    },
-  },
 ];
 
-let ProposalsDataGrid = ({ request }) => {
-  let [pageSize, setPageSize] = useState(5);
+const ProposalsDataGrid = ({ request }) => {
+  const [pageSize, setPageSize] = useState(5);
   const navigate = useNavigate();
 
   // const req = {
@@ -134,16 +117,7 @@ let ProposalsDataGrid = ({ request }) => {
   //   attachments: ["file1.jpg", "file2.docx"],
   // };
 
-  if (!request)
-    return (
-      <Stack
-        sx={{ height: "100%", widht: "100%" }}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <CircularProgress />
-      </Stack>
-    );
+  if (!request) return <OverlaySpinner />;
 
   return (
     <Box sx={{ paddingTop: "3rem" }}>
@@ -198,95 +172,95 @@ export default ProposalsDataGrid;
 
 //Dummy proposal rows for filling out table
 
-let rows = [
-  {
-    _id: 1,
-    username: "bilal50081",
-    photoURL: bilal,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 2,
-    username: "bilal50081",
-    photoURL: bilal,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 3,
-    username: "bilal50081",
-    photoURL: bilal,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 4,
-    username: "bilal50081",
-    photoURL: bilal,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 5,
-    username: "bilal50081",
-    photoURL: safwan,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 6,
-    username: "bilal50081",
-    photoURL: bilal,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 7,
-    username: "bilal50081",
-    photoURL: safwan,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 8,
-    username: "bilal50081",
-    photoURL: safwan,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 9,
-    username: "bilal50081",
-    photoURL: safwan,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-  {
-    _id: 10,
-    username: "bilal50081",
-    photoURL: safwan,
-    name: "Bilal Malik",
-    price: 400,
-    location: "Rawalpindi",
-    timeline: 15,
-  },
-];
+// let rows = [
+//   {
+//     _id: 1,
+//     username: "bilal50081",
+//     photoURL: bilal,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 2,
+//     username: "bilal50081",
+//     photoURL: bilal,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 3,
+//     username: "bilal50081",
+//     photoURL: bilal,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 4,
+//     username: "bilal50081",
+//     photoURL: bilal,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 5,
+//     username: "bilal50081",
+//     photoURL: safwan,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 6,
+//     username: "bilal50081",
+//     photoURL: bilal,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 7,
+//     username: "bilal50081",
+//     photoURL: safwan,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 8,
+//     username: "bilal50081",
+//     photoURL: safwan,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 9,
+//     username: "bilal50081",
+//     photoURL: safwan,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+//   {
+//     _id: 10,
+//     username: "bilal50081",
+//     photoURL: safwan,
+//     name: "Bilal Malik",
+//     price: 400,
+//     location: "Rawalpindi",
+//     timeline: 15,
+//   },
+// ];

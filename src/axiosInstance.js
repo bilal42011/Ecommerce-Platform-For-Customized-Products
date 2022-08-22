@@ -16,6 +16,12 @@ export const endPoints = {
   CUSTOM_REQUESTS_HISTORY: "/user/buyer-requests",
   UPGRADE_ACCOUNT: "/user/upgrade",
   PROPOSALS: "proposals",
+  ORDERS_AS_SELLER: "/order/as-seller",
+  ORDERS_AS_BUYER: "/order/as-buyer",
+  ORDER: "/order",
+  DELIVER_ORDER: "deliver",
+  REQUEST_CANCEL: "cancel",
+  CONFIRM_CANCEL: "cancel-confirm",
 };
 
 export default axiosInstance;
