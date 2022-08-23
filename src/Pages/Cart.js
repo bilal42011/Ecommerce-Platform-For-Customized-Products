@@ -8,65 +8,24 @@ import CartProducts from "../Components/Cart/CartProducts";
 import ShippingDetails from "../Components/Cart/ShippingDetails";
 import { uiActions } from "../Store/Slices/uiSlice";
 import { cartActions } from "../Store/Slices/cartSlice";
-
-const user = {
-  firstName: "Safwan",
-  lastName: "Karim",
-  city: "Islamabad",
-  address: "XYZ Town Bharakahu",
-};
-
-const cart = {
-  total: 8900,
-  products: [
-    {
-      id: 12312,
-      image:
-        "https://cdn.shopify.com/s/files/1/2980/5140/products/LoomSolar2rowDesign4PanelStand375watt_2.jpg?v=1624973202",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      quantity: 2,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 23424,
-      image:
-        "https://image.made-in-china.com/202f0j00dcNiRtCWrkob/Aluminum-Alloy-Solar-Rail-Solar-Panel-Module-Stand-Bracket.jpg",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      quantity: 1,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 23424,
-      image:
-        "https://image.made-in-china.com/202f0j00dcNiRtCWrkob/Aluminum-Alloy-Solar-Rail-Solar-Panel-Module-Stand-Bracket.jpg",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      quantity: 1,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-  ],
-};
+import PaymentModal from "../Components/Cart/PaymentModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  const { user, token } = useSelector((state) => state.auth);
   const products = useSelector((state) => state.cart.products);
 
   const [cart, setCart] = useState(null);
+  const [shippingInfo, setShippingInfo] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    city: user.city,
+    phone: user.phone,
+    address: user.address,
+  });
+  const [modalVisible, setModalVisible] = useState(false);
 
   const calculateCart = async () => {
     dispatch(uiActions.setLoading(true));
@@ -115,8 +74,20 @@ export default function Cart() {
     dispatch(cartActions.removeItem({ product }));
   };
 
-  const onCheckout = async (data) => {
+  const onCheckout = async (paymentInfo) => {
+    dispatch(uiActions.setLoading(true));
+    console.log(paymentInfo, shippingInfo, products);
     try {
+      await axiosInstance.post(
+        endPoints.ORDER,
+        { products, paymentInfo, shippingInfo },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      dispatch(uiActions.setLoading(false));
+      dispatch(cartActions.clearCart());
+      navigate("/profile/dashboard");
     } catch (error) {
       console.log(error);
       dispatch(
@@ -126,6 +97,7 @@ export default function Cart() {
         })
       );
     }
+    dispatch(uiActions.setLoading(false));
   };
 
   return (
@@ -135,9 +107,21 @@ export default function Cart() {
           {cart && <CartProducts cart={cart} onProductRemove={onRemove} />}
         </Grid>
         <Grid item xs={12} md={4}>
-          <ShippingDetails userInfo={user} />
+          <ShippingDetails
+            userInfo={shippingInfo}
+            onCheckout={(data) => {
+              setShippingInfo(data);
+              setModalVisible(true);
+            }}
+          />
         </Grid>
       </Grid>
+      <PaymentModal
+        visible={modalVisible}
+        buttonText="Order Now"
+        onPayment={onCheckout}
+        handleClose={() => setModalVisible(false)}
+      />
     </Container>
   );
 }

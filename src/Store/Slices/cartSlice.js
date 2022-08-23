@@ -34,6 +34,9 @@ const slice = createSlice({
         state.products[index].quantity -= reduceBy;
       }
     },
+    clearCart(state, action) {
+      state.products = [];
+    },
   },
 });
 

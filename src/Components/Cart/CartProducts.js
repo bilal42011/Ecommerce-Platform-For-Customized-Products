@@ -1,24 +1,16 @@
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   Divider,
-  IconButton,
   List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemSecondaryAction,
-  ListItemText,
   Stack,
   Typography,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { apiServerUrl } from "../../assets/js/utils";
+
+import CartProductItem from "./CartProductItem";
 
 export default function CartProducts({ cart, onProductRemove }) {
   return (
@@ -29,38 +21,11 @@ export default function CartProducts({ cart, onProductRemove }) {
         <List sx={{ flexGrow: 1 }}>
           {cart.products.map((item, key) => {
             return (
-              <ListItem key={key}>
-                <ListItemButton component={Link} to={`/products/${item._id}`}>
-                  <ListItemAvatar>
-                    <Avatar
-                      variant="rounded"
-                      src={apiServerUrl(item.images[0].path)}
-                    ></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={item.title}
-                    secondary={
-                      <>
-                        <Typography component="span">
-                          Rs. {item.price.toLocaleString()} /-
-                        </Typography>
-                        {" X "}
-                        <Typography component="span" fontWeight="bold">
-                          {item.quantity < 10 && "0"}
-                          {item.quantity}
-                        </Typography>
-                      </>
-                    }
-                  ></ListItemText>
-                </ListItemButton>
-                <ListItemSecondaryAction>
-                  <IconButton
-                    onClick={(e) => onProductRemove && onProductRemove(e, item)}
-                  >
-                    <Close />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+              <CartProductItem
+                key={key}
+                item={item}
+                onProductRemove={onProductRemove}
+              />
             );
           })}
         </List>

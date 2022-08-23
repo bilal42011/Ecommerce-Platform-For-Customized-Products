@@ -5,13 +5,14 @@ import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import ProposalDetails from "../Components/CustomProposalDetails/ProposalDetails";
 import OverlaySpinner from "../Components/OverlaySpinner";
-import CartProducts from "../Components/Cart/CartProducts";
+
 import { Paper, Stack, Typography } from "@mui/material";
 import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
 import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescription";
 import CancelOrderModal from "../Components/BuyerOrderPage/CancelOrderModal";
 import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellation";
+import ProductOrderInfo from "../Components/BuyerOrderPage/ProductOrderInfo";
 
 export default function BuyerOrderPage() {
   const [order, setOrder] = useState(null);
@@ -73,7 +74,8 @@ export default function BuyerOrderPage() {
         }
       );
       const temp = response.data.order;
-      temp.proposalId.sellerId = temp.sellerId;
+      if (temp.proposalId) temp.proposalId.sellerId = temp.sellerId;
+      else temp.productId.ownerId = temp.sellerId;
       setOrder(temp);
     } catch (error) {
       console.error(error);
@@ -153,14 +155,19 @@ export default function BuyerOrderPage() {
         component={Paper}
         variant="outlined"
         position="relative"
-        sx={{ alignItems: "center", padding: { xs: 2, sm: 10 }, width: "100%" }}
+        sx={{
+          alignItems: "center",
+          padding: { xs: 2, sm: 10 },
+          m: 1,
+          width: "100%",
+        }}
       >
         {elem}
       </Stack>
       {order.buyerRequestId ? (
         <ProposalDetails proposal={order.proposalId} hideActions />
       ) : (
-        <CartProducts cart={order} />
+        <ProductOrderInfo order={order} user={order.sellerId} />
       )}
       <CancelOrderModal
         open={cancelModalVisble}

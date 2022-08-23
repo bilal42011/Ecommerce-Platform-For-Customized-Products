@@ -12,13 +12,16 @@ export default function CategoryChooser({
   onChange,
   name,
   required,
+  hideLabel,
   label = "Product Category",
 }) {
   return (
     <Stack direction="row" alignItems={"center"}>
-      <Typography minWidth={"20ch"} flex={1}>
-        {label}
-      </Typography>
+      {!hideLabel && (
+        <Typography minWidth={"20ch"} flex={1}>
+          {label}
+        </Typography>
+      )}
       <FormControl sx={{ flex: 2 }} fullWidth>
         <InputLabel id="city-chooser-label">{label}</InputLabel>
         <Select
@@ -31,8 +34,8 @@ export default function CategoryChooser({
           required={required}
           name={name}
         >
-          <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
           <MenuItem value={"Iron Works"}>Iron Works</MenuItem>
+          <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
           <MenuItem value={"Grocerry"}>Grocerry</MenuItem>
         </Select>
       </FormControl>

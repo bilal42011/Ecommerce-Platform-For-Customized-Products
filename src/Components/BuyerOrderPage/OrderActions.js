@@ -8,7 +8,7 @@ export default function OrderActions({
 }) {
   return (
     <Box sx={{ mt: 5, maxWidth: 500 }}>
-      {hideDeliver || (
+      {!hideDeliver && (
         <Button variant="contained" onClick={onDeliverOrder} fullWidth>
           Deliver Now
         </Button>

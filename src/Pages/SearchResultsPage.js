@@ -1,154 +1,79 @@
-import { Pagination } from "@mui/material";
+import { Pagination, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import SearchFilters from "../Components/SearchFilters";
 import SearchResults from "../Components/SearchResults";
+import { uiActions } from "../Store/Slices/uiSlice";
+import axiosInstance, { endPoints } from "../axiosInstance";
 
 export default function SearchResultsPage() {
-  const results = [
-    {
-      id: 12312,
-      image:
-        "https://cdn.shopify.com/s/files/1/2980/5140/products/LoomSolar2rowDesign4PanelStand375watt_2.jpg?v=1624973202",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 23424,
-      image:
-        "https://image.made-in-china.com/202f0j00dcNiRtCWrkob/Aluminum-Alloy-Solar-Rail-Solar-Panel-Module-Stand-Bracket.jpg",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 3542,
-      image:
-        "https://5.imimg.com/data5/YY/QQ/MY-4005949/solar-panel-stand-500x500.jpg",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image:
-        "https://s.alicdn.com/@sc04/kf/H2e7f5b3f0b9945baa1e49e747c996b51w.jpg_300x300.jpg",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-    {
-      id: 2345,
-      image: "https://via.placeholder.com/150",
-      ownername: "user3385",
-      title: "Solar Panel Stand",
-      rating: 4,
-      description:
-        "The flat roof solar panel mounting system Solar triangular bracket, with innovative triangular to save cost both on installation and transportation. It is installed directly on a rooftop or pre-made concrete cement block. All kinds of panels can be installed which will save time for your project.",
-      price: 4999,
-      url: "/products/solar-panel-stand",
-    },
-  ];
+  const [page, setPage] = useState(1);
+  const [result, setResult] = useState(null);
+  const [category, setCategory] = useState("Iron Works");
+  const dispatch = useDispatch();
+
+  const onPageChange = (e, newPage) => {
+    // TODO: Fetch new results
+    setPage(newPage);
+  };
+
+  const fetchResults = async (category) => {
+    dispatch(uiActions.setLoading(true));
+    try {
+      const response = await axiosInstance.get(endPoints.PRODUCT, {
+        params: {
+          category,
+          page,
+        },
+      });
+      setResult(response.data.result);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
+    dispatch(uiActions.setLoading(false));
+  };
+
+  const onCategoryChange = (newVal) => {
+    setCategory(newVal);
+    fetchResults(newVal);
+  };
+
+  useEffect(() => {
+    fetchResults(category);
+  }, []);
+
   return (
     <Box sx={{ pt: 2 }} maxWidth="xl" margin="auto">
-      <SearchFilters />
-      <SearchResults results={results} />
-      <Box display="flex" justifyContent={"center"} mt={2}>
-        <Pagination count={10} />
-      </Box>
+      {result && (
+        <>
+          <SearchFilters
+            category={category}
+            onChange={onCategoryChange}
+            numberOfResults={result.count}
+          />
+          {result.count === 0 ? (
+            <Typography color="GrayText" variant="h3" textAlign={"center"}>
+              No Products Found
+            </Typography>
+          ) : (
+            <SearchResults results={result.products} />
+          )}
+          <Box display="flex" justifyContent={"center"} mt={2}>
+            <Pagination
+              count={result.totalPages}
+              page={1}
+              onChange={onPageChange}
+            />
+          </Box>
+        </>
+      )}
     </Box>
   );
 }

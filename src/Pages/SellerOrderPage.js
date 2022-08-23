@@ -5,16 +5,15 @@ import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import BuyerRequestInfoCard from "../Components/BuyerRequestInfoCard";
 import OverlaySpinner from "../Components/OverlaySpinner";
-import CartProducts from "../Components/Cart/CartProducts";
 import { Paper, Stack, Typography, Grid } from "@mui/material";
 import DeliverOrderModal from "../Components/BuyerOrderPage/DeliverOrderModal";
 import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
-import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescription";
 import CancelOrderModal from "../Components/BuyerOrderPage/CancelOrderModal";
 import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellation";
 
 import SellerProfileDescription from "../Components/SellerProfileDescription";
+import ProductOrderInfo from "../Components/BuyerOrderPage/ProductOrderInfo";
 
 export default function SellerOrderPage() {
   const [order, setOrder] = useState(null);
@@ -177,7 +176,7 @@ export default function SellerOrderPage() {
           {order.buyerRequestId ? (
             <BuyerRequestInfoCard request={order.buyerRequestId} hideActions />
           ) : (
-            <CartProducts cart={order} />
+            <ProductOrderInfo order={order} user={order.buyerId} />
           )}
         </Grid>
         <Grid item xs={12} sm={4}>

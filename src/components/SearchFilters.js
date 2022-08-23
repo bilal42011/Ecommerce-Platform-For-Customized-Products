@@ -1,19 +1,15 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import CategoryChooser from "./CategoryChooser";
 
-export default function SearchFilters() {
-  const [budget, setBudget] = useState("");
-  const [deliveryTime, setDeliveryTime] = useState("");
+export default function SearchFilters({
+  numberOfResults = 0,
+  category,
+  onChange,
+}) {
   return (
     <Box display="flex" alignItems={"center"} flexWrap="wrap">
-      <Box minWidth={120}>
+      {/* <Box minWidth={120}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Budget</InputLabel>
           <Select
@@ -47,9 +43,19 @@ export default function SearchFilters() {
             <MenuItem value={3}>3 Day</MenuItem>
           </Select>
         </FormControl>
+      </Box> */}
+      <Box>
+        <CategoryChooser
+          value={category}
+          onChange={(e) => {
+            console.log("New value", e.target.value);
+            onChange(e.target.value);
+          }}
+          hideLabel
+        />
       </Box>
       <Box flexGrow={1}></Box>
-      <Typography>1259 Results Found</Typography>
+      <Typography>{numberOfResults} Results Found</Typography>
     </Box>
   );
 }

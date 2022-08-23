@@ -31,6 +31,8 @@ export default function ShippingDetails({ userInfo, onChange, onCheckout }) {
       );
     }
 
+    console.log("Is Valid Phone", isValidPhone(formData.phone))
+
     if (!isValidPhone(formData.phone)) {
       return dispatch(
         uiActions.setAlert({

@@ -22,7 +22,12 @@ import { apiServerUrl } from "../assets/js/utils";
 const truncate = (string = "", maxLength = 50) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
-export default function ProductCard({ product, showActions, user }) {
+export default function ProductCard({
+  product,
+  showActions,
+  user,
+  onAddToCart,
+}) {
   const [anchorElem, setAnchorElem] = useState(null);
 
   const handleProductDelete = (e) => {};
@@ -99,6 +104,7 @@ export default function ProductCard({ product, showActions, user }) {
           sx={{ flexGrow: 1, ml: 2 }}
           variant="contained"
           disableElevation
+          onClick={onAddToCart}
         >
           Add to Cart
         </Button>
