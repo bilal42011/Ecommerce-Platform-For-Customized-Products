@@ -15,9 +15,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, useLocation, Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { apiServerUrl } from "../../assets/js/utils";
-import { authActions } from "../../Store/Slices/authSlice/authSlice";
+import { useSelector } from "react-redux";
+import AvatarContextMenu from "./AvatarContextMenu";
+import CartButton from "./CartButton";
 
 const nonActiveClassname = [styles.navLink, styles.nonactiveNavLink].join(" ");
 const ActiveClassname = [styles.navLink, styles.activeNavLink].join(" ");
@@ -57,23 +57,16 @@ const Header = () => {
         },
         { name: "Buyers Requests", url: "/profile/buyers-requests" },
         { name: "Your Custom Requests", url: "/profile/customrequests" },
-        { name: "Products", url: "/profile/" },
         { name: "Chat", url: "/profile/chats" },
       ];
     }
   })();
-
-  const dispatch = useDispatch();
 
   const handleMenuButtonClick = (event) => {
     setanchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setanchorEl(null);
-  };
-
-  const onLogOut = () => {
-    dispatch(authActions.logout());
   };
 
   useEffect(() => {
@@ -219,20 +212,8 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button onClick={onLogOut} sx={{ color: "white" }}>
-                  Log Out
-                </Button>
-                <Link className="ghost-link" to="/profile/dashboard">
-                  <CardHeader
-                    title={user.firstName}
-                    sx={{ color: "white" }}
-                    avatar={
-                      <Avatar src={apiServerUrl(user.avatar)}>
-                        {user.firstName.charAt(0)}
-                      </Avatar>
-                    }
-                  />
-                </Link>
+                <CartButton />
+                <AvatarContextMenu user={user} />
               </>
             )}
           </Box>

@@ -152,7 +152,7 @@ export default function UserProfile() {
               {user.products.map((item, index) => {
                 return (
                   <Grid item xs={12} md={6} lg={4} key={index}>
-                    <ProductCard product={item} showActions />
+                    <ProductCard product={item} showActions user={user} />
                   </Grid>
                 );
               })}

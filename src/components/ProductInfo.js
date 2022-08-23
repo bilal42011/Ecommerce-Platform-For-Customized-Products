@@ -10,8 +10,8 @@ export default function ProductInfo({ product }) {
       </Typography>
       <Typography fontWeight="bold">By {product.ownername}</Typography>
       <Box display={"flex"} alignItems="center">
-        <Rating value={product.rating} readOnly />{" "}
-        <Typography ml={1}>({product.rating})</Typography>
+        <Rating value={product.rating || 0} readOnly />
+        <Typography ml={1}>({product.rating || 0})</Typography>
       </Box>
       <Typography>Rs. {product.price.toLocaleString()} /-</Typography>
       <Divider sx={{ mt: 2 }} />

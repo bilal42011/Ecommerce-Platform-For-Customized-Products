@@ -44,7 +44,7 @@ root.render(
           <Route path="signup" element={<SignUp />} />
           <Route path="search" element={<SearchResultsPage />} />
           <Route path="browse" element={<SearchResultsPage />} />
-          <Route path="products/:product_id" element={<ProductPage />} />
+          <Route path="products/:productId" element={<ProductPage />} />
           <Route path="users/:userId" element={<UserProfile />} />
           <Route path="profile" element={<Protect />}>
             <Route index element={<UserProfile />} />

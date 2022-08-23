@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,14 +20,15 @@ const Layout = ({ children }) => {
       >
         {children}
         {isLoading && <OverlaySpinner />}
-        {alert && (
-          <Snackbar
-            open={Boolean(alert)}
-            autoHideDuration={5000}
-            onClose={() => {
-              dispatch(uiActions.setAlert(null));
-            }}
-          >
+
+        <Snackbar
+          open={Boolean(alert)}
+          autoHideDuration={5000}
+          onClose={() => {
+            dispatch(uiActions.setAlert(null));
+          }}
+        >
+          {alert && (
             <Alert
               severity={alert.severity}
               variant="filled"
@@ -35,10 +36,11 @@ const Layout = ({ children }) => {
                 dispatch(uiActions.setAlert(null));
               }}
             >
+              <AlertTitle>{alert.title}</AlertTitle>
               {alert.text}
             </Alert>
-          </Snackbar>
-        )}
+          )}
+        </Snackbar>
       </Container>
       <Footer />
     </>

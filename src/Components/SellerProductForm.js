@@ -33,6 +33,7 @@ export default function SellerProductForm({
   onSubmit,
   buttonLabel = "Creat Product",
   formTitle = "Create a new Product",
+  hideFileChooser,
 }) {
   const [product, setProduct] = useState(
     propsProduct || {
@@ -50,7 +51,7 @@ export default function SellerProductForm({
     e.preventDefault();
     const formData = new FormData(e.target);
     formData.set("hasSizes", product.hasSizes);
-    onSubmit && onSubmit(formData);
+    onSubmit && onSubmit(formData, product);
   };
 
   const gridControlParams = {
@@ -131,19 +132,22 @@ export default function SellerProductForm({
             />
           </Stack>
         </Grid>
-
-        <GridLabel>Images</GridLabel>
-        <Grid {...gridControlParams}>
-          <FileChooser
-            name="images"
-            value={product.images}
-            onChange={(e) =>
-              setProduct({ ...product, images: [...e.target.files] })
-            }
-            accept="image/*"
-            required
-          />
-        </Grid>
+        {hideFileChooser || (
+          <>
+            <GridLabel>Images</GridLabel>
+            <Grid {...gridControlParams}>
+              <FileChooser
+                name="images"
+                value={product.images}
+                onChange={(e) =>
+                  setProduct({ ...product, images: [...e.target.files] })
+                }
+                accept="image/*"
+                required
+              />
+            </Grid>
+          </>
+        )}
         <GridLabel>Price</GridLabel>
         <Grid {...gridControlParams}>
           <TextField

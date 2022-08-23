@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { apiServerUrl } from "../../assets/js/utils";
 
 export default function CartProducts({ cart, onProductRemove }) {
   return (
@@ -29,9 +30,12 @@ export default function CartProducts({ cart, onProductRemove }) {
           {cart.products.map((item, key) => {
             return (
               <ListItem key={key}>
-                <ListItemButton component={Link} to={item.url}>
+                <ListItemButton component={Link} to={`/products/${item._id}`}>
                   <ListItemAvatar>
-                    <Avatar variant="rounded" src={item.image}></Avatar>
+                    <Avatar
+                      variant="rounded"
+                      src={apiServerUrl(item.images[0].path)}
+                    ></Avatar>
                   </ListItemAvatar>
                   <ListItemText
                     primary={item.title}

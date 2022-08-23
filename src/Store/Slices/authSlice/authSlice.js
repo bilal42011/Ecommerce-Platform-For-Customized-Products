@@ -57,7 +57,8 @@ let authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         console.log("registeration fulfiled");
         state.isLoading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isSuccess = true;
       })
       .addCase(register.rejected, (state, action) => {
@@ -72,7 +73,8 @@ let authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         console.log("login fulfiled");
         state.isLoading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isSuccess = true;
       })
       .addCase(login.rejected, (state, action) => {

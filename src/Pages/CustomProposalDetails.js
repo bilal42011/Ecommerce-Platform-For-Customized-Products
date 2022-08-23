@@ -4,6 +4,7 @@ import ProposalDetails from "../Components/CustomProposalDetails/ProposalDetails
 import axiosInstance, { endPoints } from "../axiosInstance";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import OverlaySpinner from "../Components/OverlaySpinner";
 
 const CustomProposalDetails = () => {
   const { proposalId, requestId } = useParams();
@@ -34,7 +35,7 @@ const CustomProposalDetails = () => {
 
   return (
     <Container maxWidth="xl" disableGutters sx={{ mt: 15 }}>
-      <ProposalDetails proposal={proposal} />
+      {proposal ? <ProposalDetails proposal={proposal} /> : <OverlaySpinner />}
     </Container>
   );
 };

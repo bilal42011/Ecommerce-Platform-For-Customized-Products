@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { useState } from "react";
+import { apiServerUrl } from "../../assets/js/utils";
 
 export default function ProductMedia({ product }) {
   const [activeThumb, setActiveThumb] = useState();
@@ -22,7 +23,7 @@ export default function ProductMedia({ product }) {
           return (
             <SwiperSlide key={key}>
               <div className="product-image-wrapper">
-                <img src={item} alt={item} />
+                <img src={apiServerUrl(item.path)} alt={item.filename} />
               </div>
             </SwiperSlide>
           );
@@ -38,7 +39,7 @@ export default function ProductMedia({ product }) {
           return (
             <SwiperSlide key={key}>
               <div className="product-thumb-wrapper">
-                <img src={item} alt={item} />
+                <img src={apiServerUrl(item.path)} alt={item.filename} />
               </div>
             </SwiperSlide>
           );

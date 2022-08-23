@@ -15,31 +15,40 @@ export default function QuantityInput({
   onChange,
   sx,
   required,
+  max,
   name,
 }) {
   const [quantity, setQuantity] = useState(value || 1);
 
   const increment = () => {
     setQuantity((old) => {
-      onChange && onChange(old * 1 + 1);
-      return old * 1 + 1;
+      let oldValue = parseInt(old);
+      if ((max && oldValue < max) || !max) {
+        onChange && onChange(oldValue + 1);
+        return oldValue + 1;
+      }
+      return oldValue;
     });
   };
 
   const decrement = () => {
     setQuantity((old) => {
-      let newValue = 0;
-      if (old <= 1) newValue = old;
-      newValue = old - 1;
+      let newValue = 0,
+        oldValue = parseInt(old);
+      if (old <= 1) newValue = oldValue;
+      else newValue = oldValue - 1;
       onChange && onChange(newValue * 1);
       return newValue;
     });
   };
 
   const change = (value) => {
-    if (value >= 1) {
-      setQuantity(value * 1);
-      onChange && onChange(value * 1);
+    let newValue = parseInt(value);
+    if (newValue >= 1) {
+      if ((max && newValue <= max) || !max) {
+        setQuantity(newValue);
+        onChange && onChange(newValue * 1);
+      }
     }
   };
 

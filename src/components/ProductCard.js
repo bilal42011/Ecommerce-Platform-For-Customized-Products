@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardHeader,
   CardMedia,
   IconButton,
   Menu,
@@ -16,11 +17,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { apiServerUrl } from "../assets/js/utils";
 
 const truncate = (string = "", maxLength = 50) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
-export default function ProductCard({ product, showActions }) {
+export default function ProductCard({ product, showActions, user }) {
   const [anchorElem, setAnchorElem] = useState(null);
 
   const handleProductDelete = (e) => {};
@@ -41,7 +43,7 @@ export default function ProductCard({ product, showActions }) {
       onClose={() => setAnchorElem(null)}
     >
       <MenuItem>
-        <Link style={{ color: "inherit" }} to={`products/${product.id}/edit`}>
+        <Link style={{ color: "inherit" }} to={`products/${product._id}/edit`}>
           {" "}
           Edit
         </Link>
@@ -52,29 +54,41 @@ export default function ProductCard({ product, showActions }) {
 
   return (
     <Card variant="outlined">
-      <CardMedia component="img" height={250} image={product.image} />
+      <CardMedia
+        component="img"
+        height={250}
+        image={apiServerUrl(product.images[0].path)}
+      />
       <CardContent component={Stack} spacing={1}>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Avatar>{product.ownername.charAt(0)}</Avatar>
-
-          <Typography sx={{ flexGrow: 1 }} ml={1}>
-            {product.ownername}
-          </Typography>
-          {showActions && (
-            <IconButton onClick={(e) => setAnchorElem(e.currentTarget)}>
-              <MoreVertIcon />
-            </IconButton>
-          )}
-        </Box>
+        <CardHeader
+          sx={{ flexGrow: 1, p: 0 }}
+          title={
+            <Link to={`/products/${product._id}`} className="ghost-link">
+              <Typography variant="h5" fontWeight={"bold"} component={"h2"}>
+                {product.title}
+              </Typography>
+            </Link>
+          }
+          action={
+            showActions && (
+              <IconButton onClick={(e) => setAnchorElem(e.currentTarget)}>
+                <MoreVertIcon />
+              </IconButton>
+            )
+          }
+        />
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Avatar src={apiServerUrl(user.avatar)}>
+            {user.fullName.charAt(0)}
+          </Avatar>
+          <Typography color="GrayText">{user.fullName}</Typography>
+        </Stack>
         <Link
-          to={product.url}
+          to={product._id}
           style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <Typography variant="h5" fontWeight={"bold"} component={"h2"}>
-            {product.title}
-          </Typography>
-        </Link>
-        <Rating readOnly value={product.rating} />
+        ></Link>
+
+        {product.rating && <Rating readOnly value={product.rating} />}
         <Typography>{truncate(product.description, 200)}</Typography>
       </CardContent>
       <CardActions sx={{ padding: ".5em 1em" }}>

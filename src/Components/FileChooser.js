@@ -1,5 +1,6 @@
 import AttachFile from "@mui/icons-material/AttachFile";
 import { Button, Stack, Typography } from "@mui/material";
+import ExternalLink from "./ExternalLink";
 
 export default function FileChooser({
   value,
@@ -15,6 +16,7 @@ export default function FileChooser({
       alignItems="center"
       htmlFor="attachments-button"
       sx={{ position: "relative" }}
+      title="Uploading new files will replace existing files"
     >
       <Button variant="outlined" sx={{ maxWidth: "sm" }}>
         <label htmlFor="attachments-button">
@@ -39,11 +41,15 @@ export default function FileChooser({
           <AttachFile sx={{ verticalAlign: "middle" }} />
         </label>
       </Button>
-      {[...value].map((e, i) => (
-        <Typography key={i} variant="caption" ml={1}>
-          {e.name},
-        </Typography>
-      ))}
+      {[...value].map((e, i) => {
+        return e.name ? (
+          <Typography key={i} variant="caption" ml={1}>
+            {e.name},
+          </Typography>
+        ) : (
+          <ExternalLink link={e} name={`File-${i}`} />
+        );
+      })}
     </Stack>
   );
 }

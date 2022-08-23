@@ -1,6 +1,10 @@
 import { Container } from "@mui/system";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import axiosInstance, { endPoints } from "../axiosInstance";
 import SellerProductForm from "../Components/SellerProductForm";
+import { uiActions } from "../Store/Slices/uiSlice";
 const products = [
   {
     id: 12312,
@@ -65,15 +69,78 @@ const products = [
 ];
 
 export default function EditProduct() {
-  const product_id = useParams().product_id * 1;
+  const { productId } = useParams();
+  const { token } = useSelector((state) => state.auth);
+  const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const product = products.find((elem) => elem.id === product_id);
+  const PRODUCT_URL = `${endPoints.PRODUCT}/${productId}`;
+  const AUTH_HEADERS = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-  console.log(product, product_id);
+  const fetchProduct = async () => {
+    dispatch(uiActions.setLoading(true));
+    try {
+      const response = await axiosInstance.get(PRODUCT_URL, AUTH_HEADERS);
+      setProduct(response.data.product);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.message + " | " + error.response.data.message,
+        })
+      );
+    }
+    dispatch(uiActions.setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  const onFormSubmit = async (formData, jsonData) => {
+    delete jsonData.images;
+    delete jsonData.ownerId;
+    try {
+      const response = await axiosInstance.patch(
+        PRODUCT_URL,
+        jsonData,
+        AUTH_HEADERS
+      );
+      setProduct(response.data.product);
+      dispatch(
+        uiActions.setAlert({
+          severity: "success",
+          text: "Changes Saved",
+        })
+      );
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.message,
+        })
+      );
+    }
+  };
 
   return (
     <Container maxWidth="xl" sx={{ mt: 15 }}>
-      <SellerProductForm product={product} />
+      {product && (
+        <SellerProductForm
+          product={product}
+          buttonLabel={"Save Changes"}
+          hideFileChooser
+          onSubmit={onFormSubmit}
+        />
+      )}
     </Container>
   );
 }

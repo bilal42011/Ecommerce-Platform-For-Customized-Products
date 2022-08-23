@@ -13,6 +13,10 @@ export const getRemainingTime = (time) => {
   return `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
 };
 
+export const isLetters = (text) => /^[A-Za-z\s]*$/.test(text);
+
+export const isValidPhone = (text) => /(3[0-4]\d{8})/g.test(text);
+
 export const proposalStatus = {
   ACCEPTED: {
     color: "success",
