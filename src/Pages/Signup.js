@@ -19,6 +19,8 @@ import CityChooser from "../Components/CityChooser";
 import { useSelector, useDispatch } from "react-redux/";
 import { reset } from "../Store/Slices/authSlice/authSlice";
 import { register } from "../Store/Slices/authSlice/authSlice";
+import { uiActions } from "../Store/Slices/uiSlice";
+import { isLetters, isValidPhone } from "../assets/js/utils";
 
 export default function SignUp() {
   let navigate = useNavigate();
@@ -40,9 +42,42 @@ export default function SignUp() {
 
   const onSignUp = (e) => {
     e.preventDefault();
-    if (formDataJson.password !== formDataJson.confirmPassword) {
-      return alert("Password and Confirm Password Must be same");
+    if (
+      !isLetters(formDataJson.firstName) ||
+      !isLetters(formDataJson.lastName)
+    ) {
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          title: "Error",
+          text: "Name fields can't contain symbols or numbers",
+        })
+      );
+      return -1;
     }
+
+    if (!isValidPhone(formDataJson.phone)) {
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          title: "Error",
+          text: "Phone number must be a valid pakistani phone number",
+        })
+      );
+      return -1;
+    }
+
+    if (formDataJson.password !== formDataJson.confirmPassword) {
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          title: "Error",
+          text: "Password and Confirm Password fields must be same",
+        })
+      );
+      return -1;
+    }
+
     const formData = new FormData();
     Object.keys(formDataJson).forEach((key) =>
       formData.append(key, formDataJson[key])
@@ -144,7 +179,10 @@ export default function SignUp() {
               fullWidth
               value={formDataJson.phone}
               onChange={(e) =>
-                setFormData({ ...formDataJson, phone: e.target.value })
+                setFormData({
+                  ...formDataJson,
+                  phone: Math.floor(e.target.value),
+                })
               }
             />
           </Grid>
