@@ -56,7 +56,7 @@ export default function SignUp() {
       return -1;
     }
 
-    if (!isValidPhone(formDataJson.phone)) {
+    if (!isValidPhone(formDataJson.phone.toString())) {
       dispatch(
         uiActions.setAlert({
           severity: "error",
@@ -92,6 +92,13 @@ export default function SignUp() {
     }
     if (isError) {
       console.log("Error occured");
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          title: "Error",
+          text: message,
+        })
+      );
     }
     dispatch(reset());
   }, [isSuccess, isError, navigate, dispatch]);

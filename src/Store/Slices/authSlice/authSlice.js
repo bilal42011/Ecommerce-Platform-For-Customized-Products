@@ -12,10 +12,19 @@ let initialState = {
   message: "",
 };
 
-export const register = createAsyncThunk("auth/register", async (formData) => {
-  let data = await authService.register(formData);
-  return data;
-});
+export const register = createAsyncThunk(
+  "auth/register",
+  async (formData, thunkAPI) => {
+    try {
+      let data = await authService.register(formData);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response.data?.message || error.message
+      );
+    }
+  }
+);
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -25,7 +34,7 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
-        error?.response?.data?.message || error?.request?.data?.message
+        error.response.data?.message || error.message
       );
     }
   }
@@ -65,7 +74,9 @@ let authSlice = createSlice({
         console.log("registeration rejected");
         state.isLoading = false;
         state.isError = true;
-        state.message = "response not found 404";
+        console.log(state, action);
+        state.message = action.payload;
+        console.log(action.payload);
       })
       .addCase(register.pending, (state) => {
         state.isLoading = true;

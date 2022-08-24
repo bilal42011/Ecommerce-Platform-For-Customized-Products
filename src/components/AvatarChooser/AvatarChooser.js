@@ -22,7 +22,7 @@ export default function AvatarChooser({ value, onChange }) {
     <Box position={"relative"} width="fit-content" margin="auto">
       <IconButton sx={{ cursor: "pointer" }}>
         <Avatar
-          src={!image && apiServerUrl(value)}
+          src={!image ? apiServerUrl(value) : image}
           sx={{ width: 100, height: 100, margin: "auto" }}
         >
           OP
