@@ -47,9 +47,8 @@ root.render(
           <Route path="browse" element={<SearchResultsPage />} />
           <Route path="products/:productId" element={<ProductPage />} />
           <Route path="users/:userId" element={<UserProfile />} />
-
+          <Route path="verify-account" element={<AuthCodePage />} />
           <Route path="profile" element={<Protect />}>
-            <Route path="verify-account" element={<AuthCodePage />} />
             <Route index element={<UserProfile dashboard />} />
             <Route path="edit" element={<EditProfile />} />
             <Route path="dashboard" element={<Dashboard />} />

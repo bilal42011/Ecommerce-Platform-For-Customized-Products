@@ -1,7 +1,7 @@
 import { Avatar, Button, CardHeader, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiServerUrl } from "../../assets/js/utils";
 import { authActions } from "../../Store/Slices/authSlice/authSlice";
 
@@ -37,6 +37,7 @@ const SELLER_LINKS = [
 
 export default function AvatarContextMenu({ user }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -49,6 +50,7 @@ export default function AvatarContextMenu({ user }) {
 
   const onLogOut = () => {
     dispatch(authActions.logout());
+    navigate("/");
   };
 
   const LINKS = user.isSeller ? SELLER_LINKS : BUYER_LINKS;
