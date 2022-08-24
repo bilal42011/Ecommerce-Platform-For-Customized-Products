@@ -17,10 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { apiServerUrl } from "../assets/js/utils";
-
-const truncate = (string = "", maxLength = 50) =>
-  string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
+import { apiServerUrl, truncate } from "../assets/js/utils";
 
 export default function ProductCard({
   product,

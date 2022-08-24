@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid, Avatar, Typography, Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { Place } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const SellerProfile = ({ id, avatarSrc, name, ratings, description }) => {
+const SellerProfile = ({ id, avatarSrc, name, city, description }) => {
   return (
     <Grid
       container
@@ -24,69 +25,38 @@ const SellerProfile = ({ id, avatarSrc, name, ratings, description }) => {
       </Grid>
 
       <Grid item>
-        <Typography
-          fontFamily="Roboto Condensed, sans-serif"
-          variant="p"
-          fontWeight="bold"
-          fontSize="24px"
-        >
-          {name}
-        </Typography>
-      </Grid>
-
-      <Grid
-        container
-        item
-        alignItems="center"
-        justifyContent="center"
-        columnSpacing={0.5}
-      >
-        <Grid item>
-          <Rating
-            name="half-rating-read"
-            readOnly
-            value={ratings}
-            precision={0.5}
-            emptyIcon={
-              <StarIcon
-                style={{ opacity: 0.55 }}
-                fontSize="inherit"
-                size="medium"
-              />
-            }
-          />
-        </Grid>
-        <Grid item>
+        <Link to={`users/${id}`} className="ghost-link">
           <Typography
+            fontFamily="Roboto Condensed, sans-serif"
             variant="p"
-            fontFamily="Roboto , sans-serif"
-            fontWeight="bolder"
-            fontSize="17px"
+            fontWeight="bold"
+            fontSize="24px"
           >
-            {`(${ratings})`}
+            {name}
           </Typography>
-        </Grid>
+        </Link>
       </Grid>
 
       <Grid item>
-        <Link
-          to={`users/${id}`}
-          style={{ textDecoration: "none", color: "#666666" }}
+        <Typography>
+          <Place sx={{ verticalAlign: "middle" }} /> {city}
+        </Typography>
+      </Grid>
+
+      <Grid item>
+        <Typography
+          variant="body1"
+          fontFamily="Roboto , sans-serif"
+          textAlign="center"
+          fontSize="21px"
+          sx={{
+            "&:hover": {
+              color: "rgb(29, 191, 115)",
+            },
+          }}
         >
-          <Typography
-            variant="body1"
-            fontFamily="Roboto , sans-serif"
-            textAlign="center"
-            fontSize="21px"
-            sx={{
-              "&:hover": {
-                color: "rgb(29, 191, 115)",
-              },
-            }}
-          >
-            {description}
-          </Typography>
-        </Link>
+          {description}
+        </Typography>
       </Grid>
     </Grid>
   );

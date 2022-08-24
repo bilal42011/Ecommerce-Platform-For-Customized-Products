@@ -58,7 +58,7 @@ const SellerProfileDescription = ({ user, dashboard }) => {
         <Divider />
         {!dashboard ? (
           <>
-            <Link className="ghost-link" to="/profile/chats">
+            <Link className="ghost-link" to={`/profile/chats/${user._id}`}>
               <Button variant="contained" fullWidth>
                 Contact Me
               </Button>

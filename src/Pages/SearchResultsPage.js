@@ -6,11 +6,19 @@ import SearchFilters from "../Components/SearchFilters";
 import SearchResults from "../Components/SearchResults";
 import { uiActions } from "../Store/Slices/uiSlice";
 import axiosInstance, { endPoints } from "../axiosInstance";
+import { useSearchParams } from "react-router-dom";
+import { categoriesData } from "../Components/Homepage/Categories/CategoriesItems/CategoriesData/CategoriesData";
 
 export default function SearchResultsPage() {
   const [page, setPage] = useState(1);
+  const [params, setParams] = useSearchParams();
+
+  console.log(params.get("cat") * 1);
+
   const [result, setResult] = useState(null);
-  const [category, setCategory] = useState("Iron Works");
+  const [category, setCategory] = useState(
+    categoriesData[params.get("cat") * 1].name || "Iron Works"
+  );
   const dispatch = useDispatch();
 
   const onPageChange = (e, newPage) => {

@@ -18,6 +18,15 @@ export const isLetters = (text) => /^[A-Za-z\s]*$/.test(text);
 export const isValidPhone = (text) =>
   text.length === 10 && /(3[0-4]\d{8})/g.test(text);
 
+export const truncate = (string = "", maxLength = 50) =>
+  string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
+
+export const formatTime = (time) => {
+  const date = new Date(time);
+  const str = `${date.getHours()} : ${date.getMinutes()}`;
+  return str;
+};
+
 export const proposalStatus = {
   ACCEPTED: {
     color: "success",

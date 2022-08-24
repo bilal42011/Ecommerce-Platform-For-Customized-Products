@@ -5,15 +5,21 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
+import { apiServerUrl } from "../../assets/js/utils";
 
 export default function ChatListItem({ chat, onClick }) {
   return (
     <ListItem>
       <ListItemButton onClick={onClick}>
         <ListItemAvatar>
-          <Avatar>{chat.to.username.charAt(0)}</Avatar>
+          <Avatar src={apiServerUrl(chat.to.avatar)}>
+            {chat.to.fullName.charAt(0)}
+          </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={chat.to.fullname} secondary={chat.lastMessage} />
+        <ListItemText
+          primary={chat.to.fullName}
+          secondary={chat.lastMessage?.text || "No messages yet"}
+        />
       </ListItemButton>
     </ListItem>
   );

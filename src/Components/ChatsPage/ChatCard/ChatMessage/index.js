@@ -1,13 +1,17 @@
 import { Avatar, ListItem, ListItemAvatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
+import { apiServerUrl, formatTime } from "../../../../assets/js/utils";
 import "./ChatMessage.css";
 
-export default function ChatMessage({ message, primary }) {
+export default function ChatMessage({ sender, message, primary }) {
   return (
     <ListItem>
       {primary && (
         <ListItemAvatar>
-          <Avatar>r</Avatar>
+          <Avatar src={apiServerUrl(sender?.avatar)}>
+            {sender?.fullName[0]}
+          </Avatar>
         </ListItemAvatar>
       )}
       <Box
@@ -24,7 +28,7 @@ export default function ChatMessage({ message, primary }) {
           width="100%"
           display={"inline-block"}
         >
-          {message.time}
+          {formatTime(message.createdAt)}
         </Typography>
       </Box>
     </ListItem>

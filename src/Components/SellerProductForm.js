@@ -99,7 +99,7 @@ export default function SellerProductForm({
             >
               <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
               <MenuItem value={"Iron Works"}>Iron Works</MenuItem>
-              <MenuItem value={"Grocerry"}>Grocerry</MenuItem>
+              <MenuItem value={"Grocery"}>Grocery</MenuItem>
             </Select>
           </FormControl>
         </Grid>

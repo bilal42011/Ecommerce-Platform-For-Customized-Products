@@ -79,6 +79,7 @@ root.render(
             <Route path="products/create" element={<CreateProduct />} />
             <Route path="products/:productId/edit" element={<EditProduct />} />
             <Route path="chats" element={<ChatsPage />} />
+            <Route path="chats/:userId" element={<ChatsPage />} />
           </Route>
         </Route>
       </Routes>

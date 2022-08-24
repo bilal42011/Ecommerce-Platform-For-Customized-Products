@@ -14,73 +14,67 @@ import {
 import { grey } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { apiServerUrl, formatTime } from "../../../assets/js/utils";
+import axiosInstance, { endPoints } from "../../../axiosInstance";
+import { uiActions } from "../../../Store/Slices/uiSlice";
 import MessageList from "./MessageList";
 
-export default function ChatCard({ chat, onClose }) {
+export default function ChatCard({ chat, onClose, afterNewMessage }) {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      text: "Hello!",
-      time: "2: 28pm",
-    },
-    {
-      text: "Hi!",
-      time: "2: 28pm",
-    },
-    {
-      text: "How are you?",
-      time: "2: 28pm",
-    },
-    {
-      text: "I am fine",
-      time: "2: 28pm",
-    },
-    {
-      text: "Wanna have sex?",
-      time: "2: 28pm",
-    },
-    {
-      text: "Yeah",
-      time: "2: 28pm",
-    },
-    {
-      text: "uss",
-      time: "2: 28pm",
-    },
-    {
-      text: "uss",
-      time: "2: 28pm",
-    },
-    {
-      text: "uss",
-      time: "2: 28pm",
-    },
-    {
-      text: "🥵",
-      time: "2: 28pm",
-    },
-    {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-      time: "2: 28pm",
-    },
-    {
-      text: "Lora ipsum dallar",
-      time: "2: 28pm",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
 
-  const onNewMessage = (e) => {
+  const dispatch = useDispatch(),
+    token = useSelector((state) => state.auth.token);
+
+  const URL = `${endPoints.CHAT}/${chat ? chat._id : ""}`;
+  const fetchMessages = async () => {
+    try {
+      const response = await axiosInstance.get(URL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setMessages(response.data.messages);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (chat) fetchMessages();
+  }, [chat]);
+
+  const onNewMessage = async (e) => {
     e.preventDefault();
-    const date = new Date();
-    const time = `${date.getHours()} : ${date.getMinutes()}`;
-    setMessages([
-      ...messages,
-      {
-        text: message,
-        time: time,
-      },
-    ]);
-    setMessage("");
+    try {
+      const messageBody = {
+        message: { text: message },
+      };
+      const response = await axiosInstance.post(URL, messageBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const msg = response.data.message;
+      setMessages((old) => [...old, msg]);
+      setMessage("");
+      afterNewMessage && afterNewMessage(msg);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
   };
   const chatRef = useRef(null);
   useEffect(() => {
@@ -97,7 +91,7 @@ export default function ChatCard({ chat, onClose }) {
       sx={{ height: "100%", maxHeight: "75vh" }}
       component={Stack}
     >
-      {!chat || !messages.length ? (
+      {!chat ? (
         <Box
           sx={{
             display: "flex",
@@ -107,14 +101,18 @@ export default function ChatCard({ chat, onClose }) {
             justifyContent: "center",
           }}
         >
-          <Typography>{!chat ? "Select a Chat" : "No messages yet"}</Typography>
+          <Typography>{"Select a Chat"}</Typography>
         </Box>
       ) : (
         <>
           <CardHeader
-            title={<Typography variant="h6">{chat.to.fullname}</Typography>}
-            subheader={chat.to.username}
-            avatar={<Avatar>{chat.to.username.charAt(0)}</Avatar>}
+            title={<Typography variant="h6">{chat.to.fullName}</Typography>}
+            subheader={chat.to.city}
+            avatar={
+              <Avatar src={apiServerUrl(chat.to.avatar)}>
+                {chat.to.fullName.charAt(0)}
+              </Avatar>
+            }
             action={
               <IconButton onClick={onClose}>
                 <Close />
@@ -131,7 +129,7 @@ export default function ChatCard({ chat, onClose }) {
               bgcolor: grey[100],
             }}
           >
-            <MessageList messages={messages} />
+            <MessageList to={chat?.to} messages={messages} />
           </CardContent>
           <CardActions>
             <form onSubmit={onNewMessage} style={{ width: "100%" }}>

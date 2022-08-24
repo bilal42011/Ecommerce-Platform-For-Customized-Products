@@ -7,6 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { categoriesData } from "./Homepage/Categories/CategoriesItems/CategoriesData/CategoriesData";
+
 export default function CategoryChooser({
   value,
   onChange,
@@ -34,9 +36,13 @@ export default function CategoryChooser({
           required={required}
           name={name}
         >
-          <MenuItem value={"Iron Works"}>Iron Works</MenuItem>
-          <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
-          <MenuItem value={"Grocerry"}>Grocerry</MenuItem>
+          {categoriesData.map((item, idx) => {
+            return (
+              <MenuItem value={item.name} key={idx}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
     </Stack>

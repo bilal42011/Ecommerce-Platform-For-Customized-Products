@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CategoriesItems = () => {
   return (
     <>
-      {categoriesData.map((category) => {
+      {categoriesData.map((category, idx) => {
         return (
           <Grid
             component="div"
@@ -20,7 +20,7 @@ const CategoriesItems = () => {
             alignItems="center"
           >
             <Link
-              to={`browse?cat=${category.id}`}
+              to={`browse?cat=${idx}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <Grid

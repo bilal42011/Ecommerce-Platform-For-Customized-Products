@@ -27,6 +27,7 @@ export const endPoints = {
   USER: "user",
   PRODUCT: "product",
   CART: "cart",
+  CHAT: "/chat",
 };
 
 export default axiosInstance;
