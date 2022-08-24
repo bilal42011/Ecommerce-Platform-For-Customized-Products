@@ -15,6 +15,7 @@ import axiosInstance, { endPoints } from "../axiosInstance";
 import AvatarChooser from "../Components/AvatarChooser/AvatarChooser";
 import CityChooser from "../Components/CityChooser";
 import { authActions } from "../Store/Slices/authSlice/authSlice";
+import { uiActions } from "../Store/Slices/uiSlice";
 
 export default function EditProfile() {
   const { user, token } = useSelector((state) => state.auth);
@@ -40,10 +41,22 @@ export default function EditProfile() {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(authActions.updateUser(response.data.user));
+      dispatch(
+        uiActions.setAlert({
+          severity: "success",
+          title: "Success",
+          text: "Changes Saved!",
+        })
+      );
       navigate("/profile");
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data?.message || error.message,
+        })
+      );
     }
   };
 

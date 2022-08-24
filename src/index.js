@@ -32,6 +32,7 @@ import Protect from "./Components/Protect";
 import SellerOrderPage from "./Pages/SellerOrderPage";
 import BuyerOrderPage from "./Pages/BuyerOrderPage";
 import EditProfile from "./Pages/EditProfile";
+import AuthCodePage from "./Components/Signup/AuthCodePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,6 +47,7 @@ root.render(
           <Route path="browse" element={<SearchResultsPage />} />
           <Route path="products/:productId" element={<ProductPage />} />
           <Route path="users/:userId" element={<UserProfile />} />
+          <Route path="verify-account" element={<AuthCodePage />} />
           <Route path="profile" element={<Protect />}>
             <Route index element={<UserProfile />} />
             <Route path="edit" element={<EditProfile />} />

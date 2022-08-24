@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import CategoryChooser from "./CategoryChooser";
 import FileChooser from "./FileChooser";
 import OverlaySpinner from "./OverlaySpinner";
 import QuantityInput from "./QuantityInput/QuantityInput";
@@ -78,30 +79,26 @@ export default function SellerProductForm({
             name="title"
             label="Product Title"
             value={product.title}
-            onChange={(e) => setProduct({ ...product, title: e.target.value })}
+            onChange={(e) =>
+              setProduct((old) => {
+                return { ...old, title: e.target.value };
+              })
+            }
           />
         </Grid>
         <GridLabel>Product Category</GridLabel>
         <Grid {...gridControlParams}>
-          <FormControl sx={{ flex: 2 }} fullWidth required>
-            <InputLabel id="city-chooser-label">Product Category</InputLabel>
-            <Select
-              labelId="city-chooser-label"
-              id="city-chooser"
-              value={product.category}
-              label="Choose Category"
-              onChange={(e) =>
-                setProduct({ ...product, category: e.target.value })
-              }
-              fullWidth
-              name="category"
-              required
-            >
-              <MenuItem value={"Wood Works"}>Wood Works</MenuItem>
-              <MenuItem value={"Iron Works"}>Iron Works</MenuItem>
-              <MenuItem value={"Grocery"}>Grocery</MenuItem>
-            </Select>
-          </FormControl>
+          <CategoryChooser
+            name="category"
+            value={product.category}
+            hideLabel
+            required
+            onChange={(e) =>
+              setProduct((old) => {
+                return { ...old, category: e.target.value };
+              })
+            }
+          />
         </Grid>
         <GridLabel sx={{ alignSelf: "flex-start" }}>
           Product Description
@@ -116,7 +113,9 @@ export default function SellerProductForm({
             rows={4}
             value={product.description}
             onChange={(e) =>
-              setProduct({ ...product, description: e.target.value })
+              setProduct((old) => {
+                return { ...old, description: e.target.value };
+              })
             }
           />
         </Grid>
@@ -140,7 +139,9 @@ export default function SellerProductForm({
                 name="images"
                 value={product.images}
                 onChange={(e) =>
-                  setProduct({ ...product, images: [...e.target.files] })
+                  setProduct((old) => {
+                    return { ...old, images: [...e.target.files] };
+                  })
                 }
                 accept="image/*"
                 required
@@ -159,7 +160,9 @@ export default function SellerProductForm({
             inputMode="numeric"
             value={product.price}
             onChange={(e) =>
-              setProduct({ ...product, price: e.target.value * 1 })
+              setProduct((old) => {
+                return { ...old, price: parseInt(e.target.value) };
+              })
             }
             inputProps={{
               min: 1,
@@ -174,7 +177,11 @@ export default function SellerProductForm({
             name="quantity"
             required
             value={product.quantity}
-            onChange={(e) => setProduct({ ...product, quantity: e })}
+            onChange={(e) =>
+              setProduct((old) => {
+                return { ...old, quantity: e };
+              })
+            }
             label="Product Quantity"
             sx={{ width: "100%" }}
           />

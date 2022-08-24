@@ -1,14 +1,25 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import ProductCard from "../Components/ProductCard";
 import SellerProfileDescription from "../Components/SellerProfileDescription";
 import Reviews from "../Components/ProductPage/Reviews";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import { useParams, Link } from "react-router-dom";
 import OverlaySpinner from "../Components/OverlaySpinner";
-import { ArrowRight } from "@mui/icons-material";
+import { Add, ArrowRight } from "@mui/icons-material";
+import { uiActions } from "../Store/Slices/uiSlice";
+import { cartActions } from "../Store/Slices/cartSlice";
 
 export default function UserProfile() {
   // const user = {
@@ -90,6 +101,7 @@ export default function UserProfile() {
 
   const [user, setUser] = useState(null);
   const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const { userId } = useParams();
 
   const fetchUser = async () => {
@@ -108,6 +120,48 @@ export default function UserProfile() {
   useEffect(() => {
     fetchUser();
   }, []);
+  const { products } = useSelector((state) => state.cart);
+  const onAddToCart = (product) => {
+    const cartProduct = {
+      _id: product._id,
+      quantity: 1,
+    };
+    const existingProduct = products.find((elem) => elem._id === product._id);
+
+    console.log(product, user);
+    if (product.ownerId == user._id) {
+      return dispatch(
+        uiActions.setAlert({
+          title: "Error",
+          text: "You're the owner of this product",
+          severity: "error",
+        })
+      );
+    }
+
+    if (
+      cartProduct.quantity > product.quantity ||
+      (existingProduct &&
+        existingProduct.quantity + cartProduct.quantity > product.quantity)
+    ) {
+      return dispatch(
+        uiActions.setAlert({
+          title: "Error",
+          text: "Not enough stock!",
+          severity: "error",
+        })
+      );
+    }
+
+    dispatch(cartActions.addItem({ product: cartProduct }));
+    dispatch(
+      uiActions.setAlert({
+        title: "Item Added",
+        text: "Successfully Added to Cart",
+        severity: "success",
+      })
+    );
+  };
 
   if (!user)
     return (
@@ -152,11 +206,29 @@ export default function UserProfile() {
               {user.products.map((item, index) => {
                 return (
                   <Grid item xs={12} md={6} lg={4} key={index}>
-                    <ProductCard product={item} showActions user={user} />
+                    <ProductCard
+                      product={item}
+                      showActions
+                      user={user}
+                      onAddToCart={() => onAddToCart(item)}
+                    />
                   </Grid>
                 );
               })}
             </>
+          )}
+          {!userId && (
+            <Grid item xs={12} md={6} lg={4}>
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                height={"100%"}
+              >
+                <Link to="products/create">
+                  <Button startIcon={<Add />}> Create New Product</Button>
+                </Link>
+              </Stack>
+            </Grid>
           )}
         </Grid>
       </Grid>

@@ -12,6 +12,7 @@ export const getToken = () => {
 export const endPoints = {
   REGISTER: "auth/signup",
   LOGIN: "auth/login",
+  AUTH_CODE: "auth/code",
   BUYER_REQUEST: "/buyer-requests",
   CUSTOM_REQUESTS_HISTORY: "/user/buyer-requests",
   UPGRADE_ACCOUNT: "/user/upgrade",

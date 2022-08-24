@@ -87,8 +87,8 @@ export default function SignUp() {
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      navigate("/profile/dashboard");
+    if (isSuccess && !user.isVerified) {
+      return navigate("/verify-account");
     }
     if (isError) {
       console.log("Error occured");
@@ -102,8 +102,6 @@ export default function SignUp() {
     }
     dispatch(reset());
   }, [isSuccess, isError, navigate, dispatch]);
-
-  console.log("component rendered");
 
   return (
     <Card sx={{ maxWidth: "md", margin: "auto", mt: 15 }}>
@@ -222,12 +220,6 @@ export default function SignUp() {
                   confirmPassword: e.target.value,
                 })
               }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={<Checkbox required />}
-              label="I accept Terms and Conditions"
             />
           </Grid>
           <Grid item xs={12}>

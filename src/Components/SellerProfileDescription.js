@@ -7,10 +7,12 @@ import {
   Button,
   Rating,
   Divider,
+  Link as MUILink,
 } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Link } from "react-router-dom";
 import { apiServerUrl } from "../assets/js/utils";
+import { Email, Phone } from "@mui/icons-material";
 
 const SellerProfileDescription = ({ user, dashboard }) => {
   return (
@@ -54,6 +56,28 @@ const SellerProfileDescription = ({ user, dashboard }) => {
             <PlaceIcon sx={{ mr: 1, verticalAlign: "middle" }} /> City
           </Typography>
           <Typography fontWeight="bold">{user.city}</Typography>
+        </Stack>
+        <Stack direction={"row"} justifyContent="space-between">
+          <Typography
+            textAlign="left"
+            alignItems="center"
+            sx={{ display: "flex" }}
+          >
+            <Phone sx={{ mr: 1, verticalAlign: "middle" }} /> Phone
+          </Typography>
+          <Typography fontWeight="bold">+92{user.phone}</Typography>
+        </Stack>
+        <Stack direction={"row"} justifyContent="space-between">
+          <Typography
+            textAlign="left"
+            alignItems="center"
+            sx={{ display: "flex" }}
+          >
+            <Email sx={{ mr: 1, verticalAlign: "middle" }} /> Email
+          </Typography>
+          <Typography fontWeight="bold">
+            <MUILink href={`mailto:${user.email}`}>{user.email}</MUILink>
+          </Typography>
         </Stack>
         <Divider />
         {!dashboard ? (

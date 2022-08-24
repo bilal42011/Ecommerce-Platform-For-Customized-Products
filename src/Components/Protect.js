@@ -4,5 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export default function Protect({ children }) {
   const user = useSelector((state) => state.auth.user);
 
-  return user ? <Outlet /> : <Navigate to="/login" />;
+  if (!user) return <Navigate to="/login" />;
+  else if (!user.isVerified) return <Navigate to="/verify-account" />;
+  else return <Outlet />;
 }

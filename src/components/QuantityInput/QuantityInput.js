@@ -43,7 +43,7 @@ export default function QuantityInput({
   };
 
   const change = (value) => {
-    let newValue = parseInt(value);
+    let newValue = Math.floor(value);
     if (newValue >= 1) {
       if ((max && newValue <= max) || !max) {
         setQuantity(newValue);
