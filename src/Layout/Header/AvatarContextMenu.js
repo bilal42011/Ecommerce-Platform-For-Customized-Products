@@ -29,6 +29,10 @@ const SELLER_LINKS = [
     title: "Products",
     link: "/profile",
   },
+  {
+    title: "Change Category",
+    link: "/profile/become-a-seller",
+  },
 ];
 
 export default function AvatarContextMenu({ user }) {
