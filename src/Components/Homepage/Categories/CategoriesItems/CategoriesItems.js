@@ -46,9 +46,7 @@ const CategoriesItems = () => {
                 </Grid>
                 <Grid item>
                   <Typography
-                    variant="p"
                     className="hover"
-                    fontFamily="Roboto sans-serif"
                     fontSize="20px"
                     textAlign="center"
                     sx={{ display: "block" }}
