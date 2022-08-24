@@ -27,7 +27,7 @@ export default function RequestCustomProduct() {
     files: [],
     category: "",
     deliveryTime: 1,
-    budget: 0,
+    budget: 1,
   });
   const [formBusy, setFormBusy] = useState(false);
   const [alert, setAlert] = useState(<></>);
