@@ -55,7 +55,7 @@ export default function Dashboard() {
             <Divider />
             <Tabs value={activeTab} onChange={onTabChange}>
               <Tab label="Orders as Buyer" id="tab-1" />
-              <Tab label="Orders as Seller" id="tab-2" />
+              {user.isSeller && <Tab label="Orders as Seller" id="tab-2" />}
             </Tabs>
             <ActiveOrdersTable orders={orders} asSeller={activeTab === 1} />
           </Paper>
