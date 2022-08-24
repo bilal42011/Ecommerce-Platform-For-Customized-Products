@@ -145,20 +145,19 @@ export default function UserProfile({ dashboard }) {
               })}
             </>
           )}
-          {!userId &&
-            user.isSeller(
-              <Grid item xs={12} md={6} lg={4}>
-                <Stack
-                  justifyContent="center"
-                  alignItems="center"
-                  height={"100%"}
-                >
-                  <Link to="products/create">
-                    <Button startIcon={<Add />}> Create New Product</Button>
-                  </Link>
-                </Stack>
-              </Grid>
-            )}
+          {!userId && user.isSeller && (
+            <Grid item xs={12} md={6} lg={4}>
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                height={"100%"}
+              >
+                <Link to="products/create">
+                  <Button startIcon={<Add />}> Create New Product</Button>
+                </Link>
+              </Stack>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Container>
