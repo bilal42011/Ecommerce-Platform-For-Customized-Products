@@ -138,7 +138,7 @@ export default function RequestCustomProduct() {
             <QuantityInput
               name="deliveryTime"
               required
-              label="Delivery Time"
+              label="Delivery Time (Days)"
               value={formInfo.deliveryTime}
               onChange={(e) => setFormInfo({ ...formInfo, deliveryTime: e })}
             />

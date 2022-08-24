@@ -85,7 +85,7 @@ export default function CreateProposal() {
             />
             <QuantityInput
               name="deliveryTime"
-              label="Delivery Time"
+              label="Delivery Time (Days)"
               value={formData.deliveryTime}
               onChange={(e) => setFormData({ ...formData, deliveryTime: e })}
             />
