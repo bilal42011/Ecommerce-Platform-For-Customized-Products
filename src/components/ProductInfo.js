@@ -9,7 +9,7 @@ export default function ProductInfo({ product }) {
       <Typography variant="h3" component="h1" fontWeight="bold">
         {product.title}
       </Typography>
-      <Link to={`/users/${product.ownerId._id}`}>
+      <Link to={`/users/${product.ownerId._id}`} className="ghost-link">
         <Typography fontWeight="bold">By {product.ownerId.fullName}</Typography>
       </Link>
       <Box display={"flex"} alignItems="center">

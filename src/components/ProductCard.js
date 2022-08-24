@@ -18,16 +18,47 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { apiServerUrl, truncate } from "../assets/js/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../Store/Slices/uiSlice";
+import axiosInstance, { endPoints } from "../axiosInstance";
+import CustomDialog from "./CustomDialog";
 
 export default function ProductCard({
   product,
   showActions,
   user,
   onAddToCart,
+  onDelete,
 }) {
   const [anchorElem, setAnchorElem] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const handleProductDelete = async (e) => {
+    try {
+      const response = await axiosInstance.delete(
+        `${endPoints.PRODUCT}/${product._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-  const handleProductDelete = (e) => {};
+      dispatch(
+        uiActions.setAlert({
+          severity: "success",
+          text: "Product deleted",
+        })
+      );
+      setDialogOpen(false);
+      onDelete && onDelete();
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
+  };
   const actionsMenu = (
     <Menu
       anchorEl={anchorElem}
@@ -50,7 +81,7 @@ export default function ProductCard({
           Edit
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleProductDelete}>Delete</MenuItem>
+      <MenuItem onClick={() => setDialogOpen(true)}>Delete</MenuItem>
     </Menu>
   );
 
@@ -107,6 +138,13 @@ export default function ProductCard({
         </Button>
       </CardActions>
       {actionsMenu}
+
+      <CustomDialog
+        text={`Are you sure you want to delete the product named ${product.title}?`}
+        handleClose={() => setDialogOpen(false)}
+        handleYes={handleProductDelete}
+        open={dialogOpen}
+      />
     </Card>
   );
 }

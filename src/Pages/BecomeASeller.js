@@ -12,11 +12,15 @@ import CategoryChooser from "../Components/CategoryChooser";
 import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 import { CheckCircleOutline, ArrowRight } from "@mui/icons-material/";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../Store/Slices/uiSlice";
+import { authActions } from "../Store/Slices/authSlice/authSlice";
 
 export default function BecomeASeller() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [category, setCategory] = React.useState("");
+  const dispatch = useDispatch();
 
   const handleFinish = async (e) => {
     try {
@@ -29,8 +33,17 @@ export default function BecomeASeller() {
           },
         }
       );
+      dispatch(authActions.updateUser(response.data.user));
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } catch (err) {}
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
   };
 
   const steps = [

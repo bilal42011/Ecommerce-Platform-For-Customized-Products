@@ -14,7 +14,7 @@ export default function OverlaySpinner({ completed }) {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "transparent",
-        zIndex: 1,
+        zIndex: 9999,
       }}
     >
       <Box //backdrop

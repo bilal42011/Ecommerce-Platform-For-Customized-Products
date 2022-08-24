@@ -119,7 +119,7 @@ export default function SellerProductForm({
             }
           />
         </Grid>
-        <GridLabel>Has Sizes</GridLabel>
+        {/* <GridLabel>Has Sizes</GridLabel>
         <Grid {...gridControlParams}>
           <Stack direction="row">
             <Checkbox
@@ -130,7 +130,7 @@ export default function SellerProductForm({
               }
             />
           </Stack>
-        </Grid>
+        </Grid> */}
         {hideFileChooser || (
           <>
             <GridLabel>Images</GridLabel>
