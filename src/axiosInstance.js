@@ -23,6 +23,7 @@ export const endPoints = {
   DELIVER_ORDER: "deliver",
   REQUEST_CANCEL: "cancel",
   CONFIRM_CANCEL: "cancel-confirm",
+  UNDO_CANCEL: "undo-cancel",
   APPROVE_ORDER: "approve",
   DECLINE_ORDER: "decline",
   USER: "user",

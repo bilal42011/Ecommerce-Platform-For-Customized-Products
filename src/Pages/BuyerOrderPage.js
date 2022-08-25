@@ -6,7 +6,7 @@ import axiosInstance, { endPoints } from "../axiosInstance";
 import ProposalDetails from "../Components/CustomProposalDetails/ProposalDetails";
 import OverlaySpinner from "../Components/OverlaySpinner";
 
-import { Paper, Stack, Typography } from "@mui/material";
+import { Button, Paper, Stack, Typography } from "@mui/material";
 import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
 import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescription";
@@ -65,9 +65,37 @@ export default function BuyerOrderPage() {
         }
       );
       setOrder(response.data.order);
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
+  };
+
+  const undoCancel = async () => {
+    try {
+      const response = await axiosInstance.patch(
+        `${endPoints.ORDER}/${orderId}/${endPoints.UNDO_CANCEL}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOrder(response.data.order);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
     }
   };
 
@@ -120,9 +148,14 @@ export default function BuyerOrderPage() {
     case "PENDING_CANCEL":
       if (user._id === order.cancelInitiator) {
         elem = (
-          <Typography variant="h4">
-            Cancellation Request Sent. Waiting for Approval
-          </Typography>
+          <>
+            <Typography variant="h4">
+              Cancellation Request Sent. Waiting for Approval
+            </Typography>
+            <Button color="success" variant="contained" onClick={undoCancel}>
+              Undo Cancel Request
+            </Button>
+          </>
         );
       } else {
         elem = (
