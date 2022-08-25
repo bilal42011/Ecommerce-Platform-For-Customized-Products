@@ -7,7 +7,7 @@ import SellerProfileDescription from "../SellerProfileDescription";
 export default function ProductOrderInfo({ order, user }) {
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} sm={8}>
+      <Grid item xs={12} sm={12}>
         <Paper variant="outlined">
           <CartProductItem
             item={order.productId}
@@ -53,9 +53,6 @@ export default function ProductOrderInfo({ order, user }) {
             </Stack>
           </Box>
         </Paper>
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <SellerProfileDescription user={user} />
       </Grid>
     </Grid>
   );

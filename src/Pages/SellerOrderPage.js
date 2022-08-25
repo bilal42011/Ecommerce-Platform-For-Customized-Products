@@ -1,11 +1,11 @@
 import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import BuyerRequestInfoCard from "../Components/BuyerRequestInfoCard";
 import OverlaySpinner from "../Components/OverlaySpinner";
-import { Paper, Stack, Typography, Grid } from "@mui/material";
+import { Paper, Stack, Typography, Grid, Button } from "@mui/material";
 import DeliverOrderModal from "../Components/BuyerOrderPage/DeliverOrderModal";
 import RemainingTime from "../Components/BuyerOrderPage/RemainingTime";
 import OrderActions from "../Components/BuyerOrderPage/OrderActions";
@@ -14,9 +14,12 @@ import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellatio
 
 import SellerProfileDescription from "../Components/SellerProfileDescription";
 import ProductOrderInfo from "../Components/BuyerOrderPage/ProductOrderInfo";
+import { uiActions } from "../Store/Slices/uiSlice";
 
 export default function SellerOrderPage() {
   const [order, setOrder] = useState(null);
+
+  const dispatch = useDispatch();
 
   const [deliverModalVisible, setDeliverModalVisible] = useState(false);
   const [cancelModalVisble, setCancelModalVisble] = useState(false);
@@ -55,7 +58,7 @@ export default function SellerOrderPage() {
     try {
       const response = await axiosInstance.patch(
         `${endPoints.ORDER}/${orderId}/${endPoints.REQUEST_CANCEL}`,
-        null,
+        formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOrder(response.data.order);
@@ -94,11 +97,39 @@ export default function SellerOrderPage() {
         }
       );
       const temp = response.data.order;
-      temp.proposalId.sellerId = temp.sellerId;
+      if (temp.proposalId) temp.proposalId.sellerId = temp.sellerId;
       setOrder(temp);
     } catch (error) {
-      console.error(error);
-      alert(error.message);
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
+    }
+  };
+
+  const undoCancel = async () => {
+    try {
+      const response = await axiosInstance.patch(
+        `${endPoints.ORDER}/${orderId}/${endPoints.UNDO_CANCEL}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOrder(response.data.order);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
     }
   };
 
@@ -125,9 +156,14 @@ export default function SellerOrderPage() {
     case "PENDING_CANCEL":
       if (user._id === order.cancelInitiator) {
         elem = (
-          <Typography variant="h4">
-            Cancellation Request Sent. Waiting for Approval
-          </Typography>
+          <>
+            <Typography variant="h4">
+              Cancellation Request Sent. Waiting for Approval
+            </Typography>
+            <Button color="success" variant="contained" onClick={undoCancel}>
+              Undo Cancel Request
+            </Button>
+          </>
         );
       } else {
         elem = (
