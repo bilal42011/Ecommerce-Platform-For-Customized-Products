@@ -62,6 +62,7 @@ export default function SellerOrderPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOrder(response.data.order);
+      setCancelModalVisble(false);
     } catch (err) {
       console.error(err);
       alert(err.message);
