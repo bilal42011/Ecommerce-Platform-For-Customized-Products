@@ -9,6 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import CartProductItem from "./CartProductItem";
 
@@ -40,9 +41,11 @@ export default function CartProducts({ cart, onProductRemove }) {
         </Stack>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" fullWidth>
-          Continue Shopping
-        </Button>
+        <Link to="/browse">
+          <Button variant="outlined" fullWidth>
+            Continue Shopping
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
