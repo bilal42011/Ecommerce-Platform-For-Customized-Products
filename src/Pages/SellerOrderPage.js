@@ -212,7 +212,7 @@ export default function SellerOrderPage() {
           {order.buyerRequestId ? (
             <BuyerRequestInfoCard request={order.buyerRequestId} hideActions />
           ) : (
-            <ProductOrderInfo order={order} user={order.buyerId} />
+            <ProductOrderInfo order={order} user={order.buyerId} hideSeller />
           )}
         </Grid>
         <Grid item xs={12} sm={4}>

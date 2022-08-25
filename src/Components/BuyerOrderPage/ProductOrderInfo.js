@@ -4,10 +4,10 @@ import { Box } from "@mui/system";
 import CartProductItem from "../Cart/CartProductItem";
 import SellerProfileDescription from "../SellerProfileDescription";
 
-export default function ProductOrderInfo({ order, user }) {
+export default function ProductOrderInfo({ order, user, hideSeller }) {
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={12} sm={hideSeller ? 12 : 8}>
         <Paper variant="outlined">
           <CartProductItem
             item={order.productId}
@@ -54,6 +54,11 @@ export default function ProductOrderInfo({ order, user }) {
           </Box>
         </Paper>
       </Grid>
+      {!hideSeller && (
+        <Grid item xs={12} sm={4}>
+          <SellerProfileDescription user={user} />
+        </Grid>
+      )}
     </Grid>
   );
 }
