@@ -37,7 +37,7 @@ export default function CancelOrderModal({
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    onCancel && onCancel({ message: formData.message });
+    onCancel && onCancel({ message: formData.get("message") });
   };
 
   return (
