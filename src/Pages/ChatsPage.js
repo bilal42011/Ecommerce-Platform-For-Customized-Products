@@ -170,17 +170,18 @@ export default function ChatsPage() {
   };
 
   useEffect(() => {
-    if (userId) fetchUserChat();
-    else fetchChats();
+    (async () => {
+      dispatch(uiActions.setLoading(true));
+      if (userId) await fetchUserChat();
+      else await fetchChats();
+      dispatch(uiActions.setLoading(false));
+    })();
   }, []);
 
   const desktopUI = (
     <Grid container>
       <Grid item xs={12} sm={4} position="relative">
         <ChatsList chats={chats} onChatClick={(chat) => setActiveChat(chat)} />
-        <Fab color="primary" sx={fabStyle}>
-          <Add />
-        </Fab>
       </Grid>
       <Grid item xs={0} sm={8}>
         <ChatCard

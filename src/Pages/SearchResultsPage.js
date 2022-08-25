@@ -33,6 +33,7 @@ export default function SearchResultsPage() {
         params: {
           category,
           page,
+          search: params.get("search"),
         },
       });
       setResult(response.data.result);
