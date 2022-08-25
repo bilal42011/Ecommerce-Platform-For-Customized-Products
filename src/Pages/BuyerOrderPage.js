@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axiosInstance, { endPoints } from "../axiosInstance";
 import ProposalDetails from "../Components/CustomProposalDetails/ProposalDetails";
@@ -13,11 +13,13 @@ import DeliveryDescription from "../Components/BuyerOrderPage/DeliveryDescriptio
 import CancelOrderModal from "../Components/BuyerOrderPage/CancelOrderModal";
 import ConfirmCancellation from "../Components/BuyerOrderPage/ConfirmCancellation";
 import ProductOrderInfo from "../Components/BuyerOrderPage/ProductOrderInfo";
+import { uiActions } from "../Store/Slices/uiSlice";
 
 export default function BuyerOrderPage() {
   const [order, setOrder] = useState(null);
 
   const [cancelModalVisble, setCancelModalVisble] = useState(false);
+  const dispatch = useDispatch();
 
   const { orderId } = useParams();
 
@@ -31,7 +33,7 @@ export default function BuyerOrderPage() {
     try {
       const response = await axiosInstance.patch(
         `${endPoints.ORDER}/${orderId}/${endPoints.REQUEST_CANCEL}`,
-        null,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,9 +41,15 @@ export default function BuyerOrderPage() {
         }
       );
       setOrder(response.data.order);
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
+      setCancelModalVisble(false);
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        uiActions.setAlert({
+          severity: "error",
+          text: "ERROR: " + error.response.data.message || error.message,
+        })
+      );
     }
   };
 
