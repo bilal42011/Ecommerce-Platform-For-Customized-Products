@@ -13,8 +13,6 @@ export default function SearchResultsPage() {
   const [page, setPage] = useState(1);
   const [params, setParams] = useSearchParams();
 
-  console.log(params.get("cat") * 1);
-
   const [result, setResult] = useState(null);
   const [category, setCategory] = useState(
     categoriesData[params.get("cat") * 1].name || "Iron Works"

@@ -14,7 +14,12 @@ const SearchProductsSection = () => {
     <Container maxWidth="100%" disableGutters>
       <Grid
         container
-        sx={{ background: `url(${ArtImage})`, height: "600px" }}
+        sx={{
+          background: `url(${ArtImage})`,
+          height: "600px",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
         justifyContent="center"
         alignContent="center"
       >

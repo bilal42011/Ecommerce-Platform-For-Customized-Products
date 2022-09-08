@@ -2,15 +2,21 @@ export const apiServerUrl = (resource) =>
   resource ? `http://localhost:8000/${resource}` : "";
 
 export const getRemainingTime = (time) => {
-  var now = new Date().getTime();
-  var timeleft = new Date(time) - now;
+  const now = new Date().getTime();
+  const timeleft = new Date(time) - now;
 
-  var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+  const days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-  return `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+  const timeStr =
+    timeleft > 0
+      ? `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`
+      : `${days * -1} Days ${hours * -1} Hours Late`;
+  return timeStr;
 };
 
 export const isLetters = (text) => /^[A-Za-z\s]*$/.test(text);
@@ -22,9 +28,11 @@ export const truncate = (string = "", maxLength = 50) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
 export const formatTime = (time) => {
-  const date = new Date(time);
-  const str = `${date.getHours()} : ${date.getMinutes()}`;
-  return str;
+  const temp = new Date(time);
+  const formatter = Intl.DateTimeFormat("en", {
+    timeStyle: "short",
+  });
+  return formatter.format(temp);
 };
 
 export const proposalStatus = {

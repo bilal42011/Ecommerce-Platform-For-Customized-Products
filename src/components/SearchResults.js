@@ -17,6 +17,16 @@ export default function SearchResults({ results }) {
     };
     const existingProduct = products.find((elem) => elem._id === product._id);
 
+    if (!user) {
+      return dispatch(
+        uiActions.setAlert({
+          title: "Error",
+          text: "Please Login to buy this product",
+          severity: "error",
+        })
+      );
+    }
+
     if (product.ownerId._id === user._id) {
       return dispatch(
         uiActions.setAlert({

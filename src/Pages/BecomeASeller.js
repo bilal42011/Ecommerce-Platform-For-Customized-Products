@@ -12,14 +12,15 @@ import CategoryChooser from "../Components/CategoryChooser";
 import axiosInstance, { endPoints, getToken } from "../axiosInstance";
 import { CheckCircleOutline, ArrowRight } from "@mui/icons-material/";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../Store/Slices/uiSlice";
 import { authActions } from "../Store/Slices/authSlice/authSlice";
 
 export default function BecomeASeller() {
+  const user = useSelector((state) => state.auth.user);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = React.useState(user.category || "");
   const dispatch = useDispatch();
 
   const handleFinish = async (e) => {
@@ -66,7 +67,8 @@ export default function BecomeASeller() {
         <Stack justifyContent={"center"} alignItems="center">
           <CheckCircleOutline sx={{ mb: 3 }} />
           <Typography>
-            You have successfully registered yourself as a seller
+            You have successfully registered yourself as a {user.category}{" "}
+            seller
           </Typography>
           <Link to="/profile/products/create" className="ghost-link">
             <Button endIcon={<ArrowRight />}>Create your first Product</Button>

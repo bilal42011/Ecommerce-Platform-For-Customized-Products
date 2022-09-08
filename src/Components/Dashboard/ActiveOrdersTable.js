@@ -23,7 +23,7 @@ export default function ActiveOrdersTable({ orders, asSeller }) {
       },
     },
     {
-      field: "photoURL",
+      field: "userId",
       headerName: `${asSeller ? "Buyer" : "Seller"}`,
       flex: 1,
       align: "center",

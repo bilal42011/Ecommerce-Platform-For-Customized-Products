@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, Link as MUILink } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -25,32 +25,36 @@ const Footer = () => {
           alignItems="center"
           rowSpacing={4}
         >
-            <Grid item xs={12} md={6} textAlign="center">
-              <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                <Typography
-                  fontFamily="Roboto"
-                  fontSize="35px"
-                  fontWeight="bold"
-                  color="white"
-                  sx={{letterSpacing:{xs:"20px",md:"50px"}}}
-                >
-                  E-Workers
-                </Typography>
-              </Link>
-            </Grid>
-
-            <Grid
-              item
-              xs={12}
-              md={6}
-              sx={{ textAlign: { xs: "center", md: "start" } }}
-              alignSelf="center"
-            >
-              <Typography fontFamily="Roboto, sans-serif" fontSize="20px" color="white" sx={{letterSpacing:"5px"}}>
-                &copy; E-workers Pvt. Ltd
+          <Grid item xs={12} md={6} textAlign="center">
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <Typography
+                fontFamily="Roboto"
+                fontSize="35px"
+                fontWeight="bold"
+                color="white"
+                sx={{ letterSpacing: { xs: "20px", md: "50px" } }}
+              >
+                E-Workers
               </Typography>
-            </Grid>
-         
+            </Link>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{ textAlign: { xs: "center", md: "start" } }}
+            alignSelf="center"
+          >
+            <Typography
+              fontFamily="Roboto, sans-serif"
+              fontSize="20px"
+              color="white"
+              sx={{ letterSpacing: "5px" }}
+            >
+              &copy; E-workers Pvt. Ltd
+            </Typography>
+          </Grid>
 
           <Grid
             container
@@ -69,19 +73,31 @@ const Footer = () => {
               alignItems="center"
             >
               <Grid item>
-                <Link to="/https://reactjs.org" target="_blank" style={{ textDecoration: "none", color: "#E75480" }}>
+                <MUILink
+                  href="https://reactjs.org"
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "#E75480" }}
+                >
                   <TwitterIcon color="white" />
-                </Link>
+                </MUILink>
               </Grid>
               <Grid item>
-                <Link to="/https://reactjs.org" target="_blank" style={{ textDecoration: "none", color: "#E75480" }}>
+                <MUILink
+                  href="https://reactjs.org"
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "#E75480" }}
+                >
                   <FacebookRoundedIcon color="white" />
-                </Link>
+                </MUILink>
               </Grid>
               <Grid item>
-                <Link to="/https://reactjs.org" target="_blank" style={{ textDecoration: "none", color: "#E75480" }}>
+                <MUILink
+                  href="https://reactjs.org"
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "#E75480" }}
+                >
                   <InstagramIcon color="white" />
-                </Link>
+                </MUILink>
               </Grid>
             </Grid>
           </Grid>
