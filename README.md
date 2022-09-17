@@ -1,12 +1,9 @@
 # Ecommerce Platform for Customized Products
-
-#### Backend: 
-[https://github.com/bilal42011/Fyp-Backend](https://github.com/bilal42011/Fyp-Backend)
-
 A simple marketplace where you can buy ready-made products as well as request customized products according to your requirements
 
+#### Backend: [https://github.com/bilal42011/Fyp-Backend](https://github.com/bilal42011/Fyp-Backend)
 
-Contributors: [Muhammad Safwan Karim](https://github.com/msafwankarim) [Bilal Malik](https://github.com/bilal42011)
+Contributors: [Muhammad Safwan Karim](https://github.com/msafwankarim) ; [Bilal Malik](https://github.com/bilal42011)
 
 # Screenshots
 
